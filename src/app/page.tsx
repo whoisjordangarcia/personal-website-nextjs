@@ -34,7 +34,7 @@ export default async function Home() {
         <TerminalOutput>
           <p className="py-2">
             I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
-            specializing in building things mostly in Typescript. Currently, I’m
+            specializing in building things mostly in Typescript. Currently,
             working at @invitae as an software engineering lead.
           </p>
           <p className="py-2">
