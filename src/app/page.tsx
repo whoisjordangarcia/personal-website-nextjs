@@ -34,13 +34,13 @@ export default async function Home() {
           <div className="bg-light-pink text-white inline-flex px-2 mb-4">
             Links
           </div>
-          <p>-- [view my resume](https://jordangarcia.me/resume.pdf)</p>
-          <p>-- [email me](mailto:arickho@gmail.com)</p>
-          <p>-- [linkedin](https://linkedin.com/arickhogarcia)</p>
-          <p>-- [github](https://github.com/whoisjordangarcia)</p>
-          <p>-- [twitter](https://x.com/whoisjordangarcia)</p>
-          <p>-- [instagram](https://instagram.com/whoisjordangarcia)</p>
-          <p>-- [past website](https://v3.jordangarcia.me)</p>
+          <p>-- [<a href="/resume.pdf" className='text-[#f2d5cf] hover:underline'>view my resume</a>](https://jordangarcia.me/resume.pdf)</p>
+          <p>-- [<a href="mailto:arickho@gmail.com" className='text-[#f2d5cf] hover:underline'>email me</a>](mailto:arickho@gmail.com)</p>
+          <p>-- [<a href="https://linkedin.com/arickhogarcia" className='text-[#f2d5cf] hover:underline'>linkedin</a>](https://linkedin.com/arickhogarcia)</p>
+          <p>-- [<a href="https://github.com/whoisjordangarcia" className='text-[#f2d5cf] hover:underline'>github</a>](https://github.com/whoisjordangarcia)</p>
+          <p>-- [<a href="https://x.com/whoismrgarcia" className='text-[#f2d5cf] hover:underline'>twitter</a>](https://x.com/whoismrgarcia)</p>
+          <p>-- [<a href="https://instagram.com/whoisjordangarcia" className='text-[#f2d5cf] hover:underline'>instagram</a>](https://instagram.com/whoisjordangarcia)</p>
+          <p>-- [<a href="https://v3.jordangarcia.me" className='text-[#f2d5cf] hover:underline'>past website</a>](https://v3.jordangarcia.me)</p>
         </TerminalOutput>
       </div>
       <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="" className="font-bold">Figma</a> and coded in <a href="" className="font-bold">Neovim</a>. Built with <a href="" className="font-bold">Next.js</a> and <a href="" className="font-bold">Tailwind CSS</a> deployed with <a href="" className="font-bold">Vercel</a>. Styled using <a href="" className="font-bold">Catpuccin</a>. Most of the text is set using <a href="" className="font-bold">JetBrains Mono</a> typeset.</div>

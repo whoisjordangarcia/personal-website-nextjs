@@ -11,6 +11,7 @@
   src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2'); 
 
 }
+
 @keyframes fade {
   0% { opacity: 0}
   50% { opacity: 0; }
@@ -19,7 +20,7 @@
 
 @keyframes typing {
   0% { width: 0; }
-  100% { width: 30ch; }
+  100% { width: 34ch; }
 }
     
 @keyframes blink {
@@ -27,7 +28,7 @@
 }
 
 .typeme {
-  width: 35ch;
+  width: 34ch;
   animation: typing 2s steps(25), blink .5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
