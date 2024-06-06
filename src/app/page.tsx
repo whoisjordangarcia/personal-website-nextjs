@@ -34,16 +34,16 @@ export default async function Home() {
           <div className="bg-light-pink text-white inline-flex px-2 mb-4">
             Links
           </div>
-          <p>-- [<a href="/resume.pdf" className='text-[#f2d5cf] hover:underline'>view my resume</a>](https://jordangarcia.me/resume.pdf)</p>
-          <p>-- [<a href="mailto:arickho@gmail.com" className='text-[#f2d5cf] hover:underline'>email me</a>](mailto:arickho@gmail.com)</p>
-          <p>-- [<a href="https://linkedin.com/arickhogarcia" className='text-[#f2d5cf] hover:underline'>linkedin</a>](https://linkedin.com/arickhogarcia)</p>
-          <p>-- [<a href="https://github.com/whoisjordangarcia" className='text-[#f2d5cf] hover:underline'>github</a>](https://github.com/whoisjordangarcia)</p>
-          <p>-- [<a href="https://x.com/whoismrgarcia" className='text-[#f2d5cf] hover:underline'>twitter</a>](https://x.com/whoismrgarcia)</p>
-          <p>-- [<a href="https://instagram.com/whoisjordangarcia" className='text-[#f2d5cf] hover:underline'>instagram</a>](https://instagram.com/whoisjordangarcia)</p>
-          <p>-- [<a href="https://v3.jordangarcia.me" className='text-[#f2d5cf] hover:underline'>past website</a>](https://v3.jordangarcia.me)</p>
+          <p>-- [<a href="/resume.pdf" target='_blank' className='text-[#f2d5cf] hover:underline'>view my resume</a>](https://jordangarcia.me/resume.pdf)</p>
+          <p>-- [<a href="mailto:arickho@gmail.com" target='_blank' className='text-[#f2d5cf] hover:underline'>email me</a>](mailto:arickho@gmail.com)</p>
+          <p>-- [<a href="https://linkedin.com/arickhogarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>linkedin</a>](https://linkedin.com/arickhogarcia)</p>
+          <p>-- [<a href="https://github.com/whoisjordangarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>github</a>](https://github.com/whoisjordangarcia)</p>
+          <p>-- [<a href="https://x.com/whoismrgarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>twitter</a>](https://x.com/whoismrgarcia)</p>
+          <p>-- [<a href="https://instagram.com/whoisjordangarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>instagram</a>](https://instagram.com/whoisjordangarcia)</p>
+          <p>-- [<a href="https://v3.jordangarcia.me" target='_blank' className='text-[#f2d5cf] hover:underline'>past website</a>](https://v3.jordangarcia.me)</p>
         </TerminalOutput>
       </div>
-      <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="https://figma.com" className="font-bold hover:underline">Figma</a> and coded in <a href="https://neovim.io" className="font-bold hover:underline">Neovim</a>. Built with <a href="https://nextjs.org" className="font-bold hover:underline">Next.js</a> and <a href="https://tailwindcss.com" className="font-bold hover:underline">Tailwind CSS</a> deployed with <a href="https://vercel.com" className="font-bold hover:underline">Vercel</a>. Styled using <a href="https://catppuccin.com" className="font-bold hover:underline">Catppuccin</a>. Most of the text is set using <a href="https://www.jetbrains.com/lp/mono" className="font-bold hover:underline">JetBrains Mono</a> typeset.</div>
+      <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="https://figma.com" target='_blank' className="font-bold hover:underline">Figma</a> and coded in <a href="https://neovim.io" target='_blank' className="font-bold hover:underline">Neovim</a>. Built with <a href="https://nextjs.org" target='_blank' className="font-bold hover:underline">Next.js</a> and <a href="https://tailwindcss.com" target='_blank' className="font-bold hover:underline">Tailwind CSS</a> deployed with <a href="https://vercel.com" target='_blank' className="font-bold hover:underline">Vercel</a>. Styled using <a href="https://catppuccin.com" target='_blank' className="font-bold hover:underline">Catppuccin</a>. Most of the text is set using <a href="https://www.jetbrains.com/lp/mono" target='_blank' className="font-bold hover:underline">JetBrains Mono</a> typeset.</div>
     </main>
   );
 }
