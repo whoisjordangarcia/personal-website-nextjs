@@ -36,7 +36,7 @@ export default async function Home() {
           </div>
           <p>-- [<a href="/resume.pdf" target='_blank' className='text-[#f2d5cf] hover:underline'>view my resume</a>](https://jordangarcia.me/resume.pdf)</p>
           <p>-- [<a href="mailto:arickho@gmail.com" target='_blank' className='text-[#f2d5cf] hover:underline'>email me</a>](mailto:arickho@gmail.com)</p>
-          <p>-- [<a href="https://linkedin.com/arickhogarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>linkedin</a>](https://linkedin.com/arickhogarcia)</p>
+          <p>-- [<a href="https://linkedin.com/in/arickhogarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>linkedin</a>](https://linkedin.com/in/arickhogarcia)</p>
           <p>-- [<a href="https://github.com/whoisjordangarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>github</a>](https://github.com/whoisjordangarcia)</p>
           <p>-- [<a href="https://x.com/whoismrgarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>twitter</a>](https://x.com/whoismrgarcia)</p>
           <p>-- [<a href="https://instagram.com/whoisjordangarcia" target='_blank' className='text-[#f2d5cf] hover:underline'>instagram</a>](https://instagram.com/whoisjordangarcia)</p>
