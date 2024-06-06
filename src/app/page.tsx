@@ -18,7 +18,7 @@ export default async function Home() {
 
 `
   return (
-    <main className='py-2 px-4 md:auto lg:w-2/5'>
+    <main className='py-2 px-4 lg:w-2/5'>
       <pre className="text-xl text-white w-[500px]">
         <code>{asci}</code>
       </pre>
