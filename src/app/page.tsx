@@ -1,11 +1,9 @@
-import Link from "next/link";
+interface Props {
+  children: Node
+}
 
-import { CreatePost } from "@/app/_components/create-post";
-import { api } from "@/trpc/server";
-
-
-const TerminalInput = (props) => <h1 className='text-[#ED8796]'>jordangarcia@127.0.0.1 <span className='text-[#CAD3F5]'>~ $ {props.children}</span></h1>
-const TerminalOutput = (props) => <div className='py-4 text-[#CAD3F5]'>{props.children}</div>
+const TerminalInput = (props: Props) => <h1 className='text-[#ED8796]'>jordangarcia@127.0.0.1 <span className='text-[#CAD3F5]'>~ $ {props.children}</span></h1>
+const TerminalOutput = (props: Props) => <div className='py-4 text-[#CAD3F5]'>{props.children}</div>
 
 export default async function Home() {
   const asci = `
@@ -18,7 +16,7 @@ export default async function Home() {
 
 `
   return (
-    <main class='py-2 px-4 md:auto lg:w-2/5'>
+    <main className='py-2 px-4 md:auto lg:w-2/5'>
       <pre className="text-xl text-white w-[500px]">
         <code>{asci}</code>
       </pre>
