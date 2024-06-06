@@ -163,7 +163,7 @@ export default async function Home() {
         >
           Tailwind CSS
         </a>{" "}
-        deployed with{" "}
+        , deployed with{" "}
         <a
           href="https://vercel.com"
           target="_blank"
