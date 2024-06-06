@@ -38,8 +38,7 @@ export default async function Home() {
         <p>-- [instagram](https://instagram.com/whoisjordangarcia)</p>
         <p>-- [past website](https://v3.jordangarcia.me)</p>
       </TerminalOutput>
-
-      <div className="absolute bottom-2 left-2 w-[800px] text-xs text-[#656989]">Designed in <a href="" className="font-bold">Figma</a> and coded in <a href="" className="font-bold">Neovim</a>. Built with <a href="" className="font-bold">Next.js</a> and <a href="" className="font-bold">Tailwind CSS</a> deployed with <a href="" className="font-bold">Vercel</a>. Styled using <a href="" className="font-bold">Catpuccin</a>. Most of the text is set using <a href="" className="font-bold">JetBrains Mono</a> typeset.</div>
+      <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="" className="font-bold">Figma</a> and coded in <a href="" className="font-bold">Neovim</a>. Built with <a href="" className="font-bold">Next.js</a> and <a href="" className="font-bold">Tailwind CSS</a> deployed with <a href="" className="font-bold">Vercel</a>. Styled using <a href="" className="font-bold">Catpuccin</a>. Most of the text is set using <a href="" className="font-bold">JetBrains Mono</a> typeset.</div>
     </main>
   );
 }
