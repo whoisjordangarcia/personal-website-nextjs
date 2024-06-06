@@ -3,63 +3,44 @@ import Link from "next/link";
 import { CreatePost } from "@/app/_components/create-post";
 import { api } from "@/trpc/server";
 
+
+const TerminalInput = (props) => <h1 className='text-[#ED8796]'>jordangarcia@127.0.0.1 <span className='text-[#CAD3F5]'>~ $ {props.children}</span></h1>
+const TerminalOutput = (props) => <div className='py-4 text-[#CAD3F5]'>{props.children}</div>
+
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
+  const asci = `
+ _                _      _   _                               _     _ 
+| |              | |    | | | |                             | |   | | 
+| |__   __ _  ___| | __ | |_| |__   ___  __      _____  _ __| | __| |
+| '_ \\ / _| |/ __| |/ / | __| '_ \\ / _ \\ \\ \\ /\\ / / _ \\| '__| |/ _| |
+| | | | (_| | (__|   <  | |_| | | |  __/  \\ V  V / (_) | |  | | (_| | 
+|_| |_|\\__,_|\\___|_|\\_\\  \\__|_| |_|\\___|   \\_/\\_/ \\___/|_|  |_|\\__,_| 
 
+`
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-        </div>
+    <main class='py-2 px-4 md:auto lg:w-2/5'>
+      <pre className="text-xl text-white w-[500px]">
+        <code>{asci}</code>
+      </pre>
+      <TerminalInput>me -h</TerminalInput>
+      <TerminalOutput>
+        <p className='py-2'>I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami, specializing in building things mostly in Typescript. Currently, I’m working at @invitae, focusing on identity and access management (IAM).</p>
+        <p className='py-2'>These days, my main focus is on building distributed systems and continuously optimizing my terminal.</p>
+        <p className='py-2'>When I’m not coding, you can usually find me at the beach with my wife and dog.</p>
+      </TerminalOutput>
+      <TerminalInput>glow more-info.md</TerminalInput>
+      <TerminalOutput>
+        <p>-- [view my resume](https://jordangarcia.me/resume.pdf)</p>
+        <p>-- [email me](mailto:arickho@gmail.com)</p>
+        <p>-- [linkedin](https://linkedin.com/arickhogarcia)</p>
+        <p>-- [github](https://github.com/whoisjordangarcia)</p>
+        <p>-- [twitter](https://x.com/whoisjordangarcia)</p>
+        <p>-- [instagram](https://instagram.com/whoisjordangarcia)</p>
+        <p>-- [past website](https://v3.jordangarcia.me)</p>
+      </TerminalOutput>
 
-        <CrudShowcase />
-      </div>
+      <div className="absolute bottom-2 left-2 w-[800px] text-xs text-[#656989]">Designed in <a href="" className="font-bold">Figma</a> and coded in <a href="" className="font-bold">Neovim</a>. Built with <a href="" className="font-bold">Next.js</a> and <a href="" className="font-bold">Tailwind CSS</a> deployed with <a href="" className="font-bold">Vercel</a>. Styled using <a href="" className="font-bold">Catpuccin</a>. Most of the text is set using <a href="" className="font-bold">JetBrains Mono</a> typeset.</div>
     </main>
   );
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
-  );
-}
