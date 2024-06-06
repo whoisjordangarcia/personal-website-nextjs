@@ -16,7 +16,7 @@ const TerminalOutput = (props: Props) => (
 );
 
 export default async function Home() {
-  const asci = ` _                _      _   _                               _     _ 
+  const asciArt = ` _                _      _   _                               _     _ 
 | |              | |    | | | |                             | |   | | 
 | |__   __ _  ___| | __ | |_| |__   ___  __      _____  _ __| | __| |
 | '_ \\ / _| |/ __| |/ / | __| '_ \\ / _ \\ \\ \\ /\\ / / _ \\| '__| |/ _| |
@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <main className="px-4 py-2 lg:w-2/5">
       <pre className="w-[500px] text-xl text-white">
-        <code>{asci}</code>
+        <code>{asciArt}</code>
       </pre>
       <TerminalInput typeme>me -h</TerminalInput>
       <div className="output">

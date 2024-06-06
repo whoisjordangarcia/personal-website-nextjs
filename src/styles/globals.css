@@ -3,33 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #24273A;
+  --bg-color: #24273a;
 }
 
 @font-face {
   font-family: JetBrainsMono;
-  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2'); 
-
+  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
 }
 
 @keyframes fade {
-  0% { opacity: 0}
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes typing {
-  0% { width: 0; }
-  100% { width: 34ch; }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 34ch;
+  }
 }
-    
+
 @keyframes blink {
-  50% { border-color: transparent;}
+  50% {
+    border-color: transparent;
+  }
 }
 
 .typeme {
   width: 34ch;
-  animation: typing 2s steps(25), blink .5s step-end infinite alternate;
+  animation:
+    typing 2s steps(25),
+    blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 10px solid #f2d5cf;
@@ -41,7 +54,8 @@
   animation: fade 5s;
 }
 
-html {
-  background-color: var(--bg-color); 
+html,
+body {
+  background-color: var(--bg-color);
   font-family: JetbrainsMono;
 }
