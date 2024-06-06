@@ -162,7 +162,7 @@ export default async function Home() {
           className="font-bold hover:underline"
         >
           Tailwind CSS
-        </a>{" "}
+        </a>
         , deployed with{" "}
         <a
           href="https://vercel.com"
