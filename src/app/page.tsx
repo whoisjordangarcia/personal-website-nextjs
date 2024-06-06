@@ -1,5 +1,7 @@
+import React from 'react'
+
 interface Props {
-  children: Node
+  children: React.ReactNode
 }
 
 const TerminalInput = (props: Props) => <h1 className='text-[#ED8796]'>jordangarcia@127.0.0.1 <span className='text-[#CAD3F5]'>~ $ {props.children}</span></h1>
