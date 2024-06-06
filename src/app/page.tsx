@@ -24,7 +24,7 @@ export default async function Home() {
       </pre>
       <TerminalInput>me -h</TerminalInput>
       <TerminalOutput>
-        <p className='py-2'>I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami, specializing in building things mostly in Typescript. Currently, I’m working at @invitae, focusing on identity and access management (IAM).</p>
+        <p className='py-2'>I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami, specializing in building things mostly in Typescript. Currently, I’m working at @invitae as an software engineering lead.</p>
         <p className='py-2'>These days, my main focus is on building distributed systems and continuously optimizing my terminal.</p>
         <p className='py-2'>When I’m not coding, you can usually find me at the beach with my wife and dog.</p>
       </TerminalOutput>
