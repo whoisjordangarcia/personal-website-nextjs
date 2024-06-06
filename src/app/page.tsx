@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   children: React.ReactNode;
-  typeme: boolean;
+  typeme?: boolean;
 }
 
 const TerminalInput = (props: Props) => (
