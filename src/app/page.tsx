@@ -43,7 +43,7 @@ export default async function Home() {
           <p>-- [<a href="https://v3.jordangarcia.me" className='text-[#f2d5cf] hover:underline'>past website</a>](https://v3.jordangarcia.me)</p>
         </TerminalOutput>
       </div>
-      <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="https://www.figma.com" className="font-bold">Figma</a> and coded in <a href="https://neovim.io" className="font-bold">Neovim</a>. Built with <a href="https://nextjs.org" className="font-bold">Next.js</a> and <a href="https://tailwindcss.com" className="font-bold">Tailwind CSS</a> deployed with <a href="https://vercel.com" className="font-bold">Vercel</a>. Styled using <a href="https://catppuccin.com" className="font-bold">Catppuccin</a>. Most of the text is set using <a href="https://www.jetbrains.com/lp/mono" className="font-bold">JetBrains Mono</a> typeset.</div>
+      <div className="lg:absolute lg:bottom-2 lg:left-2 lg:w-[800px] text-xs text-[#656989]">Designed in <a href="https://figma.com" className="font-bold hover:underline">Figma</a> and coded in <a href="https://neovim.io" className="font-bold hover:underline">Neovim</a>. Built with <a href="https://nextjs.org" className="font-bold hover:underline">Next.js</a> and <a href="https://tailwindcss.com" className="font-bold hover:underline">Tailwind CSS</a> deployed with <a href="https://vercel.com" className="font-bold hover:underline">Vercel</a>. Styled using <a href="https://catppuccin.com" className="font-bold hover:underline">Catppuccin</a>. Most of the text is set using <a href="https://www.jetbrains.com/lp/mono" className="font-bold hover:underline">JetBrains Mono</a> typeset.</div>
     </main>
   );
 }
