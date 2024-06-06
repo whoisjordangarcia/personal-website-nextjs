@@ -8,8 +8,7 @@ const TerminalInput = (props: Props) => <h1 className='text-[#ED8796]'>jordangar
 const TerminalOutput = (props: Props) => <div className='py-4 text-[#CAD3F5]'>{props.children}</div>
 
 export default async function Home() {
-  const asci = `
- _                _      _   _                               _     _ 
+  const asci = ` _                _      _   _                               _     _ 
 | |              | |    | | | |                             | |   | | 
 | |__   __ _  ___| | __ | |_| |__   ___  __      _____  _ __| | __| |
 | '_ \\ / _| |/ __| |/ / | __| '_ \\ / _ \\ \\ \\ /\\ / / _ \\| '__| |/ _| |
@@ -19,7 +18,7 @@ export default async function Home() {
 `
   return (
     <main className='py-2 px-4 lg:w-2/5'>
-      <pre className="text-xl text-[#656989] w-[500px]">
+      <pre className="text-xl text-white w-[500px]">
         <code>{asci}</code>
       </pre>
       <TerminalInput>me -h</TerminalInput>
