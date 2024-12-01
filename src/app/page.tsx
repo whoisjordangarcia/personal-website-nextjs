@@ -16,52 +16,26 @@ const TerminalOutput = (props: Props) => (
 );
 
 export default async function Home() {
-  const asciArt = ` _                _      _   _                               _     _ 
-| |              | |    | | | |                             | |   | | 
-| |__   __ _  ___| | __ | |_| |__   ___  __      _____  _ __| | __| |
-| '_ \\ / _| |/ __| |/ / | __| '_ \\ / _ \\ \\ \\ /\\ / / _ \\| '__| |/ _| |
-| | | | (_| | (__|   <  | |_| | | |  __/  \\ V  V / (_) | |  | | (_| | 
-|_| |_|\\__,_|\\___|_|\\_\\  \\__|_| |_|\\___|   \\_/\\_/ \\___/|_|  |_|\\__,_| 
-
-`;
   return (
     <main className="px-4 py-2 lg:w-2/5">
-      <pre className="w-[500px] text-xl text-white">
-        <code>{asciArt}</code>
-      </pre>
-      <TerminalInput typeme>me -h</TerminalInput>
+    <TerminalInput typeme>me -h</TerminalInput>
       <div className="output">
         <TerminalOutput>
           <p className="py-2">
             I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
-            specializing in building things mostly in Typescript. Currently,
-            working at @invitae as an software engineering lead.
+            specializing in building things mostly in Typescript and Python. Currently,
+            working at @labcorp as an software engineer.
           </p>
           <p className="py-2">
             These days, my main focus is on building distributed systems and
             continuously optimizing my terminal.
           </p>
           <p className="py-2">
-            When I’m not coding, you can usually find me at the beach with my
-            wife and dog.
+            When I’m not coding, you can usually find me at the beach.
           </p>
         </TerminalOutput>
-        <TerminalInput>glow more-info.md</TerminalInput>
+        <TerminalInput>cat more-info.md</TerminalInput>
         <TerminalOutput>
-          <div className="mb-4 inline-flex bg-light-pink px-2 text-white">
-            Links
-          </div>
-          <p>
-            -- [
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              view my resume
-            </a>
-            ](https://jordangarcia.me/resume.pdf)
-          </p>
           <p>
             -- [
             <a
