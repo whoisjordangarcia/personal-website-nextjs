@@ -34,7 +34,7 @@ export default async function Home() {
             When I’m not coding, you can usually find me at the beach.
           </p>
         </TerminalOutput>
-        <TerminalInput>cat more-info.md</TerminalInput>
+        <TerminalInput>bat more-info.md</TerminalInput>
         <TerminalOutput>
           <p>
             -- [
