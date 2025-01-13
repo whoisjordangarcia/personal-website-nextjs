@@ -4,8 +4,8 @@ Personal website using the T3stack
 
 ## Setup 
 
-# Install bun
-# cat example.env >> .env
+- Install bun
+`cat example.env >> .env`
 
 ## Libraries used
 
