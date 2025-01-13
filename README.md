@@ -1,4 +1,4 @@
-# Jordan Garcia's Personal Website
+# personal website
 
 Personal website using the T3stack
 
