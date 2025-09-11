@@ -1,7 +1,7 @@
 # personal website v4
 
 <p align="center">
-  <img src="docs/jordangarcia_ss?raw=1" alt="Website screenshot" width="800" />
+  <img src="docs/jordangarcia_ss.png?raw=1" alt="Website screenshot" width="800" />
 </p>
 
 Personal site built with Next.js App Router, tRPC, Drizzle ORM, and Bun.
