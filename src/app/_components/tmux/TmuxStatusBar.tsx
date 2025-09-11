@@ -215,6 +215,11 @@ export default function TmuxStatusBar() {
         </div>
       )}
       <style jsx global>{`
+        .tmux-status,
+        .tmux-status kbd {
+          font-family: inherit;
+        }
+
         .tmux-prefix {
           position: absolute;
           right: 0.75rem;
