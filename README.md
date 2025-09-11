@@ -6,18 +6,21 @@ Personal site built with Next.js App Router, tRPC, Drizzle ORM, and Bun.
 
 Prerequisites: Install Bun from https://bun.sh
 
-1) Install dependencies
+1. Install dependencies
+
 ```
 bun install
 ```
 
-2) Environment variables
+2. Environment variables
+
 ```
 cp .env.example .env.local
 # open .env.local and fill required values
 ```
 
-3) Database (Drizzle)
+3. Database (Drizzle)
+
 ```
 bun run db:push        # create/update schema
 # or
@@ -25,18 +28,21 @@ bun run db:migrate     # run generated migrations
 bun run db:studio      # optional: DB UI
 ```
 
-4) Run the app
+4. Run the app
+
 ```
 bun run dev            # http://localhost:3000
 ```
 
 Build and serve
+
 ```
 bun run build
 bun start
 ```
 
 ## Scripts
+
 - `bun run dev` – Start Next.js dev server
 - `bun run build` – Production build
 - `bun start` – Serve built app
@@ -44,6 +50,7 @@ bun start
 - `bun run db:generate` | `db:migrate` | `db:push` | `db:studio` – Drizzle
 
 ## Project Structure
+
 - `src/app` – Pages, layout, app routes (`app/api`)
 - `src/server` – tRPC routers, DB, server utilities
 - `src/trpc` – tRPC client/server helpers
@@ -51,6 +58,7 @@ bun start
 - `public/` – Static assets; `src/styles/globals.css` styles
 
 ## Tech Stack
+
 - Next.js, React, TypeScript, Tailwind CSS
 - tRPC, @tanstack/react-query, SuperJSON, Zod
 - Drizzle ORM, @libsql/client

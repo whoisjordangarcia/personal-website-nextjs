@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --color-light-pink: #ed8796;
+}
 
 :root {
   --bg-color: #24273a;
@@ -50,8 +56,40 @@
 
 .output {
   width: 100%;
-  max-width: 80ch;
-  animation: fade 5s;
+  max-width: 100ch;
+  /* Quick reveal so output appears like a terminal */
+  animation: fade 0.15s ease-out;
+}
+
+/* Terminal-style cursor and line styling */
+@keyframes cursorBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-line {
+  white-space: pre-wrap; /* allow wrapping like a real terminal */
+  overflow: visible; /* don't clip long commands */
+  word-break: break-word; /* break long tokens if needed on small screens */
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1em;
+  vertical-align: -0.1em;
+  background-color: #f2d5cf; /* Catppuccin Latte Rosewater */
+  animation: cursorBlink 1s steps(1) infinite;
+}
+
+.terminal-cursor--bar {
+  width: 2px;
 }
 
 html,
