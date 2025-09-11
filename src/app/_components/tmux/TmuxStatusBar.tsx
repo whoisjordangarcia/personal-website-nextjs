@@ -10,6 +10,7 @@ export default function TmuxStatusBar() {
   const [splitOverlay, setSplitOverlay] = React.useState<
     null | "vertical" | "horizontal"
   >(null);
+  const [newWindowOverlay, setNewWindowOverlay] = React.useState(false);
 
   React.useEffect(() => {
     const t = setInterval(() => setNow(formatNow()), 1000);
@@ -36,7 +37,15 @@ export default function TmuxStatusBar() {
         return;
       }
 
-      if (!awaitingKey && e.ctrlKey && (e.key === "b" || e.key === "B")) {
+      // Only trigger prefix on Ctrl+b without other modifiers
+      if (
+        !awaitingKey &&
+        e.ctrlKey &&
+        !e.shiftKey &&
+        !e.altKey &&
+        !e.metaKey &&
+        (e.key === "b" || e.key === "B")
+      ) {
         e.preventDefault();
         setPrefixActive(true);
         awaitingKey = true;
@@ -50,22 +59,34 @@ export default function TmuxStatusBar() {
 
       if (!awaitingKey) return;
 
+      // Ignore pure modifier keys while awaiting the next key
+      const k = e.key;
+      if (k === "Shift" || k === "Control" || k === "Alt" || k === "Meta") {
+        return;
+      }
+
       // Handle post-prefix keys
       e.preventDefault();
-      const k = e.key;
-      if (k === "?") {
+      if (k === "?" || (e.code === "Slash" && e.shiftKey)) {
         setShowHelp((v) => !v);
         showStatus('display panes: ?  split: % or "  new: c');
-      } else if (k === "%") {
+      } else if (k === "%" || (e.code === "Digit5" && e.shiftKey)) {
         setSplitOverlay("vertical");
         showStatus("split-window -h");
         setTimeout(() => setSplitOverlay(null), 700);
-      } else if (k === '"') {
+      } else if (k === '"' || (e.code === "Quote" && e.shiftKey)) {
         setSplitOverlay("horizontal");
         showStatus("split-window -v");
         setTimeout(() => setSplitOverlay(null), 700);
       } else if (k.toLowerCase() === "c") {
         showStatus("new-window");
+        setNewWindowOverlay(true);
+        // Nudge page content to simulate window change
+        document.documentElement.classList.add("tmux-newwin-shift");
+        setTimeout(() => {
+          setNewWindowOverlay(false);
+          document.documentElement.classList.remove("tmux-newwin-shift");
+        }, 650);
       } else {
         showStatus(`unbound key: ${k}`);
       }
@@ -80,11 +101,15 @@ export default function TmuxStatusBar() {
       window.removeEventListener("keydown", onKeyDown);
       if (prefixTimer) clearTimeout(prefixTimer);
       if (statusTimerRef.current) window.clearTimeout(statusTimerRef.current);
+      document.documentElement.classList.remove("tmux-newwin-shift");
     };
   }, [showHelp]);
 
   return (
-    <div className="tmux-status pointer-events-none hidden sm:block">
+    <div
+      className="tmux-status pointer-events-none fixed right-2 left-2 hidden sm:block"
+      style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))" }}
+    >
       {/* Split overlay lines */}
       {splitOverlay && (
         <div className="tmux-split-overlay" aria-hidden>
@@ -93,6 +118,11 @@ export default function TmuxStatusBar() {
           ) : (
             <div className="tmux-split-horz" />
           )}
+        </div>
+      )}
+      {newWindowOverlay && (
+        <div className="tmux-newwin-overlay" aria-hidden>
+          <div className="tmux-newwin-pane" />
         </div>
       )}
       {/* Status message bubble */}
@@ -112,8 +142,8 @@ export default function TmuxStatusBar() {
           <div className="flex items-center gap-2 justify-self-start">
             <span
               className="inline-flex h-5 w-5 items-center justify-center rounded-sm bg-[#363a4f]"
-              aria-label="Arch Linux"
-              title="Arch Linux"
+              aria-label="Terminal"
+              title="Terminal"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -122,12 +152,9 @@ export default function TmuxStatusBar() {
                 aria-hidden="true"
                 focusable="false"
               >
-                <path
-                  fill="#1793d1"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12 2 L21 20 L3 20 Z M12 9 L15 16 L9 16 Z"
-                />
+                <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" fill="#24273a" stroke="#4b4f6b" />
+                <path d="M7 9l3 3-3 3" stroke="#a5adcb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                <path d="M12 15h5" stroke="#a5adcb" stroke-width="1.6" stroke-linecap="round" />
               </svg>
             </span>
           </div>
@@ -166,14 +193,6 @@ export default function TmuxStatusBar() {
         </div>
       )}
       <style jsx global>{`
-        .tmux-status {
-          position: fixed;
-          left: 0.5rem; /* align with previous credits spacing */
-          right: 0.5rem;
-          bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
-          z-index: 50;
-        }
-
         .tmux-prefix {
           position: absolute;
           right: 0.75rem;
@@ -284,6 +303,43 @@ export default function TmuxStatusBar() {
         @media (prefers-reduced-motion: reduce) {
           .tmux-split-overlay {
             transition: none;
+          }
+        }
+
+        /* New window slide overlay */
+        .tmux-newwin-overlay {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 40;
+        }
+        .tmux-newwin-pane {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          background: linear-gradient(
+            90deg,
+            rgba(30, 32, 48, 0) 0%,
+            rgba(30, 32, 48, 0.85) 35%,
+            rgba(30, 32, 48, 0.95) 100%
+          );
+          border-left: 1px solid #4b4f6b;
+          animation: tmuxNewWinSlide 0.65s ease-out forwards;
+        }
+        @keyframes tmuxNewWinSlide {
+          0% {
+            transform: translateX(100%);
+            opacity: 0.2;
+          }
+          60% {
+            transform: translateX(0%);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(0%);
+            opacity: 0;
           }
         }
       `}</style>

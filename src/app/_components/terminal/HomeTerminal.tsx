@@ -132,17 +132,7 @@ export default function HomeTerminal() {
             </a>
             ](https://instagram.com/whoisjordangarcia)
           </p>
-          <p>
-            -- [
-            <a
-              href="https://v3.jordangarcia.me"
-              target="_blank"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              past website
-            </a>
-            ](https://v3.jordangarcia.me)
-          </p>
+
           <div className="mt-6 text-xs text-[#656989]">
             Designed in{" "}
             <a
