@@ -152,9 +152,29 @@ export default function TmuxStatusBar() {
                 aria-hidden="true"
                 focusable="false"
               >
-                <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" fill="#24273a" stroke="#4b4f6b" />
-                <path d="M7 9l3 3-3 3" stroke="#a5adcb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                <path d="M12 15h5" stroke="#a5adcb" stroke-width="1.6" stroke-linecap="round" />
+                <rect
+                  x="3.5"
+                  y="5.5"
+                  width="17"
+                  height="13"
+                  rx="1.5"
+                  fill="#24273a"
+                  stroke="#4b4f6b"
+                />
+                <path
+                  d="M7 9l3 3-3 3"
+                  stroke="#a5adcb"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                />
+                <path
+                  d="M12 15h5"
+                  stroke="#a5adcb"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
               </svg>
             </span>
           </div>
