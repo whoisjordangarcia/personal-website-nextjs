@@ -1,17 +1,56 @@
 # personal website v4
 
-Personal website using the T3stack
+Personal site built with Next.js App Router, tRPC, Drizzle ORM, and Bun.
 
-## Setup 
+## Getting Started
 
-- Install bun
-`cat example.env >> .env`
+Prerequisites: Install Bun from https://bun.sh
 
-## Libraries used
+1) Install dependencies
+```
+bun install
+```
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+2) Environment variables
+```
+cp .env.example .env.local
+# open .env.local and fill required values
+```
+
+3) Database (Drizzle)
+```
+bun run db:push        # create/update schema
+# or
+bun run db:migrate     # run generated migrations
+bun run db:studio      # optional: DB UI
+```
+
+4) Run the app
+```
+bun run dev            # http://localhost:3000
+```
+
+Build and serve
+```
+bun run build
+bun start
+```
+
+## Scripts
+- `bun run dev` – Start Next.js dev server
+- `bun run build` – Production build
+- `bun start` – Serve built app
+- `bun run lint` – ESLint via `next lint`
+- `bun run db:generate` | `db:migrate` | `db:push` | `db:studio` – Drizzle
+
+## Project Structure
+- `src/app` – Pages, layout, app routes (`app/api`)
+- `src/server` – tRPC routers, DB, server utilities
+- `src/trpc` – tRPC client/server helpers
+- `drizzle/` – Migrations; `drizzle.config.ts` config
+- `public/` – Static assets; `src/styles/globals.css` styles
+
+## Tech Stack
+- Next.js, React, TypeScript, Tailwind CSS
+- tRPC, @tanstack/react-query, SuperJSON, Zod
+- Drizzle ORM, @libsql/client
