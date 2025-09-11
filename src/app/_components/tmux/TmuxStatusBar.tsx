@@ -107,7 +107,7 @@ export default function TmuxStatusBar() {
 
   return (
     <div
-      className="tmux-status pointer-events-none fixed right-2 left-2"
+      className="tmux-status pointer-events-none fixed left-2 right-2"
       style={{ bottom: "calc(0.5rem + env(safe-area-inset-bottom, 0px))" }}
     >
       {/* Split overlay lines */}
@@ -134,7 +134,7 @@ export default function TmuxStatusBar() {
       {/* Prefix indicator */}
       {prefixActive && <div className="tmux-prefix">[prefix]</div>}
       <div
-        className="w-full rounded border border-[#363a4f] bg-[#1e2030]/90 px-2 py-1 text-[11px] text-[#cad3f5] shadow-sm backdrop-blur select-none"
+        className="w-full select-none rounded border border-[#363a4f] bg-[#1e2030]/90 px-2 py-1 text-[11px] text-[#cad3f5] shadow-sm backdrop-blur"
         role="status"
         aria-label="tmux status bar"
       >
@@ -215,6 +215,11 @@ export default function TmuxStatusBar() {
         </div>
       )}
       <style jsx global>{`
+        .tmux-status,
+        .tmux-status kbd {
+          font-family: inherit;
+        }
+
         .tmux-prefix {
           position: absolute;
           right: 0.75rem;

@@ -7,7 +7,7 @@ import CreditsFooter from "./CreditsFooter";
 export default function BottomStack() {
   return (
     <div
-      className="fixed right-2 left-2 z-40 flex flex-col gap-2 sm:right-2 sm:left-2"
+      className="fixed left-2 right-2 z-40 flex flex-col gap-2 sm:left-2 sm:right-2"
       style={{ bottom: "calc(0.5rem + env(safe-area-inset-bottom, 0px))" }}
       aria-live="polite"
     >
