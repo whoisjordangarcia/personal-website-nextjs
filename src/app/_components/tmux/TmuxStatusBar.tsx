@@ -17,7 +17,7 @@ export default function TmuxStatusBar() {
     return () => clearInterval(t);
   }, []);
 
-  const sessionName = "nvim";
+  const sessionName = "1:zsh";
 
   // Keyboard: emulate tmux prefix & a few actions
   React.useEffect(() => {
@@ -107,8 +107,8 @@ export default function TmuxStatusBar() {
 
   return (
     <div
-      className="tmux-status pointer-events-none fixed right-2 left-2 hidden sm:block"
-      style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))" }}
+      className="tmux-status pointer-events-none fixed right-2 left-2"
+      style={{ bottom: "calc(0.5rem + env(safe-area-inset-bottom, 0px))" }}
     >
       {/* Split overlay lines */}
       {splitOverlay && (
@@ -179,8 +179,10 @@ export default function TmuxStatusBar() {
             </span>
           </div>
           <div className="flex items-center justify-self-center">
-            {/* Center active segment without icon */}
-            <span className="tmux-seg tmux-seg--active">{sessionName}</span>
+            {/* Center active segment with powerline edges */}
+            <span className="tmux-seg tmux-seg--active tmux-seg--powerline">
+              {sessionName}
+            </span>
           </div>
           <div className="flex items-center gap-2 justify-self-end text-[#a5adcb]">
             <span>{now}</span>
@@ -216,7 +218,7 @@ export default function TmuxStatusBar() {
         .tmux-prefix {
           position: absolute;
           right: 0.75rem;
-          bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+          bottom: calc(2.25rem + env(safe-area-inset-bottom, 0px));
           background: #363a4f;
           color: #cad3f5;
           border: 1px solid #4b4f6b;
@@ -228,7 +230,7 @@ export default function TmuxStatusBar() {
         .tmux-status-msg {
           position: absolute;
           left: 0.75rem;
-          bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+          bottom: calc(2.25rem + env(safe-area-inset-bottom, 0px));
           background: #363a4f;
           color: #cad3f5;
           border: 1px solid #4b4f6b;
@@ -245,7 +247,7 @@ export default function TmuxStatusBar() {
           position: fixed;
           left: 0;
           right: 0;
-          bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+          bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
           display: flex;
           justify-content: center;
           pointer-events: none;
@@ -293,6 +295,32 @@ export default function TmuxStatusBar() {
           border: 1px solid #a6e3a1; /* Catppuccin green */
           background: #a6e3a1;
           color: #1e2030;
+        }
+
+        /* Powerline-style angled ends */
+        .tmux-seg--powerline {
+          padding-left: 10px;
+          padding-right: 14px; /* extra room for right chevron */
+        }
+        .tmux-seg--powerline::before,
+        .tmux-seg--powerline::after {
+          content: "";
+          position: absolute;
+          top: -1px; /* align with 1px border */
+          bottom: -1px;
+          width: 0;
+          border-top: calc(50% + 1px) solid transparent;
+          border-bottom: calc(50% + 1px) solid transparent;
+        }
+        .tmux-seg--powerline::before {
+          /* Left wedge that blends into bar background */
+          left: -10px;
+          border-right: 10px solid #1e2030; /* tmux bar bg */
+        }
+        .tmux-seg--powerline::after {
+          /* Right wedge that blends into bar background */
+          right: -10px;
+          border-left: 10px solid #1e2030; /* tmux bar bg */
         }
 
         /* Split overlays */
