@@ -30,7 +30,7 @@ export default function HomeTerminal() {
   return (
     <>
       <TerminalLine
-        className="text-xl text-[#CAD3F5]"
+        className="text-base text-[#CAD3F5]"
         prompt={<Prompt />}
         promptLabel="jordangarcia@127.0.0.1 ~ $ "
         command="me -h"
@@ -62,7 +62,7 @@ export default function HomeTerminal() {
 
       {showSecondCommand && (
         <TerminalLine
-          className="text-xl text-[#CAD3F5]"
+          className="text-base text-[#CAD3F5]"
           prompt={<Prompt />}
           promptLabel="jordangarcia@127.0.0.1 ~ $ "
           command="bat more-info.md"

@@ -134,7 +134,7 @@ export default function TmuxStatusBar() {
       {/* Prefix indicator */}
       {prefixActive && <div className="tmux-prefix">[prefix]</div>}
       <div
-        className="w-full rounded border border-[#363a4f] bg-[#1e2030]/90 px-2 py-1 text-[11px] text-[#cad3f5] shadow-sm backdrop-blur select-none"
+        className="w-full rounded border border-[#363a4f] bg-[#1e2030]/90 px-2 py-1 text-base text-[#cad3f5] shadow-sm backdrop-blur select-none"
         role="status"
         aria-label="tmux status bar"
       >
@@ -229,7 +229,7 @@ export default function TmuxStatusBar() {
           border: 1px solid #4b4f6b;
           border-radius: 4px;
           padding: 2px 6px;
-          font-size: 11px;
+          font-size: 1rem;
         }
 
         .tmux-status-msg {
@@ -241,7 +241,7 @@ export default function TmuxStatusBar() {
           border: 1px solid #4b4f6b;
           border-radius: 4px;
           padding: 2px 6px;
-          font-size: 11px;
+          font-size: 1rem;
           max-width: 60vw;
           white-space: nowrap;
           overflow: hidden;
@@ -262,7 +262,7 @@ export default function TmuxStatusBar() {
           background: #1e2030;
           border: 1px solid #363a4f;
           color: #cad3f5;
-          font-size: 12px;
+          font-size: 1rem;
           border-radius: 6px;
           padding: 10px 12px;
           width: min(480px, 92vw);
@@ -279,7 +279,7 @@ export default function TmuxStatusBar() {
         .tmux-help__hint {
           margin-top: 8px;
           color: #a5adcb;
-          font-size: 11px;
+          font-size: 1rem;
         }
         kbd {
           background: #363a4f;
