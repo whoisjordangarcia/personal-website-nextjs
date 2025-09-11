@@ -164,16 +164,16 @@ export default function TmuxStatusBar() {
                 <path
                   d="M7 9l3 3-3 3"
                   stroke="#a5adcb"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth={1.6}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   fill="none"
                 />
                 <path
                   d="M12 15h5"
                   stroke="#a5adcb"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
+                  strokeWidth={1.6}
+                  strokeLinecap="round"
                 />
               </svg>
             </span>
