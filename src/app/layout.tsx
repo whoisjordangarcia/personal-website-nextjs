@@ -1,8 +1,10 @@
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import { Suspense } from "react";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { Analytics } from "./_components/Analytics";
 
 export const metadata = {
   title: "Jordan Garcia",
@@ -20,6 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
