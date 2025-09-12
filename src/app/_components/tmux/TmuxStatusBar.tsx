@@ -141,14 +141,14 @@ export default function TmuxStatusBar() {
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
           <div className="flex items-center gap-2 justify-self-start">
             <span
-              className="inline-flex h-5 w-5 items-center justify-center rounded-sm bg-[#363a4f]"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-sm bg-[#363a4f]"
               aria-label="Terminal"
               title="Terminal"
             >
               <svg
                 viewBox="0 0 24 24"
-                width="14"
-                height="14"
+                width="16"
+                height="16"
                 aria-hidden="true"
                 focusable="false"
               >
