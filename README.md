@@ -23,6 +23,11 @@ cp .env.example .env.local
 # open .env.local and fill required values
 ```
 
+The following environment variables are supported:
+
+- `NEXT_PUBLIC_UMAMI_WEBSITE_ID` – Umami website ID.
+- `NEXT_PUBLIC_UMAMI_SCRIPT_URL` – URL to the Umami tracking script.
+
 3. Database (Drizzle)
 
 ```
