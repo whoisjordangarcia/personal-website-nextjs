@@ -10,3 +10,8 @@ These instructions apply to the entire repository.
 - Execute end-to-end tests with `bun run test:e2e` (install browsers once via `bun run test:e2e:install`).
 
 Ensure these commands pass before committing changes.
+
+## Logging
+
+- When running verification commands, silence standard output so only errors are shown by redirecting stdout to `/dev/null` (e.g., `bun run lint:check >/dev/null`).
+- You may run the same commands without redirection to view full logs.
