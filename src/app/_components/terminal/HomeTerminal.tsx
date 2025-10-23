@@ -91,13 +91,13 @@ export default function HomeTerminal() {
           <p>
             -- [
             <a
-              href="https://linkedin.com/in/arickhogarcia"
+              href="https://linkedin.com/in/whoisjordangarcia"
               target="_blank"
               className="text-[#f2d5cf] hover:underline"
             >
               linkedin
             </a>
-            ](https://linkedin.com/in/arickhogarcia)
+            ](https://linkedin.com/in/whoisjordangarcia)
           </p>
           <p>
             -- [
@@ -109,17 +109,6 @@ export default function HomeTerminal() {
               github
             </a>
             ](https://github.com/whoisjordangarcia)
-          </p>
-          <p>
-            -- [
-            <a
-              href="https://x.com/whoismrgarcia"
-              target="_blank"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              twitter
-            </a>
-            ](https://x.com/whoismrgarcia)
           </p>
           <p>
             -- [
