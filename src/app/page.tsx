@@ -4,7 +4,7 @@ import TmuxStatusBar from "./_components/tmux/TmuxStatusBar";
 
 export default async function Home() {
   return (
-    <main className="px-4 py-2 pb-16 lg:w-3/5">
+    <main className="px-8 py-8 pb-24 lg:w-3/5">
       <HomeTerminal />
       <TmuxStatusBar />
     </main>

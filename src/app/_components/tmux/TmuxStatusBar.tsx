@@ -293,7 +293,7 @@ export default function TmuxStatusBar() {
           display: inline-flex;
           align-items: center;
           position: relative;
-          padding: 2px 8px;
+          padding: 0px 8px;
           border-radius: 3px;
         }
         .tmux-seg--active {
