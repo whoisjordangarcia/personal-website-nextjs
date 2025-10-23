@@ -80,13 +80,13 @@ export default function HomeTerminal() {
           <p>
             -- [
             <a
-              href="mailto:arickho@gmail.com"
+              href="mailto:hello@jordangarcia.me"
               target="_blank"
               className="text-[#f2d5cf] hover:underline"
             >
               email me
             </a>
-            ](mailto:arickho@gmail.com)
+            ](mailto:hello@jordangarcia.me)
           </p>
           <p>
             -- [
