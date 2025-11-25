@@ -48,14 +48,11 @@ export default function HomeTerminal() {
           <p className="py-2">
             I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
             specializing in building things mostly in Typescript and Python.
-            Currently, working at @labcorp as an software engineer.
+            Currently, working at @labcorp as an technical lead, focusing on 
+            distributed systems and constantly leveling up my terminal setup.
           </p>
           <p className="py-2">
-            These days, my main focus is on building distributed systems and
-            continuously optimizing my terminal.
-          </p>
-          <p className="py-2">
-            When I’m not coding, you can usually find me at the beach.
+            When the laptop’s shut, I’m out finding my next coffee or meal spot.
           </p>
         </TerminalOutput>
       )}
