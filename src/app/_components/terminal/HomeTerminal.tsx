@@ -48,7 +48,7 @@ export default function HomeTerminal() {
           <p className="py-2">
             I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
             specializing in building things mostly in Typescript and Python.
-            Currently, working at @labcorp as an technical lead, focusing on 
+            Focusing on 
             distributed systems and constantly leveling up my terminal setup.
           </p>
           <p className="py-2">
