@@ -14,6 +14,68 @@ const TerminalOutput: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => <div className="output py-4 text-[#CAD3F5]">{children}</div>;
 
+const Neofetch = () => {
+  const [uptime, setUptime] = React.useState("0 mins");
+  const [resolution, setResolution] = React.useState("0x0");
+  const [cpu, setCpu] = React.useState("0");
+
+  React.useEffect(() => {
+    // Resolution
+    const updateResolution = () => {
+      setResolution(`${window.innerWidth}x${window.innerHeight}`);
+    };
+    updateResolution();
+    window.addEventListener("resize", updateResolution);
+
+    // CPU cores
+    setCpu(`${navigator.hardwareConcurrency || "?"} cores`);
+
+    // Uptime counter
+    const startTime = Date.now();
+    const updateUptime = () => {
+      const seconds = Math.floor((Date.now() - startTime) / 1000);
+      if (seconds < 60) {
+        setUptime(`${seconds} secs`);
+      } else {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        setUptime(`${mins} mins, ${secs} secs`);
+      }
+    };
+    const interval = setInterval(updateUptime, 1000);
+
+    return () => {
+      window.removeEventListener("resize", updateResolution);
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+    <div className="hidden sm:flex gap-4 sm:gap-8 mb-6 ascii-fade">
+      <pre className="text-[#7DC4E4] text-xs leading-tight hidden sm:block">
+        {`      /\\
+     /  \\
+    /\\   \\
+   /      \\
+  /   ,,   \\
+ /   |  |  -\\
+/_-''    ''-_\\`}
+      </pre>
+      <div className="text-xs sm:text-sm space-y-1">
+        <p><span className="text-[#ED8796]">jordangarcia</span><span className="text-[#CAD3F5]">@</span><span className="text-[#A6DA95]">127.0.0.1</span></p>
+        <p className="text-[#656989]">-------------------</p>
+        <p><span className="text-[#ED8796]">OS:</span> <span className="text-[#CAD3F5]">Arch Linux x86_64</span></p>
+        <p><span className="text-[#ED8796]">Uptime:</span> <span className="text-[#CAD3F5]">{uptime}</span></p>
+        <p><span className="text-[#ED8796]">Resolution:</span> <span className="text-[#CAD3F5]">{resolution}</span></p>
+        <p><span className="text-[#ED8796]">CPU:</span> <span className="text-[#CAD3F5]">{cpu}</span></p>
+        <p><span className="text-[#ED8796]">Packages:</span> <span className="text-[#CAD3F5]">595 (npm)</span></p>
+        <p><span className="text-[#ED8796]">Shell:</span> <span className="text-[#CAD3F5]">zsh + tmux</span></p>
+        <p><span className="text-[#ED8796]">Editor:</span> <span className="text-[#CAD3F5]">Neovim</span></p>
+      </div>
+    </div>
+  );
+};
+
 export default function HomeTerminal() {
   const [showFirstOutput, setShowFirstOutput] = React.useState(false);
   const [showSecondCommand, setShowSecondCommand] = React.useState(false);
@@ -29,6 +91,7 @@ export default function HomeTerminal() {
 
   return (
     <>
+      <Neofetch />
       <TerminalLine
         className="text-base text-[#CAD3F5]"
         prompt={<Prompt />}
@@ -187,6 +250,7 @@ export default function HomeTerminal() {
           </div>
         </TerminalOutput>
       )}
+
     </>
   );
 }
