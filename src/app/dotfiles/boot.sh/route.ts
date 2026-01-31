@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
-const BOOT_SCRIPT_URL = "https://raw.githubusercontent.com/whoisjordangarcia/dotfiles/main/boot.sh";
+const BOOT_SCRIPT_URL =
+  "https://raw.githubusercontent.com/whoisjordangarcia/dotfiles/main/boot.sh";
 
 export async function GET() {
   try {
@@ -9,7 +10,7 @@ export async function GET() {
     if (!response.ok) {
       return NextResponse.json(
         { error: "Failed to fetch boot script" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -26,7 +27,7 @@ export async function GET() {
     console.error("Error fetching boot script:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

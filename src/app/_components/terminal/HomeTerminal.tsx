@@ -46,13 +46,20 @@ export default function HomeTerminal() {
       {showFirstOutput && (
         <TerminalOutput>
           <p className="py-2">
-            I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
-            specializing in building things mostly in Typescript and Python.
-            Focusing on 
-            distributed systems and constantly leveling up my terminal setup.
+            Aussie based in Miami. Currently a Senior Software
+            Engineer at{" "}
+            <a
+              href="https://www.nestgenomics.com/"
+              target="_blank"
+              className="text-[#f2d5cf] hover:underline"
+            >
+              @nest
+            </a>
+            . I build distributed systems with TypeScript and Python, and obsess
+            over my terminal setup. Yes, I'm a vim guy (archbtw).
           </p>
           <p className="py-2">
-            When the laptop’s shut, I’m out finding my next coffee or meal spot.
+            Off-screen, I'm hunting for the best coffee and food joints.
           </p>
         </TerminalOutput>
       )}
