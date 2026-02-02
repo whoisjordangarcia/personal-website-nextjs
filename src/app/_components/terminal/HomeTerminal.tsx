@@ -37,8 +37,8 @@ const Neofetch = () => {
   }, []);
 
   return (
-    <div className="hidden sm:flex gap-4 sm:gap-8 mb-6 ascii-fade">
-      <pre className="text-[#7DC4E4] text-base leading-tight hidden sm:block">
+    <div className="ascii-fade mb-6 hidden gap-4 sm:flex sm:gap-8">
+      <pre className="hidden text-base leading-tight text-[#7DC4E4] sm:block">
         {`      /\\
      /  \\
     /\\   \\
@@ -47,14 +47,33 @@ const Neofetch = () => {
  /   |  |  -\\
 /_-''    ''-_\\`}
       </pre>
-      <div className="text-base space-y-1">
-        <p><span className="text-[#ED8796]">jordangarcia</span><span className="text-[#CAD3F5]">@</span><span className="text-[#A6DA95]">127.0.0.1</span></p>
+      <div className="space-y-1 text-base">
+        <p>
+          <span className="text-[#ED8796]">jordangarcia</span>
+          <span className="text-[#CAD3F5]">@</span>
+          <span className="text-[#A6DA95]">127.0.0.1</span>
+        </p>
         <p className="text-[#656989]">-------------------</p>
-        <p><span className="text-[#ED8796]">os:</span> <span className="text-[#CAD3F5]">Arch Linux x86_64</span></p>
-        <p><span className="text-[#ED8796]">uptime:</span> <span className="text-[#CAD3F5]">{uptime}</span></p>
-        <p><span className="text-[#ED8796]">packages:</span> <span className="text-[#CAD3F5]">595 (npm)</span></p>
-        <p><span className="text-[#ED8796]">shell:</span> <span className="text-[#CAD3F5]">zsh + tmux</span></p>
-        <p><span className="text-[#ED8796]">editor:</span> <span className="text-[#CAD3F5]">neovim</span></p>
+        <p>
+          <span className="text-[#ED8796]">os:</span>{" "}
+          <span className="text-[#CAD3F5]">Arch Linux x86_64</span>
+        </p>
+        <p>
+          <span className="text-[#ED8796]">uptime:</span>{" "}
+          <span className="text-[#CAD3F5]">{uptime}</span>
+        </p>
+        <p>
+          <span className="text-[#ED8796]">packages:</span>{" "}
+          <span className="text-[#CAD3F5]">595 (npm)</span>
+        </p>
+        <p>
+          <span className="text-[#ED8796]">shell:</span>{" "}
+          <span className="text-[#CAD3F5]">zsh + tmux</span>
+        </p>
+        <p>
+          <span className="text-[#ED8796]">editor:</span>{" "}
+          <span className="text-[#CAD3F5]">neovim</span>
+        </p>
       </div>
     </div>
   );
@@ -93,8 +112,7 @@ export default function HomeTerminal() {
       {showFirstOutput && (
         <TerminalOutput>
           <p className="py-2">
-            Aussie based in Miami. Currently a Senior Software
-            Engineer at{" "}
+            Aussie based in Miami. Currently a Senior Software Engineer at{" "}
             <a
               href="https://www.nestgenomics.com/"
               target="_blank"
@@ -234,7 +252,6 @@ export default function HomeTerminal() {
           </div>
         </TerminalOutput>
       )}
-
     </>
   );
 }
