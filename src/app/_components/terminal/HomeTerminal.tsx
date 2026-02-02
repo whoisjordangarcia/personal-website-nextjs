@@ -14,71 +14,6 @@ const TerminalOutput: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => <div className="output py-4 text-[#CAD3F5]">{children}</div>;
 
-const Neofetch = () => {
-  const [uptime, setUptime] = React.useState("0 mins");
-
-  React.useEffect(() => {
-    // Uptime: minutes since midnight local time
-    const updateUptime = () => {
-      const now = new Date();
-      const mins = now.getHours() * 60 + now.getMinutes();
-      const hours = Math.floor(mins / 60);
-      const remainingMins = mins % 60;
-      if (hours > 0) {
-        setUptime(`${hours} hours, ${remainingMins} mins`);
-      } else {
-        setUptime(`${remainingMins} mins`);
-      }
-    };
-    updateUptime();
-    const interval = setInterval(updateUptime, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="ascii-fade mb-6 hidden gap-4 sm:flex sm:gap-8">
-      <pre className="hidden text-base leading-tight text-[#7DC4E4] sm:block">
-        {`      /\\
-     /  \\
-    /\\   \\
-   /      \\
-  /   ,,   \\
- /   |  |  -\\
-/_-''    ''-_\\`}
-      </pre>
-      <div className="space-y-1 text-base">
-        <p>
-          <span className="text-[#ED8796]">jordangarcia</span>
-          <span className="text-[#CAD3F5]">@</span>
-          <span className="text-[#A6DA95]">127.0.0.1</span>
-        </p>
-        <p className="text-[#656989]">-------------------</p>
-        <p>
-          <span className="text-[#ED8796]">os:</span>{" "}
-          <span className="text-[#CAD3F5]">Arch Linux x86_64</span>
-        </p>
-        <p>
-          <span className="text-[#ED8796]">uptime:</span>{" "}
-          <span className="text-[#CAD3F5]">{uptime}</span>
-        </p>
-        <p>
-          <span className="text-[#ED8796]">packages:</span>{" "}
-          <span className="text-[#CAD3F5]">595 (npm)</span>
-        </p>
-        <p>
-          <span className="text-[#ED8796]">shell:</span>{" "}
-          <span className="text-[#CAD3F5]">zsh + tmux</span>
-        </p>
-        <p>
-          <span className="text-[#ED8796]">editor:</span>{" "}
-          <span className="text-[#CAD3F5]">neovim</span>
-        </p>
-      </div>
-    </div>
-  );
-};
-
 export default function HomeTerminal() {
   const [showFirstOutput, setShowFirstOutput] = React.useState(false);
   const [showSecondCommand, setShowSecondCommand] = React.useState(false);
@@ -94,7 +29,6 @@ export default function HomeTerminal() {
 
   return (
     <>
-      <Neofetch />
       <TerminalLine
         className="text-base text-[#CAD3F5]"
         prompt={<Prompt />}
@@ -112,19 +46,13 @@ export default function HomeTerminal() {
       {showFirstOutput && (
         <TerminalOutput>
           <p className="py-2">
-            Aussie based in Miami. Currently a Senior Software Engineer at{" "}
-            <a
-              href="https://www.nestgenomics.com/"
-              target="_blank"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              @nest
-            </a>
-            . I build distributed systems with TypeScript and Python, and obsess
-            over my terminal setup. Yes, I'm a vim guy (archbtw).
+            I’m an Aussie "aw-see" (\ä-s\) currently residing in Miami,
+            specializing in building things mostly in Typescript and Python.
+            Focusing on distributed systems and constantly leveling up my
+            terminal setup.
           </p>
           <p className="py-2">
-            Off-screen, I'm hunting for the best coffee and food joints.
+            When the laptop’s shut, I’m out finding my next coffee or meal spot.
           </p>
         </TerminalOutput>
       )}
