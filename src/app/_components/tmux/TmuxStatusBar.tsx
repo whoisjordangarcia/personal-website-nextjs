@@ -11,13 +11,21 @@ export default function TmuxStatusBar() {
     null | "vertical" | "horizontal"
   >(null);
   const [newWindowOverlay, setNewWindowOverlay] = React.useState(false);
+  const [activeWindowIndex, setActiveWindowIndex] = React.useState(0);
+
+  // Simulated window list
+  const windows = [
+    { id: 0, name: "zsh" },
+    { id: 1, name: "vim" },
+    { id: 2, name: "node" },
+  ];
 
   React.useEffect(() => {
     const t = setInterval(() => setNow(formatNow()), 1000);
     return () => clearInterval(t);
   }, []);
 
-  const sessionName = "1:zsh";
+  const hostname = "lucky-falcon";
 
   // Keyboard: emulate tmux prefix & a few actions
   React.useEffect(() => {
@@ -87,6 +95,27 @@ export default function TmuxStatusBar() {
           setNewWindowOverlay(false);
           document.documentElement.classList.remove("tmux-newwin-shift");
         }, 650);
+      } else if (k.toLowerCase() === "n") {
+        // Next window
+        setActiveWindowIndex((prev) => (prev + 1) % windows.length);
+        showStatus("next-window");
+      } else if (k.toLowerCase() === "p") {
+        // Previous window
+        setActiveWindowIndex(
+          (prev) => (prev - 1 + windows.length) % windows.length,
+        );
+        showStatus("previous-window");
+      } else if (/^[0-9]$/.test(k)) {
+        // Select window by number
+        const idx = parseInt(k, 10);
+        if (idx < windows.length) {
+          setActiveWindowIndex(idx);
+          showStatus(`select-window -t ${idx}`);
+        } else {
+          showStatus(`window ${idx} not found`);
+        }
+      } else if (k.toLowerCase() === "d") {
+        showStatus("detached (simulated)");
       } else {
         showStatus(`unbound key: ${k}`);
       }
@@ -138,54 +167,144 @@ export default function TmuxStatusBar() {
         role="status"
         aria-label="tmux status bar"
       >
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-          <div className="flex items-center gap-2 justify-self-start">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+          {/* Left: Powerline hostname/session */}
+          <div className="flex items-center justify-self-start">
+            <span className="tmux-powerline-left">
+              <span className="tmux-powerline-left__session">[0]</span>
+              <span className="tmux-powerline-left__host">{hostname}</span>
+              <span className="tmux-powerline-left__arrow" aria-hidden="true" />
+            </span>
+          </div>
+          {/* Center: Window list */}
+          <div className="flex items-center gap-1 justify-self-center">
+            {windows.map((win, idx) => (
+              <span
+                key={win.id}
+                className={`tmux-win ${idx === activeWindowIndex ? "tmux-win--active" : ""}`}
+              >
+                {win.id}:{win.name}
+                {idx === activeWindowIndex && "*"}
+              </span>
+            ))}
+          </div>
+          {/* Right: Status indicators + date */}
+          <div className="flex items-center gap-3 justify-self-end text-[#a5adcb]">
+            {/* Battery indicator */}
             <span
-              className="inline-flex h-6 w-6 items-center justify-center rounded-sm bg-[#363a4f]"
-              aria-label="Terminal"
-              title="Terminal"
+              className="tmux-indicator"
+              title="Battery"
+              aria-label="Battery 85%"
             >
               <svg
                 viewBox="0 0 24 24"
-                width="16"
-                height="16"
+                width="14"
+                height="14"
                 aria-hidden="true"
-                focusable="false"
+                fill="none"
               >
                 <rect
-                  x="3.5"
-                  y="5.5"
-                  width="17"
-                  height="13"
-                  rx="1.5"
-                  fill="#24273a"
-                  stroke="#4b4f6b"
+                  x="2"
+                  y="7"
+                  width="18"
+                  height="10"
+                  rx="2"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path d="M20 10v4h2v-4h-2z" fill="currentColor" />
+                <rect x="4" y="9" width="12" height="6" rx="1" fill="#a6e3a1" />
+              </svg>
+              <span className="tmux-indicator__text">85%</span>
+            </span>
+            {/* WiFi indicator */}
+            <span
+              className="tmux-indicator"
+              title="WiFi"
+              aria-label="WiFi connected"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M12 18c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"
+                  fill="currentColor"
                 />
                 <path
-                  d="M7 9l3 3-3 3"
-                  stroke="#a5adcb"
-                  strokeWidth={1.6}
+                  d="M12 14c1.7 0 3.2.7 4.3 1.8"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
                 />
                 <path
-                  d="M12 15h5"
-                  stroke="#a5adcb"
-                  strokeWidth={1.6}
+                  d="M12 14c-1.7 0-3.2.7-4.3 1.8"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 10c2.8 0 5.3 1.1 7.1 3"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 10c-2.8 0-5.3 1.1-7.1 3"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 6c3.9 0 7.4 1.6 10 4.2"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 6c-3.9 0-7.4 1.6-10 4.2"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                 />
               </svg>
             </span>
-          </div>
-          <div className="flex items-center justify-self-center">
-            {/* Center active segment with powerline edges */}
-            <span className="tmux-seg tmux-seg--active tmux-seg--powerline">
-              {sessionName}
+            {/* Load average */}
+            <span
+              className="tmux-indicator"
+              title="Load average"
+              aria-label="Load 0.42"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                aria-hidden="true"
+                fill="none"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="2"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M7 14l3-4 3 2 4-5"
+                  stroke="#8bd5ca"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span className="tmux-indicator__text">0.42</span>
             </span>
-          </div>
-          <div className="flex items-center gap-2 justify-self-end text-[#a5adcb]">
-            <span>{now}</span>
+            <span className="tmux-date">{now}</span>
           </div>
         </div>
       </div>
@@ -209,6 +328,18 @@ export default function TmuxStatusBar() {
             <div className="tmux-help__row">
               <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
               <kbd>c</kbd> — new window
+            </div>
+            <div className="tmux-help__row">
+              <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
+              <kbd>n</kbd> / <kbd>p</kbd> — next/prev window
+            </div>
+            <div className="tmux-help__row">
+              <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
+              <kbd>0-9</kbd> — select window
+            </div>
+            <div className="tmux-help__row">
+              <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
+              <kbd>d</kbd> — detach
             </div>
             <div className="tmux-help__hint">Press Esc to close</div>
           </div>
@@ -288,44 +419,63 @@ export default function TmuxStatusBar() {
           border: 1px solid #4b4f6b;
         }
 
-        /* Powerline-style center segment */
-        .tmux-seg {
+        /* Powerline-style left hostname/session segment */
+        .tmux-powerline-left {
           display: inline-flex;
           align-items: center;
           position: relative;
-          padding: 0px 8px;
-          border-radius: 3px;
+          height: 22px;
         }
-        .tmux-seg--active {
-          border: 1px solid #a6e3a1; /* Catppuccin green */
-          background: #a6e3a1;
+        .tmux-powerline-left__session {
+          background: #8bd5ca; /* Catppuccin teal */
           color: #1e2030;
+          padding: 2px 8px;
+          font-weight: 600;
+          font-size: 0.85rem;
+        }
+        .tmux-powerline-left__host {
+          background: #363a4f;
+          color: #cad3f5;
+          padding: 2px 12px 2px 8px;
+          font-size: 0.85rem;
+        }
+        .tmux-powerline-left__arrow {
+          position: absolute;
+          right: -8px;
+          top: 0;
+          bottom: 0;
+          width: 0;
+          border-top: 11px solid transparent;
+          border-bottom: 11px solid transparent;
+          border-left: 8px solid #363a4f;
         }
 
-        /* Powerline-style angled ends */
-        .tmux-seg--powerline {
-          padding-left: 10px;
-          padding-right: 14px; /* extra room for right chevron */
+        /* Window list items */
+        .tmux-win {
+          padding: 1px 6px;
+          font-size: 0.9rem;
+          color: #a5adcb;
+          border-radius: 2px;
+          transition: background 0.15s ease;
         }
-        .tmux-seg--powerline::before,
-        .tmux-seg--powerline::after {
-          content: "";
-          position: absolute;
-          top: -1px; /* align with 1px border */
-          bottom: -1px;
-          width: 0;
-          border-top: calc(50% + 1px) solid transparent;
-          border-bottom: calc(50% + 1px) solid transparent;
+        .tmux-win--active {
+          background: #a6e3a1;
+          color: #1e2030;
+          font-weight: 500;
         }
-        .tmux-seg--powerline::before {
-          /* Left wedge that blends into bar background */
-          left: -10px;
-          border-right: 10px solid #1e2030; /* tmux bar bg */
+
+        /* Status indicators */
+        .tmux-indicator {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 0.8rem;
         }
-        .tmux-seg--powerline::after {
-          /* Right wedge that blends into bar background */
-          right: -10px;
-          border-left: 10px solid #1e2030; /* tmux bar bg */
+        .tmux-indicator__text {
+          font-variant-numeric: tabular-nums;
+        }
+        .tmux-date {
+          font-size: 0.9rem;
         }
 
         /* Split overlays */
