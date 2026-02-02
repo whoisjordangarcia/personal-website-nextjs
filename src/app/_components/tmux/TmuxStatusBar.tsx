@@ -107,7 +107,7 @@ export default function TmuxStatusBar() {
 
   return (
     <div
-      className="tmux-status pointer-events-none fixed right-2 left-2"
+      className="tmux-status pointer-events-none fixed right-2 left-2 hidden sm:block"
       style={{ bottom: "calc(0.5rem + env(safe-area-inset-bottom, 0px))" }}
     >
       {/* Split overlay lines */}
