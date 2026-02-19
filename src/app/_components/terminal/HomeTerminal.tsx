@@ -79,6 +79,7 @@ export default function HomeTerminal() {
             <a
               href="mailto:hello@jordangarcia.me"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-[#f2d5cf] hover:underline"
             >
               email me
@@ -90,6 +91,7 @@ export default function HomeTerminal() {
             <a
               href="https://linkedin.com/in/whoisjordangarcia"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-[#f2d5cf] hover:underline"
             >
               linkedin
@@ -101,6 +103,7 @@ export default function HomeTerminal() {
             <a
               href="https://github.com/whoisjordangarcia"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-[#f2d5cf] hover:underline"
             >
               github
@@ -112,6 +115,7 @@ export default function HomeTerminal() {
             <a
               href="https://instagram.com/whoisjordangarcia"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-[#f2d5cf] hover:underline"
             >
               instagram
@@ -124,6 +128,7 @@ export default function HomeTerminal() {
             <a
               href="https://figma.com"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Figma
@@ -132,6 +137,7 @@ export default function HomeTerminal() {
             <a
               href="https://neovim.io"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Neovim
@@ -140,6 +146,7 @@ export default function HomeTerminal() {
             <a
               href="https://nextjs.org"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Next.js
@@ -148,6 +155,7 @@ export default function HomeTerminal() {
             <a
               href="https://tailwindcss.com"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Tailwind CSS
@@ -156,6 +164,7 @@ export default function HomeTerminal() {
             <a
               href="https://vercel.com"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Vercel
@@ -164,6 +173,7 @@ export default function HomeTerminal() {
             <a
               href="https://catppuccin.com"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               Catppuccin
@@ -172,6 +182,7 @@ export default function HomeTerminal() {
             <a
               href="https://www.jetbrains.com/lp/mono"
               target="_blank"
+              rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
               JetBrains Mono

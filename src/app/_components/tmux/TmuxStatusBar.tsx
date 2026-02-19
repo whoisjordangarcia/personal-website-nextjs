@@ -2,6 +2,13 @@
 
 import React from "react";
 
+// Simulated window list (static, hoisted to avoid re-creation on each render)
+const windows = [
+  { id: 0, name: "zsh" },
+  { id: 1, name: "vim" },
+  { id: 2, name: "node" },
+];
+
 export default function TmuxStatusBar() {
   const [now, setNow] = React.useState<string>(() => formatNow());
   const [prefixActive, setPrefixActive] = React.useState(false);
@@ -12,13 +19,6 @@ export default function TmuxStatusBar() {
   >(null);
   const [newWindowOverlay, setNewWindowOverlay] = React.useState(false);
   const [activeWindowIndex, setActiveWindowIndex] = React.useState(0);
-
-  // Simulated window list
-  const windows = [
-    { id: 0, name: "zsh" },
-    { id: 1, name: "vim" },
-    { id: 2, name: "node" },
-  ];
 
   React.useEffect(() => {
     const t = setInterval(() => setNow(formatNow()), 1000);

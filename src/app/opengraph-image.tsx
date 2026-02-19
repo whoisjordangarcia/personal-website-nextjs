@@ -2,7 +2,8 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Jordan Garcia - Personal Portfolio";
+export const alt =
+  "Jordan Garcia — Senior Software Engineer specializing in TypeScript, Python, and distributed systems";
 export const size = {
   width: 1200,
   height: 630,
@@ -132,7 +133,7 @@ export default function Image() {
               marginLeft: 48,
             }}
           >
-            Software Engineer
+            Senior Software Engineer
           </div>
 
           {/* Blinking cursor line */}
