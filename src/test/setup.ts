@@ -38,8 +38,7 @@ vi.mock("next/navigation", () => ({
 
 // Mock next/script
 vi.mock("next/script", () => ({
-  default: ({ src, ...props }: { src?: string; [key: string]: unknown }) => {
-    // Return a simple script element for testing
+  default: (_props: { src?: string; [key: string]: unknown }) => {
     return null;
   },
 }));

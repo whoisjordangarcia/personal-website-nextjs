@@ -40,8 +40,9 @@ describe("Analytics", () => {
     const link = screen.getByText("Test Link");
     fireEvent.click(link);
 
-    expect(window.umami?.track).toHaveBeenCalledWith("link_click", {
+    expect(window.umami?.track).toHaveBeenCalledWith("external_link_click", {
       href: "https://example.com/",
+      text: "Test Link",
     });
   });
 
@@ -74,6 +75,7 @@ describe("Analytics", () => {
 
     expect(window.umami?.track).toHaveBeenCalledWith("link_click", {
       href: "https://example.com/",
+      text: "Nested Text",
     });
   });
 });
