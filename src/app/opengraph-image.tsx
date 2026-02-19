@@ -2,7 +2,8 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Jordan Garcia - Personal Portfolio";
+export const alt =
+  "Jordan Garcia — Software Engineer specializing in TypeScript, Python, and distributed systems";
 export const size = {
   width: 1200,
   height: 630,

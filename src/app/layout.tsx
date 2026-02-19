@@ -9,16 +9,33 @@ import { Analytics } from "./_components/Analytics";
 
 const siteUrl = "https://jordangarcia.dev";
 
+const description =
+  "Jordan Garcia — Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
+
 export const metadata: Metadata = {
   title: "Jordan Garcia",
-  description: "Personal Portfolio",
+  description,
+  keywords: [
+    "Jordan Garcia",
+    "Software Engineer",
+    "TypeScript",
+    "Python",
+    "distributed systems",
+    "Miami",
+    "full-stack developer",
+  ],
+  authors: [{ name: "Jordan Garcia", url: siteUrl }],
+  creator: "Jordan Garcia",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
   },
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Jordan Garcia",
-    description: "Personal Portfolio",
+    description,
     url: siteUrl,
     siteName: "Jordan Garcia",
     locale: "en_US",
@@ -27,7 +44,29 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Jordan Garcia",
-    description: "Personal Portfolio",
+    description,
+  },
+};
+
+// Static JSON-LD structured data for Google Knowledge Panel
+// Content is a build-time constant, not user input — safe to serialize directly
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jordan Garcia",
+  jobTitle: "Software Engineer",
+  url: siteUrl,
+  sameAs: [
+    "https://linkedin.com/in/whoisjordangarcia",
+    "https://github.com/whoisjordangarcia",
+    "https://instagram.com/whoisjordangarcia",
+  ],
+  knowsAbout: ["TypeScript", "Python", "distributed systems"],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Miami",
+    addressRegion: "FL",
+    addressCountry: "US",
   },
 };
 
@@ -39,6 +78,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
