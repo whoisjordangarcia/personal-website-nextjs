@@ -12,6 +12,7 @@ jobs:
 
     env:
       SKIP_ENV_VALIDATION: "1"
+      DATABASE_URL: "file:ci.db"
 
     steps:
       - uses: actions/checkout@v4
