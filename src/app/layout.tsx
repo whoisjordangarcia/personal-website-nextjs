@@ -10,14 +10,14 @@ import { Analytics } from "./_components/Analytics";
 const siteUrl = "https://jordangarcia.dev";
 
 const description =
-  "Jordan Garcia — Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
+  "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
 
 export const metadata: Metadata = {
   title: "Jordan Garcia",
   description,
   keywords: [
     "Jordan Garcia",
-    "Software Engineer",
+    "Senior Software Engineer",
     "TypeScript",
     "Python",
     "distributed systems",
@@ -54,7 +54,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Jordan Garcia",
-  jobTitle: "Software Engineer",
+  jobTitle: "Senior Software Engineer",
   url: siteUrl,
   sameAs: [
     "https://linkedin.com/in/whoisjordangarcia",

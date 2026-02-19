@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Jordan Garcia",
     short_name: "Jordan Garcia",
     description:
-      "Jordan Garcia — Software Engineer specializing in TypeScript and Python.",
+      "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python.",
     start_url: "/",
     display: "standalone",
     background_color: "#0f1117",
