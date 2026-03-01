@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { TRPCReactProvider } from "@/trpc/react";
 import { Analytics } from "./_components/Analytics";
 
-const siteUrl = "https://jordangarcia.dev";
+const siteUrl = "https://jordangarcia.me";
 
 const description =
   "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";

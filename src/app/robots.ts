@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://jordangarcia.dev/sitemap.xml",
+    sitemap: "https://jordangarcia.me/sitemap.xml",
   };
 }
