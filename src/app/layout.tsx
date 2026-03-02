@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { TRPCReactProvider } from "@/trpc/react";
 import { Analytics } from "./_components/Analytics";
 
-const siteUrl = "https://jordangarcia.dev";
+const siteUrl = "https://jordangarcia.me";
 
 const description =
   "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
@@ -40,11 +40,29 @@ export const metadata: Metadata = {
     siteName: "Jordan Garcia",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: `${siteUrl}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Jordan Garcia — Senior Software Engineer specializing in TypeScript, Python, and distributed systems",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jordan Garcia",
     description,
+    site: "@whoisjordangarcia",
+    creator: "@whoisjordangarcia",
+    images: [
+      {
+        url: `${siteUrl}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Jordan Garcia — Senior Software Engineer specializing in TypeScript, Python, and distributed systems",
+      },
+    ],
   },
 };
 

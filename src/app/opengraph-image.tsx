@@ -79,7 +79,7 @@ export default function Image() {
               marginLeft: 16,
             }}
           >
-            ~/jordangarcia.dev
+            ~/jordangarcia.me
           </div>
         </div>
 
