@@ -80,7 +80,7 @@ export default function HomeTerminal() {
               href="mailto:hello@jordangarcia.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
+              className="text-[var(--accent-pink)] hover:underline"
             >
               email me
             </a>
@@ -92,7 +92,7 @@ export default function HomeTerminal() {
               href="https://linkedin.com/in/whoisjordangarcia"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
+              className="text-[var(--accent-pink)] hover:underline"
             >
               linkedin
             </a>
@@ -104,7 +104,7 @@ export default function HomeTerminal() {
               href="https://github.com/whoisjordangarcia"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
+              className="text-[var(--accent-pink)] hover:underline"
             >
               github
             </a>
@@ -116,7 +116,7 @@ export default function HomeTerminal() {
               href="https://instagram.com/whoisjordangarcia"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
+              className="text-[var(--accent-pink)] hover:underline"
             >
               instagram
             </a>

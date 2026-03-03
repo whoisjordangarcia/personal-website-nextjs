@@ -5,11 +5,14 @@
     var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI,
     Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  --color-light-pink: #ed8796;
+  --color-pink: #ff69b4;
+  --color-pink-light: #ffb6c1;
+  --color-pink-dark: #db7093;
 }
 
 :root {
-  --bg-color: #24273a;
+  --bg-color: #2d1f2d;
+  --accent-pink: #ff69b4;
 }
 
 @font-face {
@@ -111,7 +114,7 @@
     blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
-  border-right: 10px solid #f2d5cf;
+  border-right: 10px solid var(--accent-pink);
 }
 
 .output {
@@ -144,7 +147,7 @@
   width: 0.6ch;
   height: 1em;
   vertical-align: -0.1em;
-  background-color: #f2d5cf; /* Catppuccin Latte Rosewater */
+  background-color: var(--accent-pink); /* Hot pink */
   animation: cursorBlink 1s steps(1) infinite;
 }
 
