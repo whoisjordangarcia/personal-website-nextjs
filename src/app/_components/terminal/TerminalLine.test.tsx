@@ -69,7 +69,7 @@ describe("TerminalLine", () => {
     expect(spans[1]).toHaveTextContent("");
   });
 
-  it("begins typing after startDelayMs", async () => {
+  it("begins typing after startDelayMs", () => {
     render(
       <TerminalLine
         prompt={<span>$</span>}
@@ -81,12 +81,12 @@ describe("TerminalLine", () => {
     );
 
     // Advance past start delay
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(100);
     });
 
     // Advance to type first character
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
@@ -95,7 +95,7 @@ describe("TerminalLine", () => {
     expect(spans[1]?.textContent).toBe("h");
   });
 
-  it("completes typing the full command", async () => {
+  it("completes typing the full command", () => {
     render(
       <TerminalLine
         prompt={<span>$</span>}
@@ -107,13 +107,13 @@ describe("TerminalLine", () => {
     );
 
     // Advance to start typing
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(0);
     });
 
     // Type all 3 characters
     for (let i = 0; i < 3; i++) {
-      await act(async () => {
+      act(() => {
         vi.advanceTimersByTime(10);
       });
     }
@@ -123,7 +123,7 @@ describe("TerminalLine", () => {
     expect(spans[1]?.textContent).toBe("abc");
   });
 
-  it("calls onDone callback when typing completes", async () => {
+  it("calls onDone callback when typing completes", () => {
     const onDone = vi.fn();
 
     render(
@@ -138,22 +138,22 @@ describe("TerminalLine", () => {
     );
 
     // Start typing
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(0);
     });
 
     // Type both characters
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
     expect(onDone).toHaveBeenCalledTimes(1);
   });
 
-  it("shows cursor when showCursorWhenDone is true (default)", async () => {
+  it("shows cursor when showCursorWhenDone is true (default)", () => {
     render(
       <TerminalLine
         prompt={<span>$</span>}
@@ -165,7 +165,7 @@ describe("TerminalLine", () => {
     );
 
     // Complete typing
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
@@ -174,7 +174,7 @@ describe("TerminalLine", () => {
     expect(cursor).toBeInTheDocument();
   });
 
-  it("hides cursor when showCursorWhenDone is false and typing is complete", async () => {
+  it("hides cursor when showCursorWhenDone is false and typing is complete", () => {
     render(
       <TerminalLine
         prompt={<span>$</span>}
@@ -187,17 +187,17 @@ describe("TerminalLine", () => {
     );
 
     // Start typing
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(0);
     });
 
     // Complete typing the single character
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
     // Give it an extra tick to complete
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
@@ -216,7 +216,7 @@ describe("TerminalLine", () => {
     expect(onDone).toHaveBeenCalled();
   });
 
-  it("handles pause characters with additional delay", async () => {
+  it("handles pause characters with additional delay", () => {
     render(
       <TerminalLine
         prompt={<span>$</span>}
@@ -230,12 +230,12 @@ describe("TerminalLine", () => {
     );
 
     // Start typing
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(0);
     });
 
     // Type 'a' (10ms)
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(10);
     });
 
@@ -244,7 +244,7 @@ describe("TerminalLine", () => {
     expect(spans[1]?.textContent).toBe("a");
 
     // Type ',' - needs base + pause time (10ms + 100ms = 110ms)
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(110);
     });
 

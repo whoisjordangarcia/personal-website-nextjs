@@ -101,7 +101,7 @@ describe("CreatePost", () => {
     expect(input).toHaveValue("");
   });
 
-  it("prevents default form submission behavior", async () => {
+  it("prevents default form submission behavior", () => {
     render(<CreatePost />);
 
     const form = screen.getByRole("button").closest("form");
@@ -161,7 +161,7 @@ describe("CreatePost pending state", () => {
     // Note: This is a simplified test - in reality you'd need to properly reset modules
   });
 
-  it("disables button when pending", async () => {
+  it("disables button when pending", () => {
     // This test would require proper module mocking with isPending: true
     // For now, we verify the button exists and has the correct type
     render(<CreatePost />);

@@ -25,8 +25,8 @@ vi.mock("./TerminalLine", () => ({
     }
     return (
       <h1
-        className={"terminal-line " + (className ?? "")}
-        aria-label={(promptLabel ?? "") + command}
+        className={`terminal-line ${className ?? ""}`}
+        aria-label={`${promptLabel ?? ""}${command}`}
       >
         {prompt}
         <span>{command}</span>

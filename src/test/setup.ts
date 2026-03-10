@@ -36,6 +36,17 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
+// Suppress styled-jsx warnings in happy-dom (jsx/global attrs are compiled away in prod)
+vi.spyOn(console, "error").mockImplementation(
+  (...args: Parameters<typeof console.error>) => {
+    const msg = typeof args[0] === "string" ? args[0] : "";
+    if (msg.includes("for a non-boolean attribute")) {
+      return;
+    }
+    process.stderr.write(`${args.map(String).join(" ")}\n`);
+  },
+);
+
 // Mock next/script
 vi.mock("next/script", () => ({
   default: (_props: { src?: string; [key: string]: unknown }) => {

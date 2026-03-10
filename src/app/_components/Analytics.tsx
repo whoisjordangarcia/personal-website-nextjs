@@ -70,7 +70,7 @@ export function Analytics() {
         const isExternal = isExternalLink(anchor.href);
         window.umami?.track(isExternal ? "external_link_click" : "link_click", {
           href: anchor.href,
-          text: anchor.textContent?.trim().slice(0, 50) ?? "",
+          text: anchor.textContent.trim().slice(0, 50),
         });
       }
     }

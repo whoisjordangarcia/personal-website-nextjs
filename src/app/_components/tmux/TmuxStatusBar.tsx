@@ -323,7 +323,7 @@ export default function TmuxStatusBar() {
             </div>
             <div className="tmux-help__row">
               <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
-              <kbd>"</kbd> — split horizontal
+              <kbd>&quot;</kbd> — split horizontal
             </div>
             <div className="tmux-help__row">
               <kbd>Ctrl</kbd>+<kbd>b</kbd> <span className="mx-1">then</span>{" "}
