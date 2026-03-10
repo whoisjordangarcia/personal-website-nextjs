@@ -55,11 +55,11 @@ export default function CreditsFooter() {
       </a>
       . Most of the text is set using{" "}
       <a
-        href="https://www.jetbrains.com/lp/mono"
+        href="https://github.com/ahatem/IoskeleyMono"
         target="_blank"
         className="font-bold hover:underline"
       >
-        JetBrains Mono
+        Ioskeley Mono
       </a>{" "}
       typeset.
     </div>

@@ -58,15 +58,15 @@ describe("CreditsFooter", () => {
     expect(catppuccinLink).toHaveAttribute("target", "_blank");
   });
 
-  it("renders JetBrains Mono link with correct attributes", () => {
+  it("renders Ioskeley Mono link with correct attributes", () => {
     render(<CreditsFooter />);
 
-    const jetbrainsLink = screen.getByText("JetBrains Mono");
-    expect(jetbrainsLink).toHaveAttribute(
+    const fontLink = screen.getByText("Ioskeley Mono");
+    expect(fontLink).toHaveAttribute(
       "href",
-      "https://www.jetbrains.com/lp/mono",
+      "https://github.com/ahatem/IoskeleyMono",
     );
-    expect(jetbrainsLink).toHaveAttribute("target", "_blank");
+    expect(fontLink).toHaveAttribute("target", "_blank");
   });
 
   it("applies correct styling classes", () => {
