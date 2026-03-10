@@ -58,7 +58,7 @@ describe("getBaseUrl", () => {
     process.env = originalEnv;
   });
 
-  it("returns window.location.origin in browser environment", async () => {
+  it("returns window.location.origin in browser environment", () => {
     // This test verifies the logic works in browser context
     // The actual function is not exported, so we test it indirectly
     expect(typeof window).toBe("object");

@@ -63,6 +63,7 @@ describe("boot.sh API route", () => {
   });
 
   it("returns 500 error on network error", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     mockFetch.mockRejectedValueOnce(new Error("Network error"));
 
     const response = await GET();
@@ -70,6 +71,7 @@ describe("boot.sh API route", () => {
 
     expect(response.status).toBe(500);
     expect(body).toEqual({ error: "Internal server error" });
+    consoleSpy.mockRestore();
   });
 
   it("fetches from the correct GitHub URL", async () => {

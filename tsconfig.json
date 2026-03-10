@@ -11,6 +11,8 @@
     /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
     "checkJs": true,
     /* Bundled projects */
     "lib": ["dom", "dom.iterable", "ES2022"],

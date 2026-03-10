@@ -78,11 +78,11 @@ describe("TmuxStatusBar", () => {
     expect(dateElement).toBeInTheDocument();
   });
 
-  it("updates date every second", async () => {
+  it("updates date every second", () => {
     render(<TmuxStatusBar />);
 
     // Advance time by 1 second
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(1000);
     });
 
@@ -91,43 +91,43 @@ describe("TmuxStatusBar", () => {
   });
 
   describe("Keyboard interactions", () => {
-    it("activates prefix mode on Ctrl+b", async () => {
+    it("activates prefix mode on Ctrl+b", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
       expect(screen.getByText("[prefix]")).toBeInTheDocument();
     });
 
-    it("deactivates prefix after timeout", async () => {
+    it("deactivates prefix after timeout", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
       expect(screen.getByText("[prefix]")).toBeInTheDocument();
 
       // Wait for prefix timeout (1500ms)
-      await act(async () => {
+      act(() => {
         vi.advanceTimersByTime(1500);
       });
 
       expect(screen.queryByText("[prefix]")).not.toBeInTheDocument();
     });
 
-    it("shows help panel on Ctrl+b then ?", async () => {
+    it("shows help panel on Ctrl+b then ?", () => {
       render(<TmuxStatusBar />);
 
       // Activate prefix
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
       // Press ?
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "?", shiftKey: true });
       });
 
@@ -135,66 +135,66 @@ describe("TmuxStatusBar", () => {
       expect(screen.getByText("tmux keys")).toBeInTheDocument();
     });
 
-    it("closes help panel on Escape", async () => {
+    it("closes help panel on Escape", () => {
       render(<TmuxStatusBar />);
 
       // Open help
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "?", shiftKey: true });
       });
 
       expect(screen.getByRole("dialog")).toBeInTheDocument();
 
       // Press Escape
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "Escape" });
       });
 
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
 
-    it("shows split-window status on Ctrl+b then %", async () => {
+    it("shows split-window status on Ctrl+b then %", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "%", shiftKey: true });
       });
 
       expect(screen.getByText("split-window -h")).toBeInTheDocument();
     });
 
-    it("shows new-window status on Ctrl+b then c", async () => {
+    it("shows new-window status on Ctrl+b then c", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "c" });
       });
 
       expect(screen.getByText("new-window")).toBeInTheDocument();
     });
 
-    it("navigates to next window on Ctrl+b then n", async () => {
+    it("navigates to next window on Ctrl+b then n", () => {
       render(<TmuxStatusBar />);
 
       // Initially window 0 is active
       expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "n" });
       });
 
@@ -203,22 +203,22 @@ describe("TmuxStatusBar", () => {
       expect(screen.getByText("next-window")).toBeInTheDocument();
     });
 
-    it("navigates to previous window on Ctrl+b then p", async () => {
+    it("navigates to previous window on Ctrl+b then p", () => {
       render(<TmuxStatusBar />);
 
       // First go to next window
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "n" });
       });
 
       // Now go to previous
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "p" });
       });
 
@@ -226,14 +226,14 @@ describe("TmuxStatusBar", () => {
       expect(screen.getByText("previous-window")).toBeInTheDocument();
     });
 
-    it("selects window by number on Ctrl+b then 0-9", async () => {
+    it("selects window by number on Ctrl+b then 0-9", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "2" });
       });
 
@@ -241,84 +241,84 @@ describe("TmuxStatusBar", () => {
       expect(screen.getByText("select-window -t 2")).toBeInTheDocument();
     });
 
-    it("shows error for non-existent window number", async () => {
+    it("shows error for non-existent window number", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "9" });
       });
 
       expect(screen.getByText("window 9 not found")).toBeInTheDocument();
     });
 
-    it("shows detached message on Ctrl+b then d", async () => {
+    it("shows detached message on Ctrl+b then d", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "d" });
       });
 
       expect(screen.getByText("detached (simulated)")).toBeInTheDocument();
     });
 
-    it("shows unbound key message for unknown keys", async () => {
+    it("shows unbound key message for unknown keys", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "x" });
       });
 
       expect(screen.getByText("unbound key: x")).toBeInTheDocument();
     });
 
-    it("wraps around when navigating past last window", async () => {
+    it("wraps around when navigating past last window", () => {
       render(<TmuxStatusBar />);
 
       // Go to window 2
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "2" });
       });
 
       // Go to next (should wrap to 0)
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "n" });
       });
 
       expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
     });
 
-    it("does not trigger prefix without Ctrl modifier", async () => {
+    it("does not trigger prefix without Ctrl modifier", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b" });
       });
 
       expect(screen.queryByText("[prefix]")).not.toBeInTheDocument();
     });
 
-    it("does not trigger prefix with other modifiers", async () => {
+    it("does not trigger prefix with other modifiers", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true, shiftKey: true });
       });
 
@@ -327,14 +327,14 @@ describe("TmuxStatusBar", () => {
   });
 
   describe("Overlays", () => {
-    it("shows vertical split overlay on Ctrl+b then %", async () => {
+    it("shows vertical split overlay on Ctrl+b then %", () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "%", shiftKey: true });
       });
 
@@ -343,14 +343,14 @@ describe("TmuxStatusBar", () => {
       expect(document.querySelector(".tmux-split-vert")).toBeInTheDocument();
     });
 
-    it('shows horizontal split overlay on Ctrl+b then "', async () => {
+    it('shows horizontal split overlay on Ctrl+b then "', () => {
       render(<TmuxStatusBar />);
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: "b", ctrlKey: true });
       });
 
-      await act(async () => {
+      act(() => {
         fireEvent.keyDown(window, { key: '"', shiftKey: true });
       });
 
