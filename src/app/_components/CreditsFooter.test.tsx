@@ -15,7 +15,7 @@ describe("CreditsFooter", () => {
     const figmaLink = screen.getByText("Figma");
     expect(figmaLink).toHaveAttribute("href", "https://figma.com");
     expect(figmaLink).toHaveAttribute("target", "_blank");
-    expect(figmaLink).toHaveClass("font-bold", "hover:underline");
+    expect(figmaLink).toHaveClass("font-bold", "term-link");
   });
 
   it("renders Neovim link with correct attributes", () => {
@@ -58,15 +58,15 @@ describe("CreditsFooter", () => {
     expect(catppuccinLink).toHaveAttribute("target", "_blank");
   });
 
-  it("renders JetBrains Mono link with correct attributes", () => {
+  it("renders Ioskeley Mono link with correct attributes", () => {
     render(<CreditsFooter />);
 
-    const jetbrainsLink = screen.getByText("JetBrains Mono");
-    expect(jetbrainsLink).toHaveAttribute(
+    const fontLink = screen.getByText("Ioskeley Mono");
+    expect(fontLink).toHaveAttribute(
       "href",
-      "https://www.jetbrains.com/lp/mono",
+      "https://github.com/ahatem/IoskeleyMono",
     );
-    expect(jetbrainsLink).toHaveAttribute("target", "_blank");
+    expect(fontLink).toHaveAttribute("target", "_blank");
   });
 
   it("applies correct styling classes", () => {

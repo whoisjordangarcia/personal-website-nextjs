@@ -13,8 +13,15 @@
 }
 
 @font-face {
-  font-family: JetBrainsMono;
-  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-family: IoskeleyMono;
+  font-weight: 400;
+  src: url("/fonts/IoskeleyMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: IoskeleyMono;
+  font-weight: 700;
+  src: url("/fonts/IoskeleyMono-Bold.woff2") format("woff2");
 }
 
 @keyframes fade {
@@ -155,5 +162,217 @@
 html,
 body {
   background-color: var(--bg-color);
-  font-family: JetbrainsMono;
+  font-family: IoskeleyMono;
+}
+
+/* Tmux status bar styles — in globals.css to avoid FOUC from styled-jsx */
+.tmux-status,
+.tmux-status kbd {
+  font-family: inherit;
+}
+
+.tmux-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 22px;
+  background: #24273a;
+  color: #6e738d;
+  font-size: 0.8rem;
+  line-height: 22px;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 4px;
+}
+.tmux-bar__left,
+.tmux-bar__right {
+  display: flex;
+  align-items: center;
+}
+
+.tmux-seg {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 6px;
+}
+.tmux-seg--session {
+  color: #a6da95;
+}
+.tmux-seg--active {
+  color: #cad3f5;
+}
+.tmux-seg--dim {
+  color: #6e738d;
+}
+
+.tmux-prefix {
+  position: absolute;
+  right: 0;
+  bottom: 22px;
+  background: #24273a;
+  color: #ed8796;
+  padding: 0 6px;
+  font-size: 0.8rem;
+  line-height: 20px;
+}
+
+.tmux-status-msg {
+  position: absolute;
+  left: 0;
+  bottom: 22px;
+  background: #24273a;
+  color: #eed49f;
+  padding: 0 8px;
+  font-size: 0.8rem;
+  line-height: 20px;
+  max-width: 60vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tmux-help {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.tmux-help__inner {
+  pointer-events: auto;
+  background: #24273a;
+  border: 1px solid #363a4f;
+  color: #cad3f5;
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  width: min(420px, 92vw);
+}
+.tmux-help__title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #f4dbd6;
+}
+.tmux-help__row {
+  margin: 1px 0;
+}
+.tmux-help__hint {
+  margin-top: 6px;
+  color: #6e738d;
+  font-size: 0.75rem;
+}
+.tmux-status kbd {
+  background: #363a4f;
+  padding: 0 3px;
+  border: 1px solid #494d64;
+}
+
+.tmux-split-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.tmux-split-vert {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #494d64;
+}
+.tmux-split-horz {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #494d64;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tmux-split-overlay {
+    transition: none;
+  }
+}
+
+.tmux-newwin-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+}
+.tmux-newwin-pane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(36, 39, 58, 0) 0%,
+    rgba(36, 39, 58, 0.85) 35%,
+    rgba(36, 39, 58, 0.95) 100%
+  );
+  border-left: 1px solid #494d64;
+  animation: tmuxNewWinSlide 0.65s ease-out forwards;
+}
+@keyframes tmuxNewWinSlide {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.2;
+  }
+  60% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+
+/* Terminal-style link hover — invert colors like selection */
+a.term-link {
+  text-decoration: none;
+  transition:
+    background 0.1s,
+    color 0.1s;
+}
+a.term-link:hover {
+  background: #f2d5cf;
+  color: #24273a;
+  text-decoration: none;
+}
+
+/* Staggered line reveal for links */
+.stagger-reveal > * {
+  opacity: 0;
+  animation: staggerFadeIn 0.25s ease-out forwards;
+}
+.stagger-reveal > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-reveal > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger-reveal > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger-reveal > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger-reveal > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+@keyframes staggerFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

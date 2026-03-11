@@ -23,51 +23,16 @@ describe("TmuxStatusBar", () => {
     );
   });
 
-  it("displays the hostname", () => {
-    render(<TmuxStatusBar />);
-
-    expect(screen.getByText("lucky-falcon")).toBeInTheDocument();
-  });
-
   it("displays the session indicator", () => {
     render(<TmuxStatusBar />);
 
     expect(screen.getByText("[0]")).toBeInTheDocument();
   });
 
-  it("displays window list with correct windows", () => {
+  it("displays the active window", () => {
     render(<TmuxStatusBar />);
 
-    expect(screen.getByText(/0:zsh/)).toBeInTheDocument();
-    expect(screen.getByText(/1:vim/)).toBeInTheDocument();
-    expect(screen.getByText(/2:node/)).toBeInTheDocument();
-  });
-
-  it("marks first window as active by default", () => {
-    render(<TmuxStatusBar />);
-
-    // First window should have asterisk
     expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
-  });
-
-  it("displays battery indicator", () => {
-    render(<TmuxStatusBar />);
-
-    expect(screen.getByText("85%")).toBeInTheDocument();
-    expect(screen.getByLabelText("Battery 85%")).toBeInTheDocument();
-  });
-
-  it("displays WiFi indicator", () => {
-    render(<TmuxStatusBar />);
-
-    expect(screen.getByLabelText("WiFi connected")).toBeInTheDocument();
-  });
-
-  it("displays load average indicator", () => {
-    render(<TmuxStatusBar />);
-
-    expect(screen.getByText("0.42")).toBeInTheDocument();
-    expect(screen.getByLabelText("Load 0.42")).toBeInTheDocument();
   });
 
   it("displays formatted date", () => {
@@ -184,77 +149,6 @@ describe("TmuxStatusBar", () => {
       expect(screen.getByText("new-window")).toBeInTheDocument();
     });
 
-    it("navigates to next window on Ctrl+b then n", () => {
-      render(<TmuxStatusBar />);
-
-      // Initially window 0 is active
-      expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "n" });
-      });
-
-      // Now window 1 should be active
-      expect(screen.getByText(/1:vim\*/)).toBeInTheDocument();
-      expect(screen.getByText("next-window")).toBeInTheDocument();
-    });
-
-    it("navigates to previous window on Ctrl+b then p", () => {
-      render(<TmuxStatusBar />);
-
-      // First go to next window
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-      act(() => {
-        fireEvent.keyDown(window, { key: "n" });
-      });
-
-      // Now go to previous
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-      act(() => {
-        fireEvent.keyDown(window, { key: "p" });
-      });
-
-      expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
-      expect(screen.getByText("previous-window")).toBeInTheDocument();
-    });
-
-    it("selects window by number on Ctrl+b then 0-9", () => {
-      render(<TmuxStatusBar />);
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "2" });
-      });
-
-      expect(screen.getByText(/2:node\*/)).toBeInTheDocument();
-      expect(screen.getByText("select-window -t 2")).toBeInTheDocument();
-    });
-
-    it("shows error for non-existent window number", () => {
-      render(<TmuxStatusBar />);
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-
-      act(() => {
-        fireEvent.keyDown(window, { key: "9" });
-      });
-
-      expect(screen.getByText("window 9 not found")).toBeInTheDocument();
-    });
-
     it("shows detached message on Ctrl+b then d", () => {
       render(<TmuxStatusBar />);
 
@@ -281,28 +175,6 @@ describe("TmuxStatusBar", () => {
       });
 
       expect(screen.getByText("unbound key: x")).toBeInTheDocument();
-    });
-
-    it("wraps around when navigating past last window", () => {
-      render(<TmuxStatusBar />);
-
-      // Go to window 2
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-      act(() => {
-        fireEvent.keyDown(window, { key: "2" });
-      });
-
-      // Go to next (should wrap to 0)
-      act(() => {
-        fireEvent.keyDown(window, { key: "b", ctrlKey: true });
-      });
-      act(() => {
-        fireEvent.keyDown(window, { key: "n" });
-      });
-
-      expect(screen.getByText(/0:zsh\*/)).toBeInTheDocument();
     });
 
     it("does not trigger prefix without Ctrl modifier", () => {

@@ -19,7 +19,6 @@ export default function HomeTerminal() {
   const [showSecondCommand, setShowSecondCommand] = React.useState(false);
   const [showSecondOutput, setShowSecondOutput] = React.useState(false);
 
-  // After first output, start second command shortly after
   React.useEffect(() => {
     if (showFirstOutput && !showSecondCommand) {
       const t = setTimeout(() => setShowSecondCommand(true), 300);
@@ -33,7 +32,7 @@ export default function HomeTerminal() {
         className="text-base text-[#CAD3F5]"
         prompt={<Prompt />}
         promptLabel="jordangarcia@127.0.0.1 ~ $ "
-        command="me -h"
+        command="whoami"
         startDelayMs={200}
         minSpeedMs={22}
         maxSpeedMs={60}
@@ -46,14 +45,23 @@ export default function HomeTerminal() {
       {showFirstOutput && (
         <TerminalOutput>
           <p className="py-2">
-            I&apos;m an Aussie &quot;aw-see&quot; (\ä-s\) currently residing in
-            Miami, specializing in building things mostly in Typescript and
-            Python. Focusing on distributed systems and constantly leveling up
-            my terminal setup.
+            Aussie in Miami, building at{" "}
+            <a
+              href="https://www.nestgenomics.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="term-link text-[#f2d5cf]"
+            >
+              @nestgenomics
+            </a>
+            . TypeScript, Python, Bash. Full-stack systems.
           </p>
           <p className="py-2">
-            When the laptop&apos;s shut, I&apos;m out finding my next coffee or
-            meal spot.
+            I care about type safety, good tooling, TUIs, and UI that
+            doesn&#39;t make you think.
+          </p>
+          <p className="py-2 text-[#a5adcb]">
+            Off-screen: long runs, hybrid workouts, and chasing good coffee.
           </p>
         </TerminalOutput>
       )}
@@ -63,7 +71,7 @@ export default function HomeTerminal() {
           className="text-base text-[#CAD3F5]"
           prompt={<Prompt />}
           promptLabel="jordangarcia@127.0.0.1 ~ $ "
-          command="bat more-info.md"
+          command="cat links.md"
           startDelayMs={200}
           minSpeedMs={22}
           maxSpeedMs={60}
@@ -75,66 +83,70 @@ export default function HomeTerminal() {
 
       {showSecondOutput && (
         <TerminalOutput>
-          <p>
-            -- [
-            <a
-              href="mailto:hello@jordangarcia.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              email me
-            </a>
-            ](mailto:hello@jordangarcia.me)
-          </p>
-          <p>
-            -- [
-            <a
-              href="https://linkedin.com/in/whoisjordangarcia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              linkedin
-            </a>
-            ](https://linkedin.com/in/whoisjordangarcia)
-          </p>
-          <p>
-            -- [
-            <a
-              href="https://github.com/whoisjordangarcia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              github
-            </a>
-            ](https://github.com/whoisjordangarcia)
-          </p>
-          <p>
-            -- [
-            <a
-              href="https://instagram.com/whoisjordangarcia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
-            >
-              instagram
-            </a>
-            ](https://instagram.com/whoisjordangarcia)
-          </p>
+          <div className="stagger-reveal space-y-1">
+            <p>
+              <span className="text-[#8bd5ca]">email:</span>
+              {"     "}
+              <a
+                href="mailto:hello@jordangarcia.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="term-link text-[#f2d5cf]"
+              >
+                hello@jordangarcia.me
+              </a>
+            </p>
+            <p>
+              <span className="text-[#8bd5ca]">github:</span>
+              {"    "}
+              <a
+                href="https://github.com/whoisjordangarcia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="term-link text-[#f2d5cf]"
+              >
+                whoisjordangarcia
+              </a>
+            </p>
+            <p>
+              <span className="text-[#8bd5ca]">linkedin:</span>
+              {"  "}
+              <a
+                href="https://linkedin.com/in/whoisjordangarcia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="term-link text-[#f2d5cf]"
+              >
+                whoisjordangarcia
+              </a>
+            </p>
+            <p>
+              <span className="text-[#8bd5ca]">x:</span>
+              {"         "}
+              <a
+                href="https://x.com/jordandotbuilds"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="term-link text-[#f2d5cf]"
+              >
+                jordandotbuilds
+              </a>
+            </p>
+            <p>
+              <span className="text-[#8bd5ca]">instagram:</span>{" "}
+              <a
+                href="https://instagram.com/whoisjordangarcia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="term-link text-[#f2d5cf]"
+              >
+                whoisjordangarcia
+              </a>
+            </p>
+          </div>
 
-          <div className="mt-6 text-xs text-[#656989]">
-            Designed in{" "}
-            <a
-              href="https://figma.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold hover:underline"
-            >
-              Figma
-            </a>{" "}
-            and coded in{" "}
+          <div className="mt-8 text-xs text-[#656989]">
+            Coded in{" "}
             <a
               href="https://neovim.io"
               target="_blank"
@@ -178,17 +190,17 @@ export default function HomeTerminal() {
               className="font-bold hover:underline"
             >
               Catppuccin
-            </a>
-            . Most of the text is set using{" "}
+            </a>{" "}
+            and{" "}
             <a
-              href="https://www.jetbrains.com/lp/mono"
+              href="https://github.com/ahatem/IoskeleyMono"
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold hover:underline"
             >
-              JetBrains Mono
-            </a>{" "}
-            typeset.
+              Ioskeley Mono
+            </a>
+            .
           </div>
         </TerminalOutput>
       )}
