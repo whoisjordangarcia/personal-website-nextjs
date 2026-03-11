@@ -50,7 +50,7 @@ export default function HomeTerminal() {
               href="https://www.nestgenomics.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] hover:underline"
+              className="text-[#f2d5cf] term-link"
             >
               @nestgenomics
             </a>
@@ -83,14 +83,14 @@ export default function HomeTerminal() {
 
       {showSecondOutput && (
         <TerminalOutput>
-          <div className="space-y-1">
+          <div className="space-y-1 stagger-reveal">
             <p>
               <span className="text-[#8bd5ca]">email:</span>{"     "}
               <a
                 href="mailto:hello@jordangarcia.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] hover:underline"
+                className="text-[#f2d5cf] term-link"
               >
                 hello@jordangarcia.me
               </a>
@@ -101,7 +101,7 @@ export default function HomeTerminal() {
                 href="https://github.com/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] hover:underline"
+                className="text-[#f2d5cf] term-link"
               >
                 whoisjordangarcia
               </a>
@@ -112,7 +112,7 @@ export default function HomeTerminal() {
                 href="https://linkedin.com/in/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] hover:underline"
+                className="text-[#f2d5cf] term-link"
               >
                 whoisjordangarcia
               </a>
@@ -123,7 +123,7 @@ export default function HomeTerminal() {
                 href="https://x.com/jordandotbuilds"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] hover:underline"
+                className="text-[#f2d5cf] term-link"
               >
                 jordandotbuilds
               </a>
@@ -134,7 +134,7 @@ export default function HomeTerminal() {
                 href="https://instagram.com/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] hover:underline"
+                className="text-[#f2d5cf] term-link"
               >
                 whoisjordangarcia
               </a>

@@ -15,7 +15,7 @@ describe("CreditsFooter", () => {
     const figmaLink = screen.getByText("Figma");
     expect(figmaLink).toHaveAttribute("href", "https://figma.com");
     expect(figmaLink).toHaveAttribute("target", "_blank");
-    expect(figmaLink).toHaveClass("font-bold", "hover:underline");
+    expect(figmaLink).toHaveClass("font-bold", "term-link");
   });
 
   it("renders Neovim link with correct attributes", () => {

@@ -44,10 +44,10 @@ describe("HomeTerminal", () => {
     expect(screen.getByText(/jordangarcia@127\.0\.0\.1/)).toBeInTheDocument();
   });
 
-  it("renders the first command 'me -h'", () => {
+  it("renders the first command 'whoami'", () => {
     render(<HomeTerminal />);
 
-    expect(screen.getByText("me -h")).toBeInTheDocument();
+    expect(screen.getByText("whoami")).toBeInTheDocument();
   });
 
   it("has correct aria-label for first command", () => {
@@ -56,7 +56,7 @@ describe("HomeTerminal", () => {
     const heading = screen.getByRole("heading");
     expect(heading).toHaveAttribute(
       "aria-label",
-      "jordangarcia@127.0.0.1 ~ $ me -h",
+      "jordangarcia@127.0.0.1 ~ $ whoami",
     );
   });
 

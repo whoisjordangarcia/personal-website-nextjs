@@ -9,7 +9,7 @@ export default function CreditsFooter() {
       <a
         href="https://figma.com"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Figma
       </a>{" "}
@@ -17,7 +17,7 @@ export default function CreditsFooter() {
       <a
         href="https://neovim.io"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Neovim
       </a>
@@ -25,7 +25,7 @@ export default function CreditsFooter() {
       <a
         href="https://nextjs.org"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Next.js
       </a>{" "}
@@ -33,7 +33,7 @@ export default function CreditsFooter() {
       <a
         href="https://tailwindcss.com"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Tailwind CSS
       </a>
@@ -41,7 +41,7 @@ export default function CreditsFooter() {
       <a
         href="https://vercel.com"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Vercel
       </a>
@@ -49,7 +49,7 @@ export default function CreditsFooter() {
       <a
         href="https://catppuccin.com"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Catppuccin
       </a>
@@ -57,7 +57,7 @@ export default function CreditsFooter() {
       <a
         href="https://github.com/ahatem/IoskeleyMono"
         target="_blank"
-        className="font-bold hover:underline"
+        className="font-bold term-link"
       >
         Ioskeley Mono
       </a>{" "}
