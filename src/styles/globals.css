@@ -12,7 +12,6 @@
   --bg-color: #24273a;
 }
 
-
 @font-face {
   font-family: IoskeleyMono;
   font-weight: 400;
@@ -339,7 +338,9 @@ body {
 /* Terminal-style link hover — invert colors like selection */
 a.term-link {
   text-decoration: none;
-  transition: background 0.1s, color 0.1s;
+  transition:
+    background 0.1s,
+    color 0.1s;
 }
 a.term-link:hover {
   background: #f2d5cf;
@@ -352,12 +353,26 @@ a.term-link:hover {
   opacity: 0;
   animation: staggerFadeIn 0.25s ease-out forwards;
 }
-.stagger-reveal > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-reveal > *:nth-child(2) { animation-delay: 60ms; }
-.stagger-reveal > *:nth-child(3) { animation-delay: 120ms; }
-.stagger-reveal > *:nth-child(4) { animation-delay: 180ms; }
-.stagger-reveal > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-reveal > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-reveal > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger-reveal > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger-reveal > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger-reveal > *:nth-child(5) {
+  animation-delay: 240ms;
+}
 @keyframes staggerFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

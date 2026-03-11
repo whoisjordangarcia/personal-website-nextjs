@@ -50,7 +50,7 @@ export default function HomeTerminal() {
               href="https://www.nestgenomics.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#f2d5cf] term-link"
+              className="term-link text-[#f2d5cf]"
             >
               @nestgenomics
             </a>
@@ -83,47 +83,51 @@ export default function HomeTerminal() {
 
       {showSecondOutput && (
         <TerminalOutput>
-          <div className="space-y-1 stagger-reveal">
+          <div className="stagger-reveal space-y-1">
             <p>
-              <span className="text-[#8bd5ca]">email:</span>{"     "}
+              <span className="text-[#8bd5ca]">email:</span>
+              {"     "}
               <a
                 href="mailto:hello@jordangarcia.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] term-link"
+                className="term-link text-[#f2d5cf]"
               >
                 hello@jordangarcia.me
               </a>
             </p>
             <p>
-              <span className="text-[#8bd5ca]">github:</span>{"    "}
+              <span className="text-[#8bd5ca]">github:</span>
+              {"    "}
               <a
                 href="https://github.com/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] term-link"
+                className="term-link text-[#f2d5cf]"
               >
                 whoisjordangarcia
               </a>
             </p>
             <p>
-              <span className="text-[#8bd5ca]">linkedin:</span>{"  "}
+              <span className="text-[#8bd5ca]">linkedin:</span>
+              {"  "}
               <a
                 href="https://linkedin.com/in/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] term-link"
+                className="term-link text-[#f2d5cf]"
               >
                 whoisjordangarcia
               </a>
             </p>
             <p>
-              <span className="text-[#8bd5ca]">x:</span>{"         "}
+              <span className="text-[#8bd5ca]">x:</span>
+              {"         "}
               <a
                 href="https://x.com/jordandotbuilds"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] term-link"
+                className="term-link text-[#f2d5cf]"
               >
                 jordandotbuilds
               </a>
@@ -134,7 +138,7 @@ export default function HomeTerminal() {
                 href="https://instagram.com/whoisjordangarcia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#f2d5cf] term-link"
+                className="term-link text-[#f2d5cf]"
               >
                 whoisjordangarcia
               </a>
@@ -186,8 +190,8 @@ export default function HomeTerminal() {
               className="font-bold hover:underline"
             >
               Catppuccin
-            </a>
-            {" "}and{" "}
+            </a>{" "}
+            and{" "}
             <a
               href="https://github.com/ahatem/IoskeleyMono"
               target="_blank"

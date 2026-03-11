@@ -102,7 +102,7 @@ export default function TmuxStatusBar() {
   }, [showHelp]);
 
   return (
-    <div className="tmux-status pointer-events-none fixed bottom-0 left-0 right-0 hidden sm:block">
+    <div className="tmux-status pointer-events-none fixed right-0 bottom-0 left-0 hidden sm:block">
       {splitOverlay && (
         <div className="tmux-split-overlay" aria-hidden>
           {splitOverlay === "vertical" ? (
