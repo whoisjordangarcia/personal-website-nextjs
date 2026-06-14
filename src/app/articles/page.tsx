@@ -28,7 +28,9 @@ export default async function ArticlesPage() {
               >
                 <span className="text-[#656989]">-rw-r--r--</span>
                 <span className="text-[#656989]">{article.date}</span>
-                <span className="text-[#8bd5ca]">{article.readingTime} min</span>
+                <span className="text-[#8bd5ca]">
+                  {article.readingTime} min
+                </span>
                 <span className="text-[#f2d5cf] group-hover:underline">
                   {article.slug}
                 </span>

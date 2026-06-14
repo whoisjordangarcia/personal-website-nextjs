@@ -17,7 +17,9 @@ export type Article = {
 
 const DEFAULT_DIR = join(process.cwd(), "src/content/articles");
 
-export async function getAllArticles(dir = DEFAULT_DIR): Promise<ArticleMeta[]> {
+export async function getAllArticles(
+  dir = DEFAULT_DIR,
+): Promise<ArticleMeta[]> {
   const files = await readdir(dir);
   const mdxFiles = files.filter((f) => f.endsWith(".mdx"));
 

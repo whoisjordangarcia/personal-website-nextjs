@@ -31,7 +31,10 @@ describe("getAllArticles", () => {
 
 describe("getArticle", () => {
   it("returns meta and content for a valid slug", async () => {
-    const { meta, content } = await getArticle("test-article-one", FIXTURES_DIR);
+    const { meta, content } = await getArticle(
+      "test-article-one",
+      FIXTURES_DIR,
+    );
     expect(meta.title).toBe("Test Article One");
     expect(content).toContain("content of test article one");
   });

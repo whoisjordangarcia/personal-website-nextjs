@@ -12,15 +12,15 @@
 
 ## File Map
 
-| Action | Path | Responsibility |
-|--------|------|---------------|
-| Create | `src/content/articles/*.mdx` | Article content (4 seed files) |
-| Create | `src/lib/articles.ts` | `getAllArticles()` / `getArticle()` utilities |
-| Create | `src/lib/articles.test.ts` | Unit tests for the utility |
-| Create | `src/lib/__fixtures__/articles/*.mdx` | Test fixture MDX files |
-| Create | `src/app/articles/page.tsx` | Listing page |
-| Create | `src/app/articles/[slug]/page.tsx` | Article reading view |
-| Modify | `src/app/sitemap.ts` | Add `/articles` + individual slugs |
+| Action | Path                                  | Responsibility                                |
+| ------ | ------------------------------------- | --------------------------------------------- |
+| Create | `src/content/articles/*.mdx`          | Article content (4 seed files)                |
+| Create | `src/lib/articles.ts`                 | `getAllArticles()` / `getArticle()` utilities |
+| Create | `src/lib/articles.test.ts`            | Unit tests for the utility                    |
+| Create | `src/lib/__fixtures__/articles/*.mdx` | Test fixture MDX files                        |
+| Create | `src/app/articles/page.tsx`           | Listing page                                  |
+| Create | `src/app/articles/[slug]/page.tsx`    | Article reading view                          |
+| Modify | `src/app/sitemap.ts`                  | Add `/articles` + individual slugs            |
 
 ---
 
@@ -56,6 +56,7 @@ git commit -m "chore: add next-mdx-remote, gray-matter, rehype-pretty-code"
 ## Task 2: Create Test Fixtures
 
 **Files:**
+
 - Create: `src/lib/__fixtures__/articles/test-article-one.mdx`
 - Create: `src/lib/__fixtures__/articles/test-article-two.mdx`
 
@@ -107,6 +108,7 @@ git commit -m "test: add MDX fixtures for articles utility tests"
 ## Task 3: Write Failing Tests for Articles Utility
 
 **Files:**
+
 - Create: `src/lib/articles.test.ts`
 
 - [ ] **Step 1: Write the failing tests**
@@ -147,7 +149,10 @@ describe("getAllArticles", () => {
 
 describe("getArticle", () => {
   it("returns meta and content for a valid slug", async () => {
-    const { meta, content } = await getArticle("test-article-one", FIXTURES_DIR);
+    const { meta, content } = await getArticle(
+      "test-article-one",
+      FIXTURES_DIR,
+    );
     expect(meta.title).toBe("Test Article One");
     expect(content).toContain("content of test article one");
   });
@@ -171,6 +176,7 @@ Expected: FAIL — `Cannot find module './articles'`
 ## Task 4: Implement Articles Utility
 
 **Files:**
+
 - Create: `src/lib/articles.ts`
 
 - [ ] **Step 1: Implement the utility**
@@ -197,7 +203,9 @@ export type Article = {
 
 const DEFAULT_DIR = join(process.cwd(), "src/content/articles");
 
-export async function getAllArticles(dir = DEFAULT_DIR): Promise<ArticleMeta[]> {
+export async function getAllArticles(
+  dir = DEFAULT_DIR,
+): Promise<ArticleMeta[]> {
   const files = await readdir(dir);
   const mdxFiles = files.filter((f) => f.endsWith(".mdx"));
 
@@ -265,6 +273,7 @@ git commit -m "feat: add articles utility with getAllArticles and getArticle"
 ## Task 5: Create Four Seed Articles
 
 **Files:**
+
 - Create: `src/content/articles/how-ai-changed-the-way-i-work.mdx`
 - Create: `src/content/articles/building-drift-ios-on-the-fly.mdx`
 - Create: `src/content/articles/tmux-the-way-i-actually-use-it.mdx`
@@ -369,7 +378,7 @@ If you&apos;re a developer who uses your own tools, build more of them. The prac
 
 Create `src/content/articles/tmux-the-way-i-actually-use-it.mdx`:
 
-```mdx
+````mdx
 ---
 title: tmux — The Way I Actually Use It
 slug: tmux-the-way-i-actually-use-it
@@ -397,6 +406,7 @@ tmux new-session -s personal-site
 tmux new-session -s nest-api
 tmux new-session -s dotfiles
 ```
+````
 
 When I switch projects, I switch sessions. `prefix + $` to rename, `prefix + s` to list and jump. The list view is fast — faster than any launcher I&apos;ve tried.
 
@@ -430,7 +440,8 @@ Mouse mode is on (`set -g mouse on`). I know some people consider this heresy. I
 The reason tmux is worth learning is not the features. It&apos;s that it enforces a discipline of context. When everything is one session with 20 windows, everything is jumbled. When each project is a named session, switching between them is intentional. That intentionality matters for focus.
 
 tmux is good because it makes the structure of your work explicit.
-```
+
+````
 
 - [ ] **Step 4: Create the Tailscale article**
 
@@ -474,7 +485,7 @@ The magic is that it requires almost no ongoing maintenance. I installed the cli
 The one thing I&apos;d add: set up MagicDNS immediately. It gives each device a stable hostname (`macmini.yourtailnet.ts.net`) instead of requiring you to remember IPs. Combined with a exit node for when I want full tunnel behavior, the setup covers every use case I&apos;ve had.
 
 The honest summary: Tailscale made my personal infrastructure something I use instead of something I maintain.
-```
+````
 
 - [ ] **Step 5: Commit seed articles**
 
@@ -488,6 +499,7 @@ git commit -m "content: add four seed articles (AI, Drift, tmux, Tailscale)"
 ## Task 6: Create the Listing Page
 
 **Files:**
+
 - Create: `src/app/articles/page.tsx`
 
 - [ ] **Step 1: Create the listing page**
@@ -525,7 +537,9 @@ export default async function ArticlesPage() {
               >
                 <span className="text-[#656989]">-rw-r--r--</span>
                 <span className="text-[#656989]">{article.date}</span>
-                <span className="text-[#8bd5ca]">{article.readingTime} min</span>
+                <span className="text-[#8bd5ca]">
+                  {article.readingTime} min
+                </span>
                 <span className="text-[#f2d5cf] group-hover:underline">
                   {article.slug}
                 </span>
@@ -559,6 +573,7 @@ git commit -m "feat: add /articles listing page with terminal ls-la aesthetic"
 ## Task 7: Create the Article Reading View
 
 **Files:**
+
 - Create: `src/app/articles/[slug]/page.tsx`
 
 - [ ] **Step 1: Create the article page**
@@ -581,15 +596,9 @@ const mdxComponents = {
     <h3 className="mt-6 mb-3 text-lg font-semibold text-[#eed49f]" {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a
-      className="text-[#f2d5cf] underline hover:brightness-110"
-      {...props}
-    />
+    <a className="text-[#f2d5cf] underline hover:brightness-110" {...props} />
   ),
-  code: ({
-    children,
-    ...props
-  }: React.HTMLAttributes<HTMLElement>) => {
+  code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
     // rehype-pretty-code adds data-language to fenced code blocks; leave those unstyled here
     if ("data-language" in props) {
       return <code {...props}>{children}</code>;
@@ -603,9 +612,7 @@ const mdxComponents = {
       </code>
     );
   },
-  blockquote: (
-    props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
-  ) => (
+  blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
       className="my-4 border-l-4 border-[#8bd5ca] pl-4 text-[#a5adcb] italic"
       {...props}
@@ -656,10 +663,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <main className="px-8 py-8 pb-24 lg:w-3/5">
-      <Link
-        href="/articles"
-        className="text-sm text-[#8bd5ca] hover:underline"
-      >
+      <Link href="/articles" className="text-sm text-[#8bd5ca] hover:underline">
         ← articles
       </Link>
       <h1 className="mt-6 mb-2 text-2xl font-bold text-[#CAD3F5]">
@@ -706,6 +710,7 @@ git commit -m "feat: add /articles/[slug] reading view with MDX rendering"
 ## Task 8: Update Sitemap
 
 **Files:**
+
 - Modify: `src/app/sitemap.ts`
 
 - [ ] **Step 1: Update sitemap to include articles**
@@ -787,6 +792,7 @@ bun run prettier:check
 ```
 
 If it fails, auto-fix with:
+
 ```bash
 bun run prettier:write
 git add -A

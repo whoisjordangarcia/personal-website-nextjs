@@ -29,20 +29,20 @@ Add a `/articles` section to the personal site. The listing page uses a terminal
 
 Four articles to seed the section:
 
-| Slug | Topic |
-|------|-------|
-| `how-ai-changed-the-way-i-work` | How AI tools boosted productivity |
-| `building-drift-ios-on-the-fly` | Building the Drift iOS app |
-| `tmux-the-way-i-actually-use-it` | Practical tmux workflow |
-| `tailscale-my-personal-network` | Tailscale for personal networking |
+| Slug                             | Topic                             |
+| -------------------------------- | --------------------------------- |
+| `how-ai-changed-the-way-i-work`  | How AI tools boosted productivity |
+| `building-drift-ios-on-the-fly`  | Building the Drift iOS app        |
+| `tmux-the-way-i-actually-use-it` | Practical tmux workflow           |
+| `tailscale-my-personal-network`  | Tailscale for personal networking |
 
 ---
 
 ## Routes
 
-| Path | Component | Purpose |
-|------|-----------|---------|
-| `/articles` | `src/app/articles/page.tsx` | Listing page |
+| Path               | Component                          | Purpose              |
+| ------------------ | ---------------------------------- | -------------------- |
+| `/articles`        | `src/app/articles/page.tsx`        | Listing page         |
 | `/articles/[slug]` | `src/app/articles/[slug]/page.tsx` | Article reading view |
 
 ---
@@ -52,6 +52,7 @@ Four articles to seed the section:
 **Aesthetic:** Terminal `ls -la` output. Matches the homepage terminal theme.
 
 **Layout:**
+
 - Reuses the homepage `<Prompt />` pattern: `jordangarcia@127.0.0.1 ~/articles $ ls -la`
 - Each article rendered as a single-line row:
   ```
@@ -61,6 +62,7 @@ Four articles to seed the section:
 - Entire row is a `<Link>` to `/articles/[slug]`
 
 **Colors (Catppuccin):**
+
 - Permissions: `#656989` (muted)
 - Date: `#656989` (muted)
 - Read time: `#8bd5ca` (teal, matches the `links.md` label color)
@@ -78,6 +80,7 @@ Four articles to seed the section:
 **Aesthetic:** Clean prose. No terminal chrome. Readable and focused.
 
 **Layout:**
+
 - Back link: `← articles` in `#8bd5ca`, top-left
 - Title: `text-2xl font-bold text-[#CAD3F5]`
 - Metadata row: `date · N min read` in `#656989`
@@ -85,6 +88,7 @@ Four articles to seed the section:
 - Background: matches site `#1e2030`
 
 **MDX component overrides:**
+
 - `<h2>`, `<h3>`: Catppuccin yellow `#eed49f`
 - `<a>`: `#f2d5cf` with underline on hover
 - `<code>` (inline): `#a6da95` on `#2a2d3d` background
@@ -98,10 +102,12 @@ Four articles to seed the section:
 ## Utility: `src/lib/articles.ts`
 
 Exports:
+
 - `getAllArticles(): ArticleMeta[]` — reads all MDX frontmatter, returns sorted list
 - `getArticle(slug: string): { meta: ArticleMeta; content: string }` — returns single article for rendering
 
 Types:
+
 ```ts
 type ArticleMeta = {
   title: string;

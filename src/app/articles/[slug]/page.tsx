@@ -15,10 +15,7 @@ const mdxComponents = {
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a className="text-[#f2d5cf] underline hover:brightness-110" {...props} />
   ),
-  code: ({
-    children,
-    ...props
-  }: React.HTMLAttributes<HTMLElement>) => {
+  code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
     if ("data-language" in props) {
       return <code {...props}>{children}</code>;
     }
@@ -82,10 +79,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <main className="px-8 py-8 pb-24 lg:w-3/5">
-      <Link
-        href="/articles"
-        className="text-sm text-[#8bd5ca] hover:underline"
-      >
+      <Link href="/articles" className="text-sm text-[#8bd5ca] hover:underline">
         ← articles
       </Link>
       <h1 className="mt-6 mb-2 text-2xl font-bold text-[#CAD3F5]">
