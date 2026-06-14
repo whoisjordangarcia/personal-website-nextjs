@@ -16,7 +16,7 @@ const mdxComponents = {
     <a className="text-[#f2d5cf] underline hover:brightness-110" {...props} />
   ),
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
-    if ("data-language" in props) {
+    if (props.className?.includes("language-")) {
       return <code {...props}>{children}</code>;
     }
     return (
@@ -74,6 +74,8 @@ export default async function ArticlePage({ params }: Props) {
   } catch {
     notFound();
   }
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (!article) notFound();
 
   const { meta, content } = article;
 
