@@ -1,0 +1,60 @@
+---
+title: tmux — The Way I Actually Use It
+slug: tmux-the-way-i-actually-use-it
+date: "2026-04-15"
+description: Not a tutorial. A description of the tmux setup I actually use every day, and why the specific choices matter.
+readingTime: 5
+---
+
+I&apos;ve read a lot of tmux tutorials. They all explain what tmux does. Fewer explain how to think about it, which is the part that takes the longest to develop.
+
+This isn&apos;t a tutorial. It&apos;s a description of how I actually use tmux after a few years of iteration.
+
+## The mental model that changed everything
+
+tmux is not a tab system. It&apos;s a persistent workspace manager. The shift that made it click: sessions outlive your terminal. Close the terminal, reopen it, `tmux attach` — everything is exactly where you left it.
+
+Once I understood that, I stopped thinking of tmux as a way to have multiple windows. I started thinking of it as a way to have multiple contexts that I move between, each of which maintains state indefinitely.
+
+## How I structure sessions
+
+One session per project. Not one session per day, not one giant session with a lot of windows. One per project.
+
+```bash
+tmux new-session -s personal-site
+tmux new-session -s nest-api
+tmux new-session -s dotfiles
+```
+
+When I switch projects, I switch sessions. `prefix + $` to rename, `prefix + s` to list and jump. The list view is fast — faster than any launcher I&apos;ve tried.
+
+## Window layout inside a session
+
+Each session typically has 3-4 windows:
+
+- **editor** — Neovim, full screen
+- **shell** — general commands, git, misc
+- **server** — dev server / long-running process
+- **scratch** — throw-away experimentation
+
+`prefix + c` to create, `prefix + ,` to rename, `prefix + [0-9]` to jump. I use numbers, not names, because muscle memory beats reading.
+
+## The config choices that matter
+
+I use `prefix = Ctrl-a` instead of the default `Ctrl-b`. `Ctrl-a` is reachable without moving my hand.
+
+```bash
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+```
+
+I set `base-index 1` so windows are numbered 1-9, which maps to the keyboard layout instead of starting at 0.
+
+Mouse mode is on (`set -g mouse on`). I know some people consider this heresy. I disagree. Mouse support for resizing panes saves time. I still navigate with keys.
+
+## The part nobody mentions
+
+The reason tmux is worth learning is not the features. It&apos;s that it enforces a discipline of context. When everything is one session with 20 windows, everything is jumbled. When each project is a named session, switching between them is intentional. That intentionality matters for focus.
+
+tmux is good because it makes the structure of your work explicit.

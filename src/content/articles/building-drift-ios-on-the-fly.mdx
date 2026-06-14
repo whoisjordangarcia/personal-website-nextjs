@@ -1,0 +1,46 @@
+---
+title: Building Drift — My iOS App for On-the-Fly Ideas
+slug: building-drift-ios-on-the-fly
+date: "2026-05-10"
+description: I built my own iOS app because nothing existing fit how I actually think. Here is what building Drift taught me about iOS development and product design.
+readingTime: 7
+---
+
+I built Drift because I kept reaching for my phone to capture something — a thought, a URL, a task — and every app I tried felt like it was designed for someone else&apos;s workflow.
+
+So I built my own. That turned out to be one of the better decisions I&apos;ve made.
+
+## Why build instead of buy
+
+I&apos;ve used Notion, Bear, Apple Notes, Obsidian, and half a dozen others. Each has strengths. None of them fit the specific thing I wanted: a place for things that don&apos;t have a home yet. Not tasks. Not notes. Not bookmarks. Ideas in transit.
+
+Drift is that. It&apos;s a fast-capture surface that gets out of the way. Open, type, close. No organization required at capture time.
+
+## What building iOS taught me
+
+**SwiftUI is genuinely good.** Coming from web (React, TypeScript), I expected a steeper curve. The declarative model translates well. State management is different but not alien.
+
+**The platform constraints are the feature.** iOS forces decisions that web never does. How does this behave with a hardware keyboard? What happens on a small screen? Does this feel right to swipe away? Those constraints made the product better.
+
+**Xcode is the hard part.** The editor is fine. The build system, signing, and simulator workflow add friction that has nothing to do with your product. I spend more time fighting Xcode than Swift.
+
+## The architecture
+
+Drift is simple on purpose:
+
+- SwiftUI for all UI
+- SwiftData for local persistence
+- iCloud sync via CloudKit (automatic with SwiftData)
+- No server, no accounts, no backend
+
+The &quot;no server&quot; decision was deliberate. I didn&apos;t want to maintain infrastructure for a personal tool. Everything lives on device and syncs through iCloud. It&apos;s fast, it works offline, and I don&apos;t have a database to keep up.
+
+## What I&apos;d do differently
+
+Start with the interaction model, not the data model. I built Drift data-first (SwiftData schema before UI), which led to a first version that worked correctly but didn&apos;t feel right. The feel came from rebuilding the interaction layer with the data model adjusted to serve it, not the other way around.
+
+## What Drift taught me about products
+
+Building something you use every day gives you feedback no user research can. I know exactly when it feels slow, when a gesture is wrong, when a label doesn&apos;t say the right thing. I&apos;ve shipped more improvements to Drift in six months than most products ship in a year — because the feedback loop is instant.
+
+If you&apos;re a developer who uses your own tools, build more of them. The practice compounds.
