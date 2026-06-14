@@ -54,14 +54,14 @@ export default function HomeTerminal() {
             >
               @nestgenomics
             </a>
-            . TypeScript, Python, Bash. Full-stack systems.
+            . Full-stack systems for genomics. TypeScript, Python, Bash.
           </p>
           <p className="py-2">
-            I care about type safety, good tooling, TUIs, and UI that
-            doesn&#39;t make you think.
+            I care about type safety, performance, sharp tooling, TUIs, and UI
+            that doesn&rsquo;t make you think.
           </p>
           <p className="py-2 text-[#a5adcb]">
-            Off-screen: long runs, hybrid workouts, and chasing good coffee.
+            Off-screen: long runs, hybrid workouts, and too much coffee.
           </p>
         </TerminalOutput>
       )}
