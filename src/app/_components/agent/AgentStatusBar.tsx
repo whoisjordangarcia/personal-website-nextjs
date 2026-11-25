@@ -23,7 +23,7 @@ export default function AgentStatusBar({ onCycle }: { onCycle: () => void }) {
         <span>│</span>
         <ContextMeter used={0.04} tokens="41k" />
         <span>│</span>
-        <span className="hidden sm:inline">~/jordangarcia.me</span>
+        <span className="hidden sm:inline">~/dev/jordangarcia.me</span>
         <span className="hidden sm:inline">│</span>
         <span className="text-[#c6a0f6]">main</span>
         <span>│</span>
