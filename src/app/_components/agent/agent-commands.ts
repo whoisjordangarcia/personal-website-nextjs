@@ -12,16 +12,14 @@ export type Reply =
 export type Action =
   | { type: "navigate"; href: string }
   | { type: "clear" }
-  | { type: "tmux" }
+  | { type: "cycle" }
   | { type: "downgrade" };
 
 export type CommandResult = { replies: Reply[]; action?: Action };
 
-export const SUGGESTIONS = ["help", "ls", "links", "whoami", "tmux"];
-
 const HELP = [
   "I'm a static site pretending to be an agent, so I know a few tricks:",
-  "whoami · ls · open <n> · links · github · email · tmux · clear",
+  "whoami · ls · open <n> · links · github · email · skin · clear",
 ].join("\n");
 
 const FALLBACK =
@@ -111,13 +109,16 @@ export function runCommand(
     case "instagram":
       return linksReply([cmd === "twitter" ? "x" : cmd]);
 
-    case "tmux":
+    case "skin":
+    case "theme":
+      return {
+        replies: [{ kind: "text", text: "Switching skins…" }],
+        action: { type: "cycle" },
+      };
+
     case "exit":
     case "quit":
-      return {
-        replies: [{ kind: "text", text: "Switching to tmux…" }],
-        action: { type: "tmux" },
-      };
+      return text("There's no exit. You're on a website.");
 
     case "clear":
       return { replies: [], action: { type: "clear" } };
@@ -151,7 +152,7 @@ function linksReply(labels: string[]): CommandResult {
   };
 }
 
-export const MODEL_START = 7;
+export const MODEL_START = 4;
 
 /** The warning shown when a free-form prompt "fails intent detection". */
 export function downgradeWarning(model: number): string {

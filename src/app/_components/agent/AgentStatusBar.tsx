@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { SUGGESTIONS } from "./agent-commands";
 
 /** Fixed bottom chrome for the agent skin: input box, status line, mode hint. */
 export default function AgentStatusBar({
@@ -10,8 +9,6 @@ export default function AgentStatusBar({
   onChange,
   onSubmit,
   onKeyDown,
-  onSuggestion,
-  busy,
   model,
 }: {
   onCycle: () => void;
@@ -19,8 +16,6 @@ export default function AgentStatusBar({
   onChange: (v: string) => void;
   onSubmit: () => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onSuggestion: (cmd: string) => void;
-  busy: boolean;
   /** Current (fake) model version; drops when intent detection "fails". */
   model: number;
 }) {
@@ -39,21 +34,8 @@ export default function AgentStatusBar({
 
   return (
     <div className="agent-chrome fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
-      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pt-2 pb-1 text-xs">
-        {SUGGESTIONS.map((s) => (
-          <button
-            key={s}
-            type="button"
-            disabled={busy}
-            onClick={() => onSuggestion(s)}
-            className="shrink-0 cursor-pointer border border-[#494d64] px-2 py-1 text-[#a5adcb] hover:border-[#c6a0f6] hover:text-[#CAD3F5] disabled:opacity-50"
-          >
-            {s}
-          </button>
-        ))}
-      </div>
       <form
-        className="flex items-center gap-2 border-y border-[#494d64] py-1.5 text-[#CAD3F5]"
+        className="mt-2 flex items-center gap-2 border-y border-[#494d64] py-1.5 text-[#CAD3F5]"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();

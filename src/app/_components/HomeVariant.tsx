@@ -3,12 +3,14 @@
 import React from "react";
 import AgentConsole from "./agent/AgentConsole";
 import type { AgentArticle } from "./agent/AgentTerminal";
+import OpencodeConsole from "./opencode/OpencodeConsole";
 
-export type Variant = "tmux" | "agent";
-const VARIANTS: Variant[] = ["tmux", "agent"];
+export type Variant = "agent" | "opencode";
+/** Shift+Tab order. */
+export const VARIANTS: Variant[] = ["agent", "opencode"];
 const STORAGE_KEY = "home-ui";
 
-function isVariant(v: unknown): v is Variant {
+export function isVariant(v: unknown): v is Variant {
   return VARIANTS.includes(v as Variant);
 }
 
@@ -41,14 +43,14 @@ function setVariant(next: Variant) {
  */
 export default function HomeVariant({
   initial,
-  tmux,
   agent,
+  opencode,
   articles,
 }: {
   /** What the server rendered (from ?ui=); hydration starts here. */
   initial: Variant;
-  tmux: React.ReactNode;
   agent: React.ReactNode;
+  opencode: React.ReactNode;
   /** For the interactive prompt's "ls" / "open" commands. */
   articles: AgentArticle[];
 }) {
@@ -84,15 +86,8 @@ export default function HomeVariant({
         </>
       ) : (
         <>
-          {tmux}
-          <button
-            type="button"
-            onClick={cycle}
-            className="fixed right-4 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 inline-flex min-h-11 cursor-pointer items-center text-xs text-[#6e738d] hover:text-[#c6a0f6] sm:right-2 sm:bottom-7 sm:min-h-0"
-          >
-            ▸▸ agent mode{" "}
-            <span className="hidden pointer-fine:inline">(shift+tab)</span>
-          </button>
+          {opencode}
+          <OpencodeConsole articles={articles} onCycle={cycle} />
         </>
       )}
     </div>

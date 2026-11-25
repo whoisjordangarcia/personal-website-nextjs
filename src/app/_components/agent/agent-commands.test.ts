@@ -53,8 +53,9 @@ describe("runCommand", () => {
     expect(lines[0]?.href).toBe("https://github.com/whoisjordangarcia");
   });
 
-  it("switches skins on tmux/exit", () => {
-    expect(runCommand("exit", articles).action).toEqual({ type: "tmux" });
+  it("switches skins on skin, and refuses to exit", () => {
+    expect(runCommand("skin", articles).action).toEqual({ type: "cycle" });
+    expect(runCommand("exit", articles).action).toBeUndefined();
   });
 
   it("falls back to a canned reply and a model downgrade", () => {
@@ -64,7 +65,7 @@ describe("runCommand", () => {
   });
 
   it("words the downgrade warning, bottoming out at Fable 1", () => {
-    expect(downgradeWarning(7)).toMatch(/Fable 7 .* switching to Fable 6/);
+    expect(downgradeWarning(4)).toMatch(/Fable 4 .* switching to Fable 3/);
     expect(downgradeWarning(1)).toMatch(/no lower model/);
   });
 });

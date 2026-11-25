@@ -21,23 +21,23 @@ describe("AgentConsole", () => {
     expect(screen.getByLabelText("Ask the agent")).toHaveValue("");
   });
 
-  it("runs a suggestion chip on tap", async () => {
+  it("shows links when asked", async () => {
     const user = userEvent.setup();
     render(<AgentConsole articles={articles} onCycle={vi.fn()} />);
 
-    await user.click(screen.getByRole("button", { name: "links" }));
+    await user.type(screen.getByLabelText("Ask the agent"), "links{Enter}");
 
     expect(
       await screen.findByRole("link", { name: "hello@jordangarcia.me" }),
     ).toBeInTheDocument();
   });
 
-  it("switches skins when asked for tmux", async () => {
+  it("switches skins on the skin command", async () => {
     const user = userEvent.setup();
     const onCycle = vi.fn();
     render(<AgentConsole articles={articles} onCycle={onCycle} />);
 
-    await user.type(screen.getByLabelText("Ask the agent"), "tmux{Enter}");
+    await user.type(screen.getByLabelText("Ask the agent"), "skin{Enter}");
 
     await vi.waitFor(() => expect(onCycle).toHaveBeenCalledOnce());
   });
@@ -45,14 +45,14 @@ describe("AgentConsole", () => {
   it("downgrades the model when intent detection 'fails'", async () => {
     const user = userEvent.setup();
     render(<AgentConsole articles={articles} onCycle={vi.fn()} />);
-    expect(screen.getByText("Fable 7")).toBeInTheDocument();
+    expect(screen.getByText("Fable 4")).toBeInTheDocument();
 
     await user.type(screen.getByLabelText("Ask the agent"), "hi{Enter}");
 
     expect(
-      await screen.findByText(/Fable 7 failed intent detection/),
+      await screen.findByText(/Fable 4 failed intent detection/),
     ).toBeInTheDocument();
-    expect(screen.getByText("Fable 6")).toBeInTheDocument();
+    expect(screen.getByText("Fable 3")).toBeInTheDocument();
   });
 
   it("clears the conversation", async () => {
