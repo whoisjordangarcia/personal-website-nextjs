@@ -5,9 +5,14 @@ import React from "react";
 import type { AgentArticle } from "../agent/AgentTerminal";
 import type { Reply } from "../agent/agent-commands";
 import { useAgentSession } from "../agent/useAgentSession";
+import OcLoader, { OcScanner } from "./OcLoader";
+import OcSidebar from "./OcSidebar";
 import { OcMeta, OcTool, OcUser } from "./OpencodeTranscript";
 
 type Mode = "build" | "plan";
+
+/** Long enough for the loader to read as work rather than a flicker. */
+const OC_THINK_MS = 1100;
 
 /** Interactive prompt + bottom bar for the OpenCode-style skin. */
 export default function OpencodeConsole({
@@ -17,8 +22,8 @@ export default function OpencodeConsole({
   articles: AgentArticle[];
   onCycle: () => void;
 }) {
-  const { turns, value, setValue, model, submit, onKeyDown, endRef } =
-    useAgentSession({ articles, onCycle });
+  const { turns, value, setValue, busy, model, submit, onKeyDown, endRef } =
+    useAgentSession({ articles, onCycle, thinkMs: OC_THINK_MS });
   const [mode, setMode] = React.useState<Mode>("build");
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -37,9 +42,7 @@ export default function OpencodeConsole({
             <OcUser>{t.input}</OcUser>
             <div className="mt-3 space-y-2">
               {t.replies === null ? (
-                <p className="text-[#6e738d]">
-                  <span className="agent-spark text-[#f5a97f]">◇</span> working…
-                </p>
+                <OcLoader />
               ) : (
                 <>
                   {t.replies.map((r, i) => (
@@ -54,7 +57,9 @@ export default function OpencodeConsole({
         <div ref={endRef} className="scroll-mb-52" />
       </div>
 
-      <div className="fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
+      <OcSidebar model={model} turns={turns.length} />
+
+      <div className="fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8 lg:right-[42ch]">
         <form
           className="mt-2 flex items-center gap-2 border border-[#494d64] px-3 py-1.5 focus-within:border-[#8aadf4]"
           onSubmit={(e) => {
@@ -92,9 +97,16 @@ export default function OpencodeConsole({
             >
               {mode}
             </button>
-            <span>
-              <span className="text-[#CAD3F5]">Fable {model}</span> · jordan
-            </span>
+            {busy ? (
+              <span className="flex items-center gap-2">
+                <OcScanner />
+                <span>esc interrupt</span>
+              </span>
+            ) : (
+              <span>
+                <span className="text-[#CAD3F5]">Fable {model}</span> · jordan
+              </span>
+            )}
           </div>
           <button
             type="button"

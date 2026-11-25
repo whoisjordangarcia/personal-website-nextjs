@@ -11,7 +11,7 @@ import {
 
 export type Turn = { id: number; input: string; replies: Reply[] | null };
 
-const THINK_MS = 450;
+const DEFAULT_THINK_MS = 450;
 
 /**
  * State for the fake agent prompt, shared by every agent-style skin:
@@ -21,10 +21,13 @@ const THINK_MS = 450;
 export function useAgentSession({
   articles,
   onCycle,
+  thinkMs = DEFAULT_THINK_MS,
 }: {
   articles: AgentArticle[];
   /** Shift+Tab inside the prompt, and the "skin" command. */
   onCycle: () => void;
+  /** How long the fake "thinking" lasts before a reply appears. */
+  thinkMs?: number;
 }) {
   const [turns, setTurns] = React.useState<Turn[]>([]);
   const [value, setValue] = React.useState("");
@@ -84,9 +87,9 @@ export function useAgentSession({
         } else if (action?.type === "cycle") {
           onCycle();
         }
-      }, THINK_MS);
+      }, thinkMs);
     },
-    [articles, busy, onCycle],
+    [articles, busy, onCycle, thinkMs],
   );
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
