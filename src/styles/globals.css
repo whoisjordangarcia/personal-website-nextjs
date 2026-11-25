@@ -2,9 +2,9 @@
 
 @theme {
   --font-sans:
-    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI,
-    Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Cantarell, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
   --color-light-pink: #ed8796;
 }
 

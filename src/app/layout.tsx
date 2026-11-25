@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
 import { Suspense } from "react";
 
 import { TRPCReactProvider } from "@/trpc/react";
@@ -94,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en">
       <body>
         <script
           type="application/ld+json"

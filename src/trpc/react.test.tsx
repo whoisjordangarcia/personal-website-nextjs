@@ -1,18 +1,20 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { TRPCReactProvider, api } from "./react";
+import { TRPCReactProvider, useTRPC } from "./react";
 
 // Mock the trpc modules
-vi.mock("@trpc/react-query", () => ({
-  createTRPCReact: () => ({
-    createClient: vi.fn().mockReturnValue({}),
-    Provider: ({ children }: { children: React.ReactNode }) => (
+vi.mock("@trpc/tanstack-react-query", () => ({
+  createTRPCContext: () => ({
+    TRPCProvider: ({ children }: { children: React.ReactNode }) => (
       <div data-testid="trpc-provider">{children}</div>
     ),
+    useTRPC: vi.fn(),
+    useTRPCClient: vi.fn(),
   }),
 }));
 
 vi.mock("@trpc/client", () => ({
+  createTRPCClient: vi.fn().mockReturnValue({}),
   loggerLink: vi.fn().mockReturnValue({}),
   httpBatchLink: vi.fn().mockReturnValue({}),
 }));
@@ -106,8 +108,8 @@ describe("getQueryClient", () => {
   });
 });
 
-describe("api object", () => {
+describe("useTRPC", () => {
   it("is defined and exported", () => {
-    expect(api).toBeDefined();
+    expect(useTRPC).toBeDefined();
   });
 });

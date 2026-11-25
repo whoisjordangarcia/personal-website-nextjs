@@ -1,6 +1,6 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import matter from "gray-matter";
+import { parseFrontmatter } from "./frontmatter";
 
 export type ArticleMeta = {
   title: string;
@@ -26,7 +26,7 @@ export async function getAllArticles(
   const articles = await Promise.all(
     mdxFiles.map(async (filename) => {
       const raw = await readFile(join(dir, filename), "utf-8");
-      const { data } = matter(raw);
+      const { data } = parseFrontmatter(raw);
       return {
         title: data.title as string,
         slug: data.slug as string,
@@ -45,7 +45,7 @@ export async function getArticle(
   dir = DEFAULT_DIR,
 ): Promise<Article> {
   const raw = await readFile(join(dir, `${slug}.mdx`), "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter(raw);
   return {
     meta: {
       title: data.title as string,

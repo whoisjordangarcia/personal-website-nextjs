@@ -1,20 +1,24 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { api } from "@/trpc/react";
+import { useTRPC } from "@/trpc/react";
 
 export function CreatePost() {
   const router = useRouter();
   const [name, setName] = useState("");
 
-  const createPost = api.post.create.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      setName("");
-    },
-  });
+  const trpc = useTRPC();
+  const createPost = useMutation(
+    trpc.post.create.mutationOptions({
+      onSuccess: () => {
+        router.refresh();
+        setName("");
+      },
+    }),
+  );
 
   return (
     <form

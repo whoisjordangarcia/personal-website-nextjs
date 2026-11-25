@@ -1,5 +1,5 @@
 import { getArticle, getAllArticles } from "@/lib/articles";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote-client/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
