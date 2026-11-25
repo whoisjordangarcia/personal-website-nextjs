@@ -58,6 +58,7 @@ export default function AgentConsole({
         onSubmit={() => submit(value)}
         onKeyDown={onKeyDown}
         model={model}
+        onConfig={onConfig}
       />
     </>
   );

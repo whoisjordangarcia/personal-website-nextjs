@@ -10,6 +10,7 @@ export default function AgentStatusBar({
   onSubmit,
   onKeyDown,
   model,
+  onConfig,
 }: {
   onCycle: () => void;
   value: string;
@@ -18,6 +19,8 @@ export default function AgentStatusBar({
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Current (fake) model version; drops when intent detection "fails". */
   model: number;
+  /** Opens the theme menu. */
+  onConfig: () => void;
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -73,19 +76,29 @@ export default function AgentStatusBar({
         <span>│</span>
         <span>Miami{time ? ` ${time}` : ""}</span>
       </div>
-      <button
-        type="button"
-        onClick={onCycle}
-        className="mt-0.5 inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-(--ctp-mauve) hover:text-(--ctp-text) sm:min-h-0"
-      >
-        ▸▸ agent mode on{" "}
-        <span className="text-(--ctp-overlay0) pointer-coarse:hidden">
-          (shift+tab to cycle)
-        </span>
-        <span className="hidden text-(--ctp-overlay0) pointer-coarse:inline">
-          (tap to cycle)
-        </span>
-      </button>
+      <div className="mt-0.5 flex flex-wrap items-center gap-x-4">
+        <button
+          type="button"
+          onClick={onCycle}
+          className="inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-(--ctp-mauve) hover:text-(--ctp-text) sm:min-h-0"
+        >
+          ▸▸ agent mode on{" "}
+          <span className="text-(--ctp-overlay0) pointer-coarse:hidden">
+            (shift+tab to cycle)
+          </span>
+          <span className="hidden text-(--ctp-overlay0) pointer-coarse:inline">
+            (tap to cycle)
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={onConfig}
+          className="inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-(--ctp-overlay0) hover:text-(--ctp-text) sm:min-h-0"
+        >
+          ⚙ /config <span className="pointer-coarse:hidden">(⌘,)</span>
+          <span className="hidden pointer-coarse:inline">theme</span>
+        </button>
+      </div>
     </div>
   );
 }

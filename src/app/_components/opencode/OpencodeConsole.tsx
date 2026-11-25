@@ -112,15 +112,25 @@ export default function OpencodeConsole({
               </span>
             )}
           </div>
-          <button
-            type="button"
-            onClick={onCycle}
-            className="inline-flex min-h-11 cursor-pointer items-center hover:text-(--ctp-text) sm:min-h-0"
-          >
-            <span className="pointer-coarse:hidden">shift+tab</span>
-            <span className="hidden pointer-coarse:inline">tap</span>
-            &nbsp;switch skin
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={onConfig}
+              className="inline-flex min-h-11 cursor-pointer items-center hover:text-(--ctp-text) sm:min-h-0"
+            >
+              <span className="pointer-coarse:hidden">ctrl+,</span>
+              &nbsp;theme
+            </button>
+            <button
+              type="button"
+              onClick={onCycle}
+              className="inline-flex min-h-11 cursor-pointer items-center hover:text-(--ctp-text) sm:min-h-0"
+            >
+              <span className="pointer-coarse:hidden">shift+tab</span>
+              <span className="hidden pointer-coarse:inline">tap</span>
+              &nbsp;switch skin
+            </button>
+          </div>
         </div>
       </div>
     </>

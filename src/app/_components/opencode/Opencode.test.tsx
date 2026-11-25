@@ -64,6 +64,21 @@ describe("OpencodeConsole", () => {
     expect(screen.getAllByText(/Fable 4/).length).toBeGreaterThan(0);
   });
 
+  it("has a visible theme button", async () => {
+    const user = userEvent.setup();
+    const onConfig = vi.fn();
+    render(
+      <OpencodeConsole
+        articles={articles}
+        onCycle={vi.fn()}
+        onConfig={onConfig}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /theme/ }));
+    expect(onConfig).toHaveBeenCalledOnce();
+  });
+
   it("toggles the build/plan badge", async () => {
     const user = userEvent.setup();
     render(<OpencodeConsole articles={articles} onCycle={vi.fn()} />);

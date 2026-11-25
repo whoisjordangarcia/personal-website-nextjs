@@ -55,6 +55,21 @@ describe("AgentConsole", () => {
     expect(screen.getByText("Fable 3")).toBeInTheDocument();
   });
 
+  it("has a visible config button for the theme menu", async () => {
+    const user = userEvent.setup();
+    const onConfig = vi.fn();
+    render(
+      <AgentConsole
+        articles={articles}
+        onCycle={vi.fn()}
+        onConfig={onConfig}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /\/config/ }));
+    expect(onConfig).toHaveBeenCalledOnce();
+  });
+
   it("clears the conversation", async () => {
     const user = userEvent.setup();
     render(<AgentConsole articles={articles} onCycle={vi.fn()} />);
