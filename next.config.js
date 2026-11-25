@@ -5,6 +5,9 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  // Let phones/tablets on the LAN load dev resources (HMR, chunks).
+  allowedDevOrigins: ["192.168.*.*", "10.*.*.*"],
+};
 
 export default config;
