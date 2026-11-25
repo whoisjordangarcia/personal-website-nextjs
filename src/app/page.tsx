@@ -16,7 +16,7 @@ export default async function Home({
     .map(({ title, slug, date }) => ({ title, slug, date }));
 
   return (
-    <main className="px-8 py-8 pb-40 lg:w-3/5">
+    <main className="px-8 py-8 pb-56 lg:w-3/5">
       <h1 className="sr-only">Jordan Garcia — Senior Software Engineer</h1>
       <HomeVariant
         initial={ui === "tmux" ? "tmux" : "agent"}
@@ -27,6 +27,7 @@ export default async function Home({
           </>
         }
         agent={<AgentTerminal articles={articles} />}
+        articles={articles}
       />
     </main>
   );

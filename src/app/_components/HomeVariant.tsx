@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import AgentStatusBar from "./agent/AgentStatusBar";
+import AgentConsole from "./agent/AgentConsole";
+import type { AgentArticle } from "./agent/AgentTerminal";
 
 export type Variant = "tmux" | "agent";
 const VARIANTS: Variant[] = ["tmux", "agent"];
@@ -42,11 +43,14 @@ export default function HomeVariant({
   initial,
   tmux,
   agent,
+  articles,
 }: {
   /** What the server rendered (from ?ui=); hydration starts here. */
   initial: Variant;
   tmux: React.ReactNode;
   agent: React.ReactNode;
+  /** For the interactive prompt's "ls" / "open" commands. */
+  articles: AgentArticle[];
 }) {
   const variant = React.useSyncExternalStore(
     subscribe,
@@ -76,7 +80,7 @@ export default function HomeVariant({
       {variant === "agent" ? (
         <>
           {agent}
-          <AgentStatusBar onCycle={cycle} />
+          <AgentConsole articles={articles} onCycle={cycle} />
         </>
       ) : (
         <>

@@ -1,9 +1,36 @@
 "use client";
 
 import React from "react";
+import { SUGGESTIONS } from "./agent-commands";
 
 /** Fixed bottom chrome for the agent skin: input box, status line, mode hint. */
-export default function AgentStatusBar({ onCycle }: { onCycle: () => void }) {
+export default function AgentStatusBar({
+  onCycle,
+  value,
+  onChange,
+  onSubmit,
+  onKeyDown,
+  onSuggestion,
+  busy,
+  model,
+}: {
+  onCycle: () => void;
+  value: string;
+  onChange: (v: string) => void;
+  onSubmit: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onSuggestion: (cmd: string) => void;
+  busy: boolean;
+  /** Current (fake) model version; drops when intent detection "fails". */
+  model: number;
+}) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Focus the prompt on desktop only: on touch it would pop the keyboard.
+  React.useEffect(() => {
+    if (window.matchMedia("(pointer: fine)").matches) inputRef.current?.focus();
+  }, []);
+
   const time = React.useSyncExternalStore(
     subscribeClock,
     formatTime,
@@ -12,12 +39,47 @@ export default function AgentStatusBar({ onCycle }: { onCycle: () => void }) {
 
   return (
     <div className="agent-chrome fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
-      <div className="flex items-center gap-2 border-y border-[#494d64] py-2 text-[#CAD3F5]">
-        <span className="text-[#6e738d]">❯</span>
-        <span className="terminal-cursor" aria-hidden />
+      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pt-2 pb-1 text-xs">
+        {SUGGESTIONS.map((s) => (
+          <button
+            key={s}
+            type="button"
+            disabled={busy}
+            onClick={() => onSuggestion(s)}
+            className="shrink-0 cursor-pointer border border-[#494d64] px-2 py-1 text-[#a5adcb] hover:border-[#c6a0f6] hover:text-[#CAD3F5] disabled:opacity-50"
+          >
+            {s}
+          </button>
+        ))}
       </div>
+      <form
+        className="flex items-center gap-2 border-y border-[#494d64] py-1.5 text-[#CAD3F5]"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+      >
+        <span aria-hidden className="text-[#6e738d]">
+          ❯
+        </span>
+        <input
+          id="agent-prompt"
+          aria-label="Ask the agent"
+          ref={inputRef}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder='Try "help"'
+          autoComplete="off"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          enterKeyHint="send"
+          className="min-w-0 flex-1 bg-transparent text-base text-[#CAD3F5] caret-[#f2d5cf] outline-none placeholder:text-[#5b6078] sm:text-[0.95rem]"
+        />
+      </form>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 text-xs text-[#6e738d]">
-        <span className="text-[#c6a0f6]">Fable 7</span>
+        <span className="text-[#c6a0f6]">Fable {model}</span>
         <span>│</span>
         <span>$0.00</span>
         <span>│</span>
