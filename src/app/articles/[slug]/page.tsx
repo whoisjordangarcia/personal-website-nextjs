@@ -81,9 +81,15 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <main className="px-8 py-8 pb-24 lg:w-3/5">
-      <Link href="/articles" className="text-sm text-[#8bd5ca] hover:underline">
-        ← articles
-      </Link>
+      <nav className="text-sm text-[#656989]">
+        <Link href="/" className="text-[#8bd5ca] hover:underline">
+          ~
+        </Link>
+        {" / "}
+        <Link href="/articles" className="text-[#8bd5ca] hover:underline">
+          articles
+        </Link>
+      </nav>
       <h1 className="mt-6 mb-2 text-2xl font-bold text-[#CAD3F5]">
         {meta.title}
       </h1>
