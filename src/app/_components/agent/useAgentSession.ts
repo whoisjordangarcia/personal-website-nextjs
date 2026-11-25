@@ -21,11 +21,14 @@ const DEFAULT_THINK_MS = 450;
 export function useAgentSession({
   articles,
   onCycle,
+  onConfig,
   thinkMs = DEFAULT_THINK_MS,
 }: {
   articles: AgentArticle[];
   /** Shift+Tab inside the prompt, and the "skin" command. */
   onCycle: () => void;
+  /** The "config" / "theme" commands. */
+  onConfig: () => void;
   /** How long the fake "thinking" lasts before a reply appears. */
   thinkMs?: number;
 }) {
@@ -86,10 +89,12 @@ export function useAgentSession({
           window.location.assign(action.href);
         } else if (action?.type === "cycle") {
           onCycle();
+        } else if (action?.type === "config") {
+          onConfig();
         }
       }, thinkMs);
     },
-    [articles, busy, onCycle, thinkMs],
+    [articles, busy, onCycle, onConfig, thinkMs],
   );
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

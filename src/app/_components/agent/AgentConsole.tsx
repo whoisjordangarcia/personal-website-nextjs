@@ -14,29 +14,32 @@ import { useAgentSession } from "./useAgentSession";
 export default function AgentConsole({
   articles,
   onCycle,
+  onConfig = () => undefined,
 }: {
   articles: AgentArticle[];
   onCycle: () => void;
+  /** Opens the theme menu (the "config" command). */
+  onConfig?: () => void;
 }) {
   const { turns, value, setValue, model, submit, onKeyDown, endRef } =
-    useAgentSession({ articles, onCycle });
+    useAgentSession({ articles, onCycle, onConfig });
 
   return (
     <>
       <div
-        className="agent-transcript text-[0.95rem] leading-relaxed break-words text-[#CAD3F5]"
+        className="agent-transcript text-[0.95rem] leading-relaxed break-words text-(--ctp-text)"
         aria-live="polite"
       >
         {turns.map((t) => (
           <div key={t.id} className="agent-step mt-6">
             <p className="agent-user">
-              <span className="text-[#6e738d]">❯ </span>
+              <span className="text-(--ctp-overlay0)">❯ </span>
               {t.input}
             </p>
             <div className="mt-3 space-y-2">
               {t.replies === null ? (
-                <p className="text-[#6e738d]">
-                  <span className="agent-spark text-[#f5a97f]">✻</span>{" "}
+                <p className="text-(--ctp-overlay0)">
+                  <span className="agent-spark text-(--ctp-peach)">✻</span>{" "}
                   Thinking…
                 </p>
               ) : (
@@ -62,7 +65,7 @@ export default function AgentConsole({
 
 export function ReplyView({ reply }: { reply: Reply }) {
   if (reply.kind === "warning") {
-    return <p className="text-[#eed49f]">{reply.text}</p>;
+    return <p className="text-(--ctp-yellow)">{reply.text}</p>;
   }
   if (reply.kind === "text") {
     return (
@@ -75,29 +78,32 @@ export function ReplyView({ reply }: { reply: Reply }) {
   return (
     <div>
       <div className="flex gap-2">
-        <span aria-hidden className="text-[#a6da95]">
+        <span aria-hidden className="text-(--ctp-green)">
           ●
         </span>
         <p>
           <span className="font-bold">{reply.tool}</span>
-          <span className="text-[#a5adcb]">({reply.arg})</span>
+          <span className="text-(--ctp-subtext0)">({reply.arg})</span>
         </p>
       </div>
-      <div className="flex gap-2 pl-1 text-[#a5adcb]">
-        <span aria-hidden className="text-[#6e738d]">
+      <div className="flex gap-2 pl-1 text-(--ctp-subtext0)">
+        <span aria-hidden className="text-(--ctp-overlay0)">
           ⎿
         </span>
         <div className="min-w-0 flex-1 space-y-0.5">
           {reply.lines.map((l, i) => (
             <p key={i}>
               {l.label && (
-                <span className="inline-block w-[10ch] text-[#8bd5ca]">
+                <span className="inline-block w-[10ch] text-(--ctp-teal)">
                   {l.label}
                 </span>
               )}
               {l.href ? (
                 l.href.startsWith("/") ? (
-                  <Link href={l.href} className="term-link text-[#f2d5cf]">
+                  <Link
+                    href={l.href}
+                    className="term-link text-(--ctp-rosewater)"
+                  >
                     {l.text}
                   </Link>
                 ) : (
@@ -105,13 +111,13 @@ export function ReplyView({ reply }: { reply: Reply }) {
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="term-link text-[#f2d5cf]"
+                    className="term-link text-(--ctp-rosewater)"
                   >
                     {l.text}
                   </a>
                 )
               ) : (
-                <span className="text-[#6e738d]">{l.text}</span>
+                <span className="text-(--ctp-overlay0)">{l.text}</span>
               )}
             </p>
           ))}

@@ -21,60 +21,61 @@ export default function OcSidebar({
   return (
     <aside
       aria-label="Session sidebar"
-      className="fixed top-0 right-0 bottom-0 z-30 hidden w-[42ch] flex-col bg-[#1e2030] px-[2ch] py-4 text-sm text-[#a5adcb] lg:flex"
+      className="fixed top-0 right-0 bottom-0 z-30 hidden w-[42ch] flex-col bg-(--ctp-mantle) px-[2ch] py-4 text-sm text-(--ctp-subtext0) lg:flex"
     >
-      <p className="pb-4 font-bold text-[#CAD3F5]">who is jordan?</p>
+      <p className="pb-4 font-bold text-(--ctp-text)">who is jordan?</p>
 
       <div className="flex-1 space-y-4 overflow-y-auto pr-[1ch]">
         <section>
-          <h2 className="font-bold text-[#CAD3F5]">Context</h2>
+          <h2 className="font-bold text-(--ctp-text)">Context</h2>
           <p>{tokens.toLocaleString("en-US")} tokens</p>
           <p>{percent}% used</p>
           <p>$0.00 spent</p>
         </section>
 
         <section>
-          <h2 className="font-bold text-[#CAD3F5]">MCP</h2>
+          <h2 className="font-bold text-(--ctp-text)">MCP</h2>
           <ul>
             {profileLinks.map((l) => (
               <li key={l.label} className="flex items-center gap-[1ch]">
-                <span aria-hidden className="text-[#a6da95]">
+                <span aria-hidden className="text-(--ctp-green)">
                   •
                 </span>
                 <a
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="term-link text-[#CAD3F5]"
+                  className="term-link text-(--ctp-text)"
                 >
                   {l.label}
                 </a>
-                <span className="text-[#6e738d]">connected</span>
+                <span className="text-(--ctp-overlay0)">connected</span>
               </li>
             ))}
           </ul>
         </section>
 
         <section>
-          <h2 className="font-bold text-[#CAD3F5]">Todo</h2>
+          <h2 className="font-bold text-(--ctp-text)">Todo</h2>
           <ul>
             <li>
-              <span className="text-[#a6da95]">[✓]</span> ship articles
+              <span className="text-(--ctp-green)">[✓]</span> ship articles
             </li>
             <li>
-              <span className="text-[#a6da95]">[✓]</span> add agent skins
+              <span className="text-(--ctp-green)">[✓]</span> add agent skins
             </li>
             <li>
-              <span className="text-[#eed49f]">[•]</span> write the next post
+              <span className="text-(--ctp-yellow)">[•]</span> write the next
+              post
             </li>
           </ul>
         </section>
       </div>
 
-      <footer className="space-y-1 pt-4 text-xs text-[#6e738d]">
+      <footer className="space-y-1 pt-4 text-xs text-(--ctp-overlay0)">
         <p>~/dev/jordangarcia.me</p>
         <p>
-          <span className="text-[#a6da95]">•</span> Fable {model}
+          <span className="text-(--ctp-green)">•</span> Fable {model}
         </p>
       </footer>
     </aside>

@@ -7,13 +7,22 @@ import rehypePrettyCode from "rehype-pretty-code";
 
 const mdxComponents = {
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="mt-8 mb-4 text-xl font-bold text-[#eed49f]" {...props} />
+    <h2
+      className="mt-8 mb-4 text-xl font-bold text-(--ctp-yellow)"
+      {...props}
+    />
   ),
   h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className="mt-6 mb-3 text-lg font-semibold text-[#eed49f]" {...props} />
+    <h3
+      className="mt-6 mb-3 text-lg font-semibold text-(--ctp-yellow)"
+      {...props}
+    />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-[#f2d5cf] underline hover:brightness-110" {...props} />
+    <a
+      className="text-(--ctp-rosewater) underline hover:brightness-110"
+      {...props}
+    />
   ),
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
     if (props.className?.includes("language-")) {
@@ -21,7 +30,7 @@ const mdxComponents = {
     }
     return (
       <code
-        className="rounded bg-[#2a2d3d] px-1.5 py-0.5 text-sm text-[#a6da95]"
+        className="rounded bg-(--ctp-surface0) px-1.5 py-0.5 text-sm text-(--ctp-green)"
         {...props}
       >
         {children}
@@ -30,7 +39,7 @@ const mdxComponents = {
   },
   blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="my-4 border-l-4 border-[#8bd5ca] pl-4 text-[#a5adcb] italic"
+      className="my-4 border-l-4 border-(--ctp-teal) pl-4 text-(--ctp-subtext0) italic"
       {...props}
     />
   ),
@@ -81,22 +90,22 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <main className="px-8 py-8 pb-24 lg:w-3/5">
-      <nav className="text-sm text-[#656989]">
-        <Link href="/" className="text-[#8bd5ca] hover:underline">
+      <nav className="text-sm text-(--ctp-overlay0)">
+        <Link href="/" className="text-(--ctp-teal) hover:underline">
           ~
         </Link>
         {" / "}
-        <Link href="/articles" className="text-[#8bd5ca] hover:underline">
+        <Link href="/articles" className="text-(--ctp-teal) hover:underline">
           articles
         </Link>
       </nav>
-      <h1 className="mt-6 mb-2 text-2xl font-bold text-[#CAD3F5]">
+      <h1 className="mt-6 mb-2 text-2xl font-bold text-(--ctp-text)">
         {meta.title}
       </h1>
-      <p className="mb-8 text-sm text-[#656989]">
+      <p className="mb-8 text-sm text-(--ctp-overlay0)">
         {meta.date} · {meta.readingTime} min read
       </p>
-      <div className="max-w-[65ch] text-[#CAD3F5]">
+      <div className="max-w-[65ch] text-(--ctp-text)">
         <MDXRemote
           source={content}
           components={mdxComponents}

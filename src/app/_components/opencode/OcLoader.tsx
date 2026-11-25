@@ -18,7 +18,7 @@ function usePrefersReducedMotion() {
 }
 
 /** opencode's knight-rider scanner, drawn as text cells. */
-export function OcScanner({ color = "245, 169, 127" }: { color?: string }) {
+export function OcScanner({ color = "var(--ctp-peach)" }: { color?: string }) {
   const reduced = usePrefersReducedMotion();
   const [frame, setFrame] = React.useState(0);
 
@@ -34,7 +34,12 @@ export function OcScanner({ color = "245, 169, 127" }: { color?: string }) {
   return (
     <span aria-hidden className="inline-flex tracking-[0.15em]">
       {scannerFrame(reduced ? 0 : frame).map((c, i) => (
-        <span key={i} style={{ color: `rgba(${color}, ${c.alpha})` }}>
+        <span
+          key={i}
+          style={{
+            color: `color-mix(in srgb, ${color} ${Math.round(c.alpha * 100)}%, transparent)`,
+          }}
+        >
           {c.glyph}
         </span>
       ))}
@@ -45,7 +50,7 @@ export function OcScanner({ color = "245, 169, 127" }: { color?: string }) {
 /** Pending-reply row: scanner + "working". */
 export default function OcLoader() {
   return (
-    <p className="flex items-center gap-3 text-[#6e738d]" role="status">
+    <p className="flex items-center gap-3 text-(--ctp-overlay0)" role="status">
       <OcScanner />
       <span>working</span>
     </p>

@@ -33,15 +33,15 @@ export default function AgentStatusBar({
   );
 
   return (
-    <div className="agent-chrome fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
+    <div className="agent-chrome fixed right-0 bottom-0 left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
       <form
-        className="mt-2 flex items-center gap-2 border-y border-[#494d64] py-1.5 text-[#CAD3F5]"
+        className="mt-2 flex items-center gap-2 border-y border-(--ctp-surface1) py-1.5 text-(--ctp-text)"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
       >
-        <span aria-hidden className="text-[#6e738d]">
+        <span aria-hidden className="text-(--ctp-overlay0)">
           ❯
         </span>
         <input
@@ -57,11 +57,11 @@ export default function AgentStatusBar({
           autoCorrect="off"
           spellCheck={false}
           enterKeyHint="send"
-          className="min-w-0 flex-1 bg-transparent text-base text-[#CAD3F5] caret-[#f2d5cf] outline-none placeholder:text-[#5b6078] sm:text-[0.95rem]"
+          className="min-w-0 flex-1 bg-transparent text-base text-(--ctp-text) caret-(--ctp-rosewater) outline-none placeholder:text-(--ctp-surface2) sm:text-[0.95rem]"
         />
       </form>
-      <div className="mt-1 flex flex-wrap items-center gap-x-2 text-xs text-[#6e738d]">
-        <span className="text-[#c6a0f6]">Fable {model}</span>
+      <div className="mt-1 flex flex-wrap items-center gap-x-2 text-xs text-(--ctp-overlay0)">
+        <span className="text-(--ctp-mauve)">Fable {model}</span>
         <span>│</span>
         <span>$0.00</span>
         <span>│</span>
@@ -69,20 +69,20 @@ export default function AgentStatusBar({
         <span>│</span>
         <span className="hidden sm:inline">~/dev/jordangarcia.me</span>
         <span className="hidden sm:inline">│</span>
-        <span className="text-[#c6a0f6]">main</span>
+        <span className="text-(--ctp-mauve)">main</span>
         <span>│</span>
         <span>Miami{time ? ` ${time}` : ""}</span>
       </div>
       <button
         type="button"
         onClick={onCycle}
-        className="mt-0.5 inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-[#c6a0f6] hover:text-[#CAD3F5] sm:min-h-0"
+        className="mt-0.5 inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-(--ctp-mauve) hover:text-(--ctp-text) sm:min-h-0"
       >
         ▸▸ agent mode on{" "}
-        <span className="text-[#6e738d] pointer-coarse:hidden">
+        <span className="text-(--ctp-overlay0) pointer-coarse:hidden">
           (shift+tab to cycle)
         </span>
-        <span className="hidden text-[#6e738d] pointer-coarse:inline">
+        <span className="hidden text-(--ctp-overlay0) pointer-coarse:inline">
           (tap to cycle)
         </span>
       </button>
@@ -112,8 +112,10 @@ function ContextMeter({ used, tokens }: { used: number; tokens: string }) {
       aria-label={`context window ${Math.round(used * 100)}% used`}
     >
       <span aria-hidden className="tracking-[-0.1em]">
-        <span className="text-[#c6a0f6]">{"━".repeat(filled)}</span>
-        <span className="text-[#494d64]">{"━".repeat(cells - filled)}</span>
+        <span className="text-(--ctp-mauve)">{"━".repeat(filled)}</span>
+        <span className="text-(--ctp-surface1)">
+          {"━".repeat(cells - filled)}
+        </span>
       </span>
       <span>
         {Math.round(used * 100)}% ({tokens})

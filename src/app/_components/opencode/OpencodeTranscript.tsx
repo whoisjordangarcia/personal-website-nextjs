@@ -28,7 +28,7 @@ const Step = ({
 
 export function OcUser({ children }: { children: React.ReactNode }) {
   return (
-    <div className="border-l-2 border-[#8aadf4] bg-[#1e2030] px-3 py-2 text-[#CAD3F5]">
+    <div className="border-l-2 border-(--ctp-blue) bg-(--ctp-mantle) px-3 py-2 text-(--ctp-text)">
       {children}
     </div>
   );
@@ -44,17 +44,17 @@ export function OcTool({
   arg: string;
 }) {
   return (
-    <p className="text-[#6e738d]">
-      <span className="text-[#8bd5ca]">{icon}</span> {name}{" "}
-      <span className="text-[#a5adcb]">{arg}</span>
+    <p className="text-(--ctp-overlay0)">
+      <span className="text-(--ctp-teal)">{icon}</span> {name}{" "}
+      <span className="text-(--ctp-subtext0)">{arg}</span>
     </p>
   );
 }
 
 export function OcMeta({ model, ms }: { model: number; ms: string }) {
   return (
-    <p className="mt-2 text-xs text-[#6e738d]">
-      <span className="text-[#f5a97f]">◇</span> Fable {model} · build · {ms}
+    <p className="mt-2 text-xs text-(--ctp-overlay0)">
+      <span className="text-(--ctp-peach)">◇</span> Fable {model} · build · {ms}
     </p>
   );
 }
@@ -65,13 +65,13 @@ export default function OpencodeTranscript({
   articles: AgentArticle[];
 }) {
   return (
-    <div className="text-[0.95rem] leading-relaxed break-words text-[#CAD3F5]">
+    <div className="text-[0.95rem] leading-relaxed break-words text-(--ctp-text)">
       <Step delay={0}>
-        <header className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 border-b border-[#363a4f] pb-2">
+        <header className="mb-6 flex flex-wrap items-baseline justify-between gap-x-4 border-b border-(--ctp-surface0) pb-2">
           <p className="font-bold">
-            <span className="text-[#6e738d]">#</span> who is jordan?
+            <span className="text-(--ctp-overlay0)">#</span> who is jordan?
           </p>
-          <p className="text-xs text-[#6e738d]">~/dev/jordangarcia.me</p>
+          <p className="text-xs text-(--ctp-overlay0)">~/dev/jordangarcia.me</p>
         </header>
       </Step>
 
@@ -86,7 +86,7 @@ export default function OpencodeTranscript({
             href="https://www.nestgenomics.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="term-link text-[#8aadf4]"
+            className="term-link text-(--ctp-blue)"
           >
             @nestgenomics
           </a>
@@ -102,13 +102,13 @@ export default function OpencodeTranscript({
       {articles.length > 0 && (
         <Step delay={900} className="mt-4">
           <OcTool icon="$" name="bash" arg="ls articles/" />
-          <ul className="mt-1 space-y-0.5 border-l border-[#363a4f] pl-3">
+          <ul className="mt-1 space-y-0.5 border-l border-(--ctp-surface0) pl-3">
             {articles.map((a) => (
               <li key={a.slug} className="flex flex-col sm:flex-row sm:gap-3">
-                <span className="shrink-0 text-[#6e738d]">{a.date}</span>
+                <span className="shrink-0 text-(--ctp-overlay0)">{a.date}</span>
                 <Link
                   href={`/articles/${a.slug}`}
-                  className="term-link text-[#f2d5cf]"
+                  className="term-link text-(--ctp-rosewater)"
                 >
                   {a.title}
                 </Link>
@@ -120,17 +120,17 @@ export default function OpencodeTranscript({
 
       <Step delay={1300} className="mt-4">
         <OcTool icon="→" name="read" arg="links.md" />
-        <ul className="mt-1 space-y-0.5 border-l border-[#363a4f] pl-3">
+        <ul className="mt-1 space-y-0.5 border-l border-(--ctp-surface0) pl-3">
           {profileLinks.map((l) => (
             <li key={l.label}>
-              <span className="inline-block w-[10ch] text-[#8bd5ca]">
+              <span className="inline-block w-[10ch] text-(--ctp-teal)">
                 {l.label}
               </span>
               <a
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="term-link text-[#f2d5cf]"
+                className="term-link text-(--ctp-rosewater)"
               >
                 {l.text}
               </a>

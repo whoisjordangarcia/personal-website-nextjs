@@ -5,6 +5,7 @@ import { Suspense } from "react";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { Analytics } from "./_components/Analytics";
+import { THEME_BOOT_SCRIPT } from "./_components/theme/theme";
 
 const siteUrl = "https://jordangarcia.me";
 
@@ -93,7 +94,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Static build-time string: applies the saved theme before paint. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body>
         <script
           type="application/ld+json"

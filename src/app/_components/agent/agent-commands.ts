@@ -13,13 +13,14 @@ export type Action =
   | { type: "navigate"; href: string }
   | { type: "clear" }
   | { type: "cycle" }
+  | { type: "config" }
   | { type: "downgrade" };
 
 export type CommandResult = { replies: Reply[]; action?: Action };
 
 const HELP = [
   "I'm a static site pretending to be an agent, so I know a few tricks:",
-  "whoami · ls · open <n> · links · github · email · skin · clear",
+  "whoami · ls · open <n> · links · github · email · skin · config · clear",
 ].join("\n");
 
 const FALLBACK =
@@ -110,10 +111,17 @@ export function runCommand(
       return linksReply([cmd === "twitter" ? "x" : cmd]);
 
     case "skin":
-    case "theme":
       return {
         replies: [{ kind: "text", text: "Switching skins…" }],
         action: { type: "cycle" },
+      };
+
+    case "config":
+    case "theme":
+    case "settings":
+      return {
+        replies: [{ kind: "text", text: "Opening config…" }],
+        action: { type: "config" },
       };
 
     case "exit":

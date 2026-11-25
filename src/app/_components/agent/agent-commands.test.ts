@@ -53,6 +53,12 @@ describe("runCommand", () => {
     expect(lines[0]?.href).toBe("https://github.com/whoisjordangarcia");
   });
 
+  it("opens the theme menu on config/theme/settings", () => {
+    for (const c of ["config", "/theme", "settings"]) {
+      expect(runCommand(c, articles).action).toEqual({ type: "config" });
+    }
+  });
+
   it("switches skins on skin, and refuses to exit", () => {
     expect(runCommand("skin", articles).action).toEqual({ type: "cycle" });
     expect(runCommand("exit", articles).action).toBeUndefined();

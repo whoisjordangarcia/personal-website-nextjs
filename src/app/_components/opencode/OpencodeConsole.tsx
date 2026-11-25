@@ -18,12 +18,15 @@ const OC_THINK_MS = 1100;
 export default function OpencodeConsole({
   articles,
   onCycle,
+  onConfig = () => undefined,
 }: {
   articles: AgentArticle[];
   onCycle: () => void;
+  /** Opens the theme menu (the "config" command). */
+  onConfig?: () => void;
 }) {
   const { turns, value, setValue, busy, model, submit, onKeyDown, endRef } =
-    useAgentSession({ articles, onCycle, thinkMs: OC_THINK_MS });
+    useAgentSession({ articles, onCycle, onConfig, thinkMs: OC_THINK_MS });
   const [mode, setMode] = React.useState<Mode>("build");
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -34,7 +37,7 @@ export default function OpencodeConsole({
   return (
     <>
       <div
-        className="text-[0.95rem] leading-relaxed break-words text-[#CAD3F5]"
+        className="text-[0.95rem] leading-relaxed break-words text-(--ctp-text)"
         aria-live="polite"
       >
         {turns.map((t) => (
@@ -59,15 +62,15 @@ export default function OpencodeConsole({
 
       <OcSidebar model={model} turns={turns.length} />
 
-      <div className="fixed right-0 bottom-0 left-0 z-40 bg-[#24273a] px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8 lg:right-[42ch]">
+      <div className="fixed right-0 bottom-0 left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8 lg:right-[42ch]">
         <form
-          className="mt-2 flex items-center gap-2 border border-[#494d64] px-3 py-1.5 focus-within:border-[#8aadf4]"
+          className="mt-2 flex items-center gap-2 border border-(--ctp-surface1) px-3 py-1.5 focus-within:border-(--ctp-blue)"
           onSubmit={(e) => {
             e.preventDefault();
             submit(value);
           }}
         >
-          <span aria-hidden className="text-[#8aadf4]">
+          <span aria-hidden className="text-(--ctp-blue)">
             &gt;
           </span>
           <input
@@ -82,16 +85,16 @@ export default function OpencodeConsole({
             autoCorrect="off"
             spellCheck={false}
             enterKeyHint="send"
-            className="min-w-0 flex-1 bg-transparent text-base text-[#CAD3F5] caret-[#8aadf4] outline-none placeholder:text-[#5b6078] sm:text-[0.95rem]"
+            className="min-w-0 flex-1 bg-transparent text-base text-(--ctp-text) caret-(--ctp-blue) outline-none placeholder:text-(--ctp-surface2) sm:text-[0.95rem]"
           />
         </form>
-        <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 text-xs text-[#6e738d]">
+        <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 text-xs text-(--ctp-overlay0)">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setMode((m) => (m === "build" ? "plan" : "build"))}
-              className={`inline-flex min-h-11 cursor-pointer items-center px-1.5 font-bold text-[#24273a] uppercase sm:min-h-0 ${
-                mode === "build" ? "bg-[#f5a97f]" : "bg-[#8aadf4]"
+              className={`inline-flex min-h-11 cursor-pointer items-center px-1.5 font-bold text-(--ctp-base) uppercase sm:min-h-0 ${
+                mode === "build" ? "bg-(--ctp-peach)" : "bg-(--ctp-blue)"
               }`}
               aria-label={`Mode: ${mode}. Tap to switch.`}
             >
@@ -104,14 +107,15 @@ export default function OpencodeConsole({
               </span>
             ) : (
               <span>
-                <span className="text-[#CAD3F5]">Fable {model}</span> · jordan
+                <span className="text-(--ctp-text)">Fable {model}</span> ·
+                jordan
               </span>
             )}
           </div>
           <button
             type="button"
             onClick={onCycle}
-            className="inline-flex min-h-11 cursor-pointer items-center hover:text-[#CAD3F5] sm:min-h-0"
+            className="inline-flex min-h-11 cursor-pointer items-center hover:text-(--ctp-text) sm:min-h-0"
           >
             <span className="pointer-coarse:hidden">shift+tab</span>
             <span className="hidden pointer-coarse:inline">tap</span>
@@ -125,7 +129,7 @@ export default function OpencodeConsole({
 
 function OcReply({ reply }: { reply: Reply }) {
   if (reply.kind === "warning") {
-    return <p className="text-[#eed49f]">{reply.text}</p>;
+    return <p className="text-(--ctp-yellow)">{reply.text}</p>;
   }
   if (reply.kind === "text") {
     return <p className="whitespace-pre-line">{reply.text}</p>;
@@ -137,17 +141,20 @@ function OcReply({ reply }: { reply: Reply }) {
         name={reply.tool.toLowerCase()}
         arg={reply.arg}
       />
-      <ul className="mt-1 space-y-0.5 border-l border-[#363a4f] pl-3 text-[#a5adcb]">
+      <ul className="mt-1 space-y-0.5 border-l border-(--ctp-surface0) pl-3 text-(--ctp-subtext0)">
         {reply.lines.map((l, i) => (
           <li key={i}>
             {l.label && (
-              <span className="inline-block w-[10ch] text-[#8bd5ca]">
+              <span className="inline-block w-[10ch] text-(--ctp-teal)">
                 {l.label}
               </span>
             )}
             {l.href ? (
               l.href.startsWith("/") ? (
-                <Link href={l.href} className="term-link text-[#f2d5cf]">
+                <Link
+                  href={l.href}
+                  className="term-link text-(--ctp-rosewater)"
+                >
                   {l.text}
                 </Link>
               ) : (
@@ -155,13 +162,13 @@ function OcReply({ reply }: { reply: Reply }) {
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="term-link text-[#f2d5cf]"
+                  className="term-link text-(--ctp-rosewater)"
                 >
                   {l.text}
                 </a>
               )
             ) : (
-              <span className="text-[#6e738d]">{l.text}</span>
+              <span className="text-(--ctp-overlay0)">{l.text}</span>
             )}
           </li>
         ))}

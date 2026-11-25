@@ -29,14 +29,14 @@ const Step = ({
 const UserTurn = ({ delay, text }: { delay: number; text: string }) => (
   <Step delay={delay} className="mt-6 first:mt-0">
     <p className="agent-user">
-      <span className="text-[#6e738d]">❯ </span>
+      <span className="text-(--ctp-overlay0)">❯ </span>
       {text}
     </p>
   </Step>
 );
 
 const Bullet = ({
-  color = "#CAD3F5",
+  color = "var(--ctp-text)",
   children,
 }: {
   color?: string;
@@ -51,8 +51,8 @@ const Bullet = ({
 );
 
 const ToolResult = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex gap-2 pl-1 text-[#a5adcb]">
-    <span aria-hidden className="text-[#6e738d]">
+  <div className="flex gap-2 pl-1 text-(--ctp-subtext0)">
+    <span aria-hidden className="text-(--ctp-overlay0)">
       ⎿
     </span>
     <div className="min-w-0 flex-1 space-y-0.5">{children}</div>
@@ -65,7 +65,7 @@ export default function AgentTerminal({
   articles: AgentArticle[];
 }) {
   return (
-    <div className="agent-transcript text-[0.95rem] leading-relaxed break-words text-[#CAD3F5]">
+    <div className="agent-transcript text-[0.95rem] leading-relaxed break-words text-(--ctp-text)">
       <UserTurn delay={0} text="who is jordan?" />
 
       <Step delay={450} className="mt-4">
@@ -76,14 +76,14 @@ export default function AgentTerminal({
               href="https://www.nestgenomics.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="term-link text-[#8aadf4]"
+              className="term-link text-(--ctp-blue)"
             >
               @nestgenomics
             </a>
             . Full-stack systems for genomics in{" "}
-            <code className="text-[#8aadf4]">TypeScript</code>,{" "}
-            <code className="text-[#8aadf4]">Python</code>, and{" "}
-            <code className="text-[#8aadf4]">Bash</code>.
+            <code className="text-(--ctp-blue)">TypeScript</code>,{" "}
+            <code className="text-(--ctp-blue)">Python</code>, and{" "}
+            <code className="text-(--ctp-blue)">Bash</code>.
           </p>
           <p className="mt-3">
             <strong>Cares about:</strong> type safety, performance, sharp
@@ -99,26 +99,33 @@ export default function AgentTerminal({
       {articles.length > 0 && (
         <>
           <Step delay={900} className="mt-4">
-            <Bullet color="#a6da95">
+            <Bullet color="var(--ctp-green)">
               <span className="font-bold">Bash</span>
-              <span className="text-[#a5adcb]">(ls articles/ | head -3)</span>
+              <span className="text-(--ctp-subtext0)">
+                (ls articles/ | head -3)
+              </span>
             </Bullet>
           </Step>
           <Step delay={1100}>
             <ToolResult>
               {articles.map((a) => (
                 <p key={a.slug} className="flex flex-col sm:flex-row sm:gap-3">
-                  <span className="shrink-0 text-[#6e738d]">{a.date}</span>
+                  <span className="shrink-0 text-(--ctp-overlay0)">
+                    {a.date}
+                  </span>
                   <Link
                     href={`/articles/${a.slug}`}
-                    className="term-link text-[#f2d5cf]"
+                    className="term-link text-(--ctp-rosewater)"
                   >
                     {a.title}
                   </Link>
                 </p>
               ))}
               <p>
-                <Link href="/articles" className="term-link text-[#6e738d]">
+                <Link
+                  href="/articles"
+                  className="term-link text-(--ctp-overlay0)"
+                >
                   … all articles
                 </Link>
               </p>
@@ -128,23 +135,23 @@ export default function AgentTerminal({
       )}
 
       <Step delay={1400} className="mt-4">
-        <Bullet color="#a6da95">
+        <Bullet color="var(--ctp-green)">
           <span className="font-bold">Read</span>
-          <span className="text-[#a5adcb]">(links.md)</span>
+          <span className="text-(--ctp-subtext0)">(links.md)</span>
         </Bullet>
       </Step>
       <Step delay={1600}>
         <ToolResult>
           {profileLinks.map((l) => (
             <p key={l.label}>
-              <span className="inline-block w-[10ch] text-[#8bd5ca]">
+              <span className="inline-block w-[10ch] text-(--ctp-teal)">
                 {l.label}
               </span>
               <a
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="term-link text-[#f2d5cf]"
+                className="term-link text-(--ctp-rosewater)"
               >
                 {l.text}
               </a>
@@ -154,9 +161,9 @@ export default function AgentTerminal({
       </Step>
 
       <Step delay={1900} className="mt-6">
-        <p className="text-[#6e738d]">
-          <span className="agent-spark text-[#f5a97f]">✻</span> Brewed for 1.9s
-          · Neovim, Next.js, Tailwind, Vercel, Catppuccin, Ioskeley Mono
+        <p className="text-(--ctp-overlay0)">
+          <span className="agent-spark text-(--ctp-peach)">✻</span> Brewed for
+          1.9s · Neovim, Next.js, Tailwind, Vercel, Catppuccin, Ioskeley Mono
         </p>
       </Step>
     </div>

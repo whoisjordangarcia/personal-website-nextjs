@@ -4,6 +4,7 @@ import React from "react";
 import AgentConsole from "./agent/AgentConsole";
 import type { AgentArticle } from "./agent/AgentTerminal";
 import OpencodeConsole from "./opencode/OpencodeConsole";
+import ThemePicker from "./theme/ThemePicker";
 
 export type Variant = "agent" | "opencode";
 /** Shift+Tab order. */
@@ -65,6 +66,21 @@ export default function HomeVariant({
     setVariant(VARIANTS[(VARIANTS.indexOf(current) + 1) % VARIANTS.length]!);
   }, []);
 
+  const [configOpen, setConfigOpen] = React.useState(false);
+  const openConfig = React.useCallback(() => setConfigOpen(true), []);
+
+  // Cmd+, / Ctrl+, opens the theme menu, like an editor's settings shortcut.
+  React.useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "," && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setConfigOpen(true);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   React.useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key !== "Tab" || !e.shiftKey) return;
@@ -82,14 +98,23 @@ export default function HomeVariant({
       {variant === "agent" ? (
         <>
           {agent}
-          <AgentConsole articles={articles} onCycle={cycle} />
+          <AgentConsole
+            articles={articles}
+            onCycle={cycle}
+            onConfig={openConfig}
+          />
         </>
       ) : (
         <>
           {opencode}
-          <OpencodeConsole articles={articles} onCycle={cycle} />
+          <OpencodeConsole
+            articles={articles}
+            onCycle={cycle}
+            onConfig={openConfig}
+          />
         </>
       )}
+      {configOpen && <ThemePicker onClose={() => setConfigOpen(false)} />}
     </div>
   );
 }
