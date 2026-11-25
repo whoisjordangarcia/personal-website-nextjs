@@ -1,9 +1,10 @@
 import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [react()],
+  // Tests only need JSX compiled; Vite's built-in transform does that, so
+  // @vitejs/plugin-react (fast refresh, Babel) isn't needed here.
+  esbuild: { jsx: "automatic" },
   test: {
     environment: "happy-dom",
     globals: true,
