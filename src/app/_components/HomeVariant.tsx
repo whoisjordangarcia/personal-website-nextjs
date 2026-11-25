@@ -84,9 +84,10 @@ export default function HomeVariant({
           <button
             type="button"
             onClick={cycle}
-            className="fixed right-4 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 inline-flex min-h-11 cursor-pointer items-center text-xs text-[#6e738d] hover:text-[#c6a0f6] sm:hidden"
+            className="fixed right-4 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 inline-flex min-h-11 cursor-pointer items-center text-xs text-[#6e738d] hover:text-[#c6a0f6] sm:right-2 sm:bottom-7 sm:min-h-0"
           >
-            ▸▸ agent mode
+            ▸▸ agent mode{" "}
+            <span className="hidden pointer-fine:inline">(shift+tab)</span>
           </button>
         </>
       )}
