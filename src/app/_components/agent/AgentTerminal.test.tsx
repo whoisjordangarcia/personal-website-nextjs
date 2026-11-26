@@ -10,7 +10,7 @@ const articles = [
 describe("AgentTerminal", () => {
   it("renders the bio without waiting on any animation", () => {
     render(<AgentTerminal articles={articles} />);
-    expect(screen.getByText(/Aussie in Miami/)).toBeInTheDocument();
+    expect(screen.getByText(/Aussie in Palm Beach/)).toBeInTheDocument();
   });
 
   it("links the latest articles", () => {

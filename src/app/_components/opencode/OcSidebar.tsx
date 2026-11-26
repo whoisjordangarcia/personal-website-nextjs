@@ -11,7 +11,7 @@ export default function OcSidebar({
   model,
   turns,
 }: {
-  model: number;
+  model: string;
   /** Prompts sent so far; drives the (fake) token count. */
   turns: number;
 }) {
@@ -75,7 +75,7 @@ export default function OcSidebar({
       <footer className="space-y-1 pt-4 text-xs text-(--ctp-overlay0)">
         <p>~/dev/jordangarcia.me</p>
         <p>
-          <span className="text-(--ctp-green)">•</span> Fable {model}
+          <span className="text-(--ctp-green)">•</span> {model}
         </p>
       </footer>
     </aside>

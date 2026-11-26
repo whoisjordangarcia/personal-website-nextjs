@@ -71,7 +71,7 @@ export default function AgentTerminal({
       <Step delay={450} className="mt-4">
         <Bullet>
           <p>
-            Aussie in Miami, building at{" "}
+            Aussie in Palm Beach, building at{" "}
             <a
               href="https://www.nestgenomics.com/"
               target="_blank"

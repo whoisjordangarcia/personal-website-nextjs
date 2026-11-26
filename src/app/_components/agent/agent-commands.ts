@@ -49,7 +49,7 @@ export function runCommand(
     case "who":
     case "about":
       return text(
-        "Jordan Garcia: Aussie in Miami, senior engineer at @nestgenomics building full-stack systems for genomics. Into type safety, fast software, sharp tools and TUIs.",
+        "Jordan Garcia: Aussie in Palm Beach, senior engineer at @nestgenomics building full-stack systems for genomics. Into type safety, fast software, sharp tools and TUIs.",
       );
 
     case "ls":
@@ -167,12 +167,20 @@ function linksReply(labels: string[]): CommandResult {
   };
 }
 
-export const MODEL_START = 4;
+/** The model the session starts on. */
+export const MODEL_START = "Fable 4";
+/** Where it falls back to when intent detection "fails", like a real agent. */
+export const FALLBACK_MODEL = "Haiku 4";
+
+/** Next model after a failed intent detection (Haiku is the floor). */
+export function downgradeModel(model: string): string {
+  return model === MODEL_START ? FALLBACK_MODEL : model;
+}
 
 /** The warning shown when a free-form prompt "fails intent detection". */
-export function downgradeWarning(model: number): string {
-  if (model <= 1) {
-    return "⚠ Fable 1 failed intent detection · no lower model available. It's regex all the way down.";
+export function downgradeWarning(model: string): string {
+  if (model === MODEL_START) {
+    return `⚠ ${MODEL_START} failed intent detection · switching to ${FALLBACK_MODEL} (smaller, faster, equally confident)`;
   }
-  return `⚠ Fable ${model} failed intent detection · switching to Fable ${model - 1} (less intelligent, equally confident)`;
+  return `⚠ ${model} failed intent detection too · no lower model available. It's regex all the way down.`;
 }

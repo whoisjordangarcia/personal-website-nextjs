@@ -51,10 +51,10 @@ export function OcTool({
   );
 }
 
-export function OcMeta({ model, ms }: { model: number; ms: string }) {
+export function OcMeta({ model, ms }: { model: string; ms: string }) {
   return (
     <p className="mt-2 text-xs text-(--ctp-overlay0)">
-      <span className="text-(--ctp-peach)">◇</span> Fable {model} · build · {ms}
+      <span className="text-(--ctp-peach)">◇</span> {model} · build · {ms}
     </p>
   );
 }
@@ -81,7 +81,7 @@ export default function OpencodeTranscript({
 
       <Step delay={500} className="mt-4 space-y-3">
         <p>
-          Aussie in Miami, building at{" "}
+          Aussie in Palm Beach, building at{" "}
           <a
             href="https://www.nestgenomics.com/"
             target="_blank"

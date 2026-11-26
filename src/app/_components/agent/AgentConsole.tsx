@@ -7,6 +7,9 @@ import type { AgentArticle } from "./AgentTerminal";
 import type { Reply } from "./agent-commands";
 import { useAgentSession } from "./useAgentSession";
 
+/** Long enough to read the fun verb before the reply lands. */
+const AGENT_THINK_MS = 1000;
+
 /**
  * The interactive part of the agent skin: a fake prompt that answers a
  * handful of canned commands below the server-rendered transcript.
@@ -22,7 +25,12 @@ export default function AgentConsole({
   onConfig?: (tab?: "theme" | "font") => void;
 }) {
   const { turns, value, setValue, model, submit, onKeyDown, endRef } =
-    useAgentSession({ articles, onCycle, onConfig });
+    useAgentSession({
+      articles,
+      onCycle,
+      onConfig,
+      thinkMs: AGENT_THINK_MS,
+    });
 
   return (
     <>
@@ -38,9 +46,10 @@ export default function AgentConsole({
             </p>
             <div className="mt-3 space-y-2">
               {t.replies === null ? (
-                <p className="text-(--ctp-overlay0)">
+                <p className="text-(--ctp-overlay0)" role="status">
                   <span className="agent-spark text-(--ctp-peach)">✻</span>{" "}
-                  Thinking…
+                  <span className="text-(--ctp-peach)">{t.verb}…</span>{" "}
+                  <span className="text-xs">(esc to interrupt)</span>
                 </p>
               ) : (
                 t.replies.map((r, i) => <ReplyView key={i} reply={r} />)

@@ -14,9 +14,15 @@ describe("AgentConsole", () => {
 
     await user.type(screen.getByLabelText("Ask the agent"), "ls{Enter}");
 
-    expect(screen.getByText("Thinking…")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent(
+      /…\s*\(esc to interrupt\)/,
+    );
     expect(
-      await screen.findByRole("link", { name: "First Post" }),
+      await screen.findByRole(
+        "link",
+        { name: "First Post" },
+        { timeout: 3000 },
+      ),
     ).toHaveAttribute("href", "/articles/first-post");
     expect(screen.getByLabelText("Ask the agent")).toHaveValue("");
   });
@@ -28,7 +34,11 @@ describe("AgentConsole", () => {
     await user.type(screen.getByLabelText("Ask the agent"), "links{Enter}");
 
     expect(
-      await screen.findByRole("link", { name: "hello@jordangarcia.me" }),
+      await screen.findByRole(
+        "link",
+        { name: "hello@jordangarcia.me" },
+        { timeout: 3000 },
+      ),
     ).toBeInTheDocument();
   });
 
@@ -39,7 +49,9 @@ describe("AgentConsole", () => {
 
     await user.type(screen.getByLabelText("Ask the agent"), "skin{Enter}");
 
-    await vi.waitFor(() => expect(onCycle).toHaveBeenCalledOnce());
+    await vi.waitFor(() => expect(onCycle).toHaveBeenCalledOnce(), {
+      timeout: 3000,
+    });
   });
 
   it("downgrades the model when intent detection 'fails'", async () => {
@@ -50,9 +62,11 @@ describe("AgentConsole", () => {
     await user.type(screen.getByLabelText("Ask the agent"), "hi{Enter}");
 
     expect(
-      await screen.findByText(/Fable 4 failed intent detection/),
+      await screen.findByText(/Fable 4 failed intent detection/, undefined, {
+        timeout: 3000,
+      }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Fable 3")).toBeInTheDocument();
+    expect(screen.getByText("Haiku 4")).toBeInTheDocument();
   });
 
   it("has a visible config button for the theme menu", async () => {
@@ -76,9 +90,13 @@ describe("AgentConsole", () => {
     const input = screen.getByLabelText("Ask the agent");
 
     await user.type(input, "whoami{Enter}");
-    expect(await screen.findByText(/Aussie in Miami/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Aussie in Palm Beach/, undefined, {
+        timeout: 3000,
+      }),
+    ).toBeInTheDocument();
 
     await user.type(input, "clear{Enter}");
-    expect(screen.queryByText(/Aussie in Miami/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Aussie in Palm Beach/)).not.toBeInTheDocument();
   });
 });

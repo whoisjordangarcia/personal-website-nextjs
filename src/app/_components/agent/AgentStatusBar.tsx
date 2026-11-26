@@ -18,7 +18,7 @@ export default function AgentStatusBar({
   onSubmit: () => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Current (fake) model version; drops when intent detection "fails". */
-  model: number;
+  model: string;
   /** Opens the theme menu. */
   onConfig: () => void;
 }) {
@@ -64,7 +64,7 @@ export default function AgentStatusBar({
         />
       </form>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 text-xs text-(--ctp-overlay0)">
-        <span className="text-(--ctp-mauve)">Fable {model}</span>
+        <span className="text-(--ctp-mauve)">{model}</span>
         <span>│</span>
         <span>$0.00</span>
         <span>│</span>
@@ -74,7 +74,7 @@ export default function AgentStatusBar({
         <span className="hidden sm:inline">│</span>
         <span className="text-(--ctp-mauve)">main</span>
         <span>│</span>
-        <span>Miami{time ? ` ${time}` : ""}</span>
+        <span>Palm Beach{time ? ` ${time}` : ""}</span>
       </div>
       <div className="mt-0.5 flex flex-wrap items-center gap-x-4">
         <button

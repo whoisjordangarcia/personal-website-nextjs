@@ -3,13 +3,21 @@
 import React from "react";
 import type { AgentArticle } from "./AgentTerminal";
 import {
+  downgradeModel,
   downgradeWarning,
   MODEL_START,
   runCommand,
   type Reply,
 } from "./agent-commands";
+import { pickVerb } from "./spinner-verbs";
 
-export type Turn = { id: number; input: string; replies: Reply[] | null };
+export type Turn = {
+  id: number;
+  input: string;
+  replies: Reply[] | null;
+  /** Fun "thinking" verb shown while the reply is pending. */
+  verb: string;
+};
 
 const DEFAULT_THINK_MS = 450;
 
@@ -35,11 +43,12 @@ export function useAgentSession({
   const [turns, setTurns] = React.useState<Turn[]>([]);
   const [value, setValue] = React.useState("");
   const [busy, setBusy] = React.useState(false);
-  const [model, setModel] = React.useState(MODEL_START);
-  const modelRef = React.useRef(MODEL_START);
+  const [model, setModel] = React.useState<string>(MODEL_START);
+  const modelRef = React.useRef<string>(MODEL_START);
   const history = React.useRef<string[]>([]);
   const historyIdx = React.useRef(-1);
   const nextId = React.useRef(0);
+  const lastVerb = React.useRef<string | undefined>(undefined);
   const endRef = React.useRef<HTMLDivElement>(null);
   const timer = React.useRef<number | null>(null);
 
@@ -71,7 +80,7 @@ export function useAgentSession({
           { kind: "warning", text: downgradeWarning(current) },
           ...replies,
         ];
-        modelRef.current = Math.max(1, current - 1);
+        modelRef.current = downgradeModel(current);
       }
       if (action?.type === "clear") {
         setTurns([]);
@@ -79,7 +88,9 @@ export function useAgentSession({
       }
 
       const id = nextId.current++;
-      setTurns((t) => [...t, { id, input, replies: null }]);
+      const verb = pickVerb(lastVerb.current);
+      lastVerb.current = verb;
+      setTurns((t) => [...t, { id, input, replies: null, verb }]);
       setBusy(true);
       timer.current = window.setTimeout(() => {
         setTurns((t) => t.map((x) => (x.id === id ? { ...x, replies } : x)));

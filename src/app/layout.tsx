@@ -44,7 +44,7 @@ const fontVars = [geistMono, jetbrainsMono, firaCode, plexMono]
 const siteUrl = "https://jordangarcia.me";
 
 const description =
-  "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
+  "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Palm Beach, Australia-born.";
 
 export const metadata: Metadata = {
   title: "Jordan Garcia",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     "TypeScript",
     "Python",
     "distributed systems",
-    "Miami",
+    "Palm Beach",
     "full-stack developer",
   ],
   authors: [{ name: "Jordan Garcia", url: siteUrl }],
@@ -116,7 +116,7 @@ const jsonLd = {
   knowsAbout: ["TypeScript", "Python", "distributed systems"],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Miami",
+    addressLocality: "Palm Beach",
     addressRegion: "FL",
     addressCountry: "US",
   },

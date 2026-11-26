@@ -107,8 +107,7 @@ export default function OpencodeConsole({
               </span>
             ) : (
               <span>
-                <span className="text-(--ctp-text)">Fable {model}</span> ·
-                jordan
+                <span className="text-(--ctp-text)">{model}</span> · jordan
               </span>
             )}
           </div>

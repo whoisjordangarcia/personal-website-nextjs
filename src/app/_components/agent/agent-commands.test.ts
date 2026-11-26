@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { downgradeWarning, runCommand } from "./agent-commands";
+import { downgradeModel, downgradeWarning, runCommand } from "./agent-commands";
 
 const articles = [
   { title: "First Post", slug: "first-post", date: "2026-06-01" },
@@ -77,8 +77,12 @@ describe("runCommand", () => {
     expect(result.action).toEqual({ type: "downgrade" });
   });
 
-  it("words the downgrade warning, bottoming out at Fable 1", () => {
-    expect(downgradeWarning(4)).toMatch(/Fable 4 .* switching to Fable 3/);
-    expect(downgradeWarning(1)).toMatch(/no lower model/);
+  it("falls back from Fable 4 to Haiku 4, then bottoms out", () => {
+    expect(downgradeModel("Fable 4")).toBe("Haiku 4");
+    expect(downgradeModel("Haiku 4")).toBe("Haiku 4");
+    expect(downgradeWarning("Fable 4")).toMatch(
+      /Fable 4 failed intent detection · switching to Haiku 4/,
+    );
+    expect(downgradeWarning("Haiku 4")).toMatch(/no lower model/);
   });
 });

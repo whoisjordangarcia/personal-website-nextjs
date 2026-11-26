@@ -24,7 +24,7 @@ beforeEach(() => {
 describe("OpencodeTranscript", () => {
   it("renders the bio, articles and links on the server", () => {
     render(<OpencodeTranscript articles={articles} />);
-    expect(screen.getByText(/Aussie in Miami/)).toBeInTheDocument();
+    expect(screen.getByText(/Aussie in Palm Beach/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "First Post" })).toHaveAttribute(
       "href",
       "/articles/first-post",
