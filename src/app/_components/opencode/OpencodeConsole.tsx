@@ -62,7 +62,7 @@ export default function OpencodeConsole({
 
       <OcSidebar model={model} turns={turns.length} />
 
-      <div className="fixed right-0 bottom-0 left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8 lg:right-[42ch]">
+      <div className="fixed right-0 bottom-(--kb,0px) left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8 md:right-[34ch] lg:right-[42ch]">
         <form
           className="mt-2 flex items-center gap-2 border border-(--ctp-surface1) px-3 py-1.5 focus-within:border-(--ctp-blue)"
           onSubmit={(e) => {

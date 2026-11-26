@@ -5,6 +5,8 @@ import AgentConsole from "./agent/AgentConsole";
 import type { AgentArticle } from "./agent/AgentTerminal";
 import OpencodeConsole from "./opencode/OpencodeConsole";
 import ConfigMenu, { type ConfigTab } from "./theme/ConfigMenu";
+import { syncThemeColor } from "./theme/theme";
+import { useKeyboardInset } from "./useKeyboardInset";
 
 export type Variant = "agent" | "opencode";
 /** Shift+Tab order. */
@@ -66,6 +68,11 @@ export default function HomeVariant({
     setVariant(VARIANTS[(VARIANTS.indexOf(current) + 1) % VARIANTS.length]!);
   }, []);
 
+  useKeyboardInset();
+  // Safari's toolbar tint follows <meta name="theme-color">; match the
+  // palette restored by the boot script.
+  React.useEffect(() => syncThemeColor(), []);
+
   const [configTab, setConfigTab] = React.useState<ConfigTab | null>(null);
   const openConfig = React.useCallback(
     (tab: ConfigTab = "theme") => setConfigTab(tab),
@@ -97,7 +104,10 @@ export default function HomeVariant({
   }, [cycle]);
 
   return (
-    <div data-variant={variant}>
+    <div
+      data-variant={variant}
+      className={variant === "opencode" ? "md:pr-[34ch] lg:pr-0" : undefined}
+    >
       {variant === "agent" ? (
         <>
           {agent}

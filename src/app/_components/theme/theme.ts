@@ -39,9 +39,27 @@ export function getSavedTheme(): ThemeId {
   }
 }
 
+/** Point <meta name="theme-color"> (iOS/Android browser chrome) at --ctp-base. */
+export function syncThemeColor() {
+  const base = getComputedStyle(document.documentElement)
+    .getPropertyValue("--ctp-base")
+    .trim();
+  if (!base) return;
+  let meta = document.querySelector<HTMLMetaElement>(
+    'meta[name="theme-color"]',
+  );
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "theme-color";
+    document.head.appendChild(meta);
+  }
+  meta.content = base;
+}
+
 /** Apply without saving: used for live preview while browsing the menu. */
 export function previewTheme(id: ThemeId) {
   document.documentElement.dataset.theme = id;
+  syncThemeColor();
 }
 
 export function saveTheme(id: ThemeId) {

@@ -592,3 +592,13 @@ a.term-link:hover {
     color: var(--ctp-peach);
   }
 }
+
+/* iOS polish: no grey tap flash; keep side content out of the notch in
+   landscape now that viewport-fit=cover is on. */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}

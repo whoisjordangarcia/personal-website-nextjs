@@ -36,7 +36,7 @@ export default function AgentStatusBar({
   );
 
   return (
-    <div className="agent-chrome fixed right-0 bottom-0 left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
+    <div className="agent-chrome fixed right-0 bottom-(--kb,0px) left-0 z-40 bg-(--ctp-base) px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:px-8">
       <form
         className="mt-2 flex items-center gap-2 border-y border-(--ctp-surface1) py-1.5 text-(--ctp-text)"
         onSubmit={(e) => {

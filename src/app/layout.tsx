@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Fira_Code,
   Geist_Mono,
@@ -45,6 +45,15 @@ const siteUrl = "https://jordangarcia.me";
 
 const description =
   "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Palm Beach, Australia-born.";
+
+// viewport-fit=cover makes env(safe-area-inset-*) non-zero on iPhones, so
+// the fixed prompt bars can clear the home indicator.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#24273a",
+};
 
 export const metadata: Metadata = {
   title: "Jordan Garcia",

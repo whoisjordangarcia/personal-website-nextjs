@@ -21,7 +21,7 @@ export default function OcSidebar({
   return (
     <aside
       aria-label="Session sidebar"
-      className="fixed top-0 right-0 bottom-0 z-30 hidden w-[42ch] flex-col bg-(--ctp-mantle) px-[2ch] py-4 text-sm text-(--ctp-subtext0) lg:flex"
+      className="fixed top-0 right-0 bottom-0 z-30 hidden w-[34ch] flex-col bg-(--ctp-mantle) px-[2ch] py-4 text-sm text-(--ctp-subtext0) md:flex lg:w-[42ch]"
     >
       <p className="pb-4 font-bold text-(--ctp-text)">who is jordan?</p>
 
