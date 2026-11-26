@@ -13,31 +13,29 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-// Mock the tRPC api
+// Mock tRPC + TanStack Query: mutationOptions passes options through, and
+// useMutation calls onSuccess right after mutate to simulate success.
 const mockMutate = vi.fn();
-const mockUseMutation = vi.fn(() => ({
-  mutate: mockMutate,
-  isPending: false,
-}));
+let mockIsPending = false;
 
 vi.mock("@/trpc/react", () => ({
-  api: {
+  useTRPC: () => ({
     post: {
       create: {
-        useMutation: (options: { onSuccess?: () => void }) => {
-          const result = mockUseMutation();
-          return {
-            ...result,
-            mutate: (data: { name: string }) => {
-              mockMutate(data);
-              // Simulate successful mutation
-              options.onSuccess?.();
-            },
-          };
-        },
+        mutationOptions: (options: { onSuccess?: () => void }) => options,
       },
     },
-  },
+  }),
+}));
+
+vi.mock("@tanstack/react-query", () => ({
+  useMutation: (options: { onSuccess?: () => void }) => ({
+    isPending: mockIsPending,
+    mutate: (data: { name: string }) => {
+      mockMutate(data);
+      options.onSuccess?.();
+    },
+  }),
 }));
 
 describe("CreatePost", () => {
@@ -142,31 +140,13 @@ describe("CreatePost", () => {
 });
 
 describe("CreatePost pending state", () => {
-  it("shows 'Submitting...' text when pending", () => {
-    // Override the mock to return isPending: true
-    vi.doMock("@/trpc/react", () => ({
-      api: {
-        post: {
-          create: {
-            useMutation: () => ({
-              mutate: vi.fn(),
-              isPending: true,
-            }),
-          },
-        },
-      },
-    }));
-
-    // Re-import the component with new mock
-    // Note: This is a simplified test - in reality you'd need to properly reset modules
-  });
-
-  it("disables button when pending", () => {
-    // This test would require proper module mocking with isPending: true
-    // For now, we verify the button exists and has the correct type
+  it("shows 'Submitting...' and disables the button when pending", () => {
+    mockIsPending = true;
     render(<CreatePost />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveAttribute("type", "submit");
+    expect(button).toHaveTextContent("Submitting...");
+    expect(button).toBeDisabled();
+    mockIsPending = false;
   });
 });

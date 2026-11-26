@@ -1,16 +1,59 @@
 import "@/styles/globals.css";
 
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import type { Metadata, Viewport } from "next";
+import {
+  Fira_Code,
+  Geist_Mono,
+  IBM_Plex_Mono,
+  JetBrains_Mono,
+} from "next/font/google";
 import { Suspense } from "react";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { Analytics } from "./_components/Analytics";
+import { FONT_BOOT_SCRIPT } from "./_components/theme/font";
+import { THEME_BOOT_SCRIPT } from "./_components/theme/theme";
+
+// Optional fonts for the /config Font tab. preload: false means none of
+// these download until a visitor actually picks one.
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  preload: false,
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  preload: false,
+});
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
+  preload: false,
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-plex-mono",
+  preload: false,
+});
+const fontVars = [geistMono, jetbrainsMono, firaCode, plexMono]
+  .map((f) => f.variable)
+  .join(" ");
 
 const siteUrl = "https://jordangarcia.me";
 
 const description =
-  "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Miami, Australia-born.";
+  "Jordan Garcia — Senior Software Engineer specializing in TypeScript and Python. Building distributed systems from Palm Beach, Australia-born.";
+
+// viewport-fit=cover makes env(safe-area-inset-*) non-zero on iPhones, so
+// the fixed prompt bars can clear the home indicator.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#24273a",
+};
 
 export const metadata: Metadata = {
   title: "Jordan Garcia",
@@ -21,7 +64,7 @@ export const metadata: Metadata = {
     "TypeScript",
     "Python",
     "distributed systems",
-    "Miami",
+    "Palm Beach",
     "full-stack developer",
   ],
   authors: [{ name: "Jordan Garcia", url: siteUrl }],
@@ -82,7 +125,7 @@ const jsonLd = {
   knowsAbout: ["TypeScript", "Python", "distributed systems"],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Miami",
+    addressLocality: "Palm Beach",
     addressRegion: "FL",
     addressCountry: "US",
   },
@@ -94,7 +137,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={fontVars} suppressHydrationWarning>
+      <head>
+        {/* Static build-time strings: apply saved theme/font before paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: THEME_BOOT_SCRIPT + FONT_BOOT_SCRIPT,
+          }}
+        />
+      </head>
       <body>
         <script
           type="application/ld+json"

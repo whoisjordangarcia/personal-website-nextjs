@@ -1,0 +1,37 @@
+---
+title: Tailscale — My Personal Network
+slug: tailscale-my-personal-network
+date: "2026-03-20"
+description: Tailscale made my personal infrastructure actually usable. Here is what I run on it and why it changed how I think about access.
+readingTime: 4
+---
+
+For years I ran a VPN server because I wanted to access my home network remotely. It worked, mostly, but it was something I maintained rather than something I used. Tailscale replaced all of that, and I haven&apos;t thought about it since.
+
+## What Tailscale is
+
+Tailscale is a mesh VPN built on WireGuard. Every device you add gets a stable private IP (`100.x.x.x` range) and can reach every other device on your tailnet, regardless of what network either device is on.
+
+The key difference from a traditional VPN: there&apos;s no central server that traffic routes through. Devices connect directly to each other when possible, falling back to relay servers only when NAT traversal fails. The result is low latency that feels local even when you&apos;re remote.
+
+## What I run on it
+
+**Home server access.** I have a Mac Mini running a few local services — a media server, a local AI model endpoint, backups. All of it is accessible from my phone or laptop anywhere in the world via stable Tailscale hostnames.
+
+**SSH everywhere.** `ssh mini.tail.ts.net` works from my phone (via Termius), from a coffee shop, from anywhere. No port forwarding, no public IP, no firewall rules to maintain.
+
+**Subnet routing.** My router acts as a subnet router, which means my entire home network (`192.168.1.0/24`) is reachable via Tailscale without installing the client on every device. Printers, smart home devices, everything.
+
+## The iOS integration
+
+The Tailscale iOS app runs as a VPN profile. Split tunneling means only traffic to tailnet addresses goes through it — everything else hits the internet directly. Battery impact is negligible.
+
+I use it with Termius for SSH and with Prompt for web services on my home server. Having a real terminal on my phone that can reach my home machines changed how I work when I&apos;m away from my desk.
+
+## Why it works
+
+The magic is that it requires almost no ongoing maintenance. I installed the client on each device once, they joined the tailnet, done. No certificates to renew, no server to keep up, no firewall rules to audit.
+
+The one thing I&apos;d add: set up MagicDNS immediately. It gives each device a stable hostname (`macmini.yourtailnet.ts.net`) instead of requiring you to remember IPs. Combined with an exit node for when I want full tunnel behavior, the setup covers every use case I&apos;ve had.
+
+The honest summary: Tailscale made my personal infrastructure something I use instead of something I maintain.

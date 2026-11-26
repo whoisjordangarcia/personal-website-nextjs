@@ -51,9 +51,11 @@ describe("BottomStack", () => {
 
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper).toHaveClass("right-2", "left-2");
-    expect(wrapper).toHaveStyle({
-      bottom: "calc(0.5rem + env(safe-area-inset-bottom, 0px))",
-    });
+    // Read the raw inline style: happy-dom >= 20.14 normalizes rem to px
+    // in computed styles, which would make toHaveStyle environment-specific.
+    expect(wrapper.getAttribute("style")).toContain(
+      "calc(0.5rem + env(safe-area-inset-bottom, 0px))",
+    );
   });
 
   it("wraps children in pointer-events-auto divs", () => {
