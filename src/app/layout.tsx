@@ -1,11 +1,45 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
+import {
+  Fira_Code,
+  Geist_Mono,
+  IBM_Plex_Mono,
+  JetBrains_Mono,
+} from "next/font/google";
 import { Suspense } from "react";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { Analytics } from "./_components/Analytics";
+import { FONT_BOOT_SCRIPT } from "./_components/theme/font";
 import { THEME_BOOT_SCRIPT } from "./_components/theme/theme";
+
+// Optional fonts for the /config Font tab. preload: false means none of
+// these download until a visitor actually picks one.
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  preload: false,
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  preload: false,
+});
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
+  preload: false,
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-plex-mono",
+  preload: false,
+});
+const fontVars = [geistMono, jetbrainsMono, firaCode, plexMono]
+  .map((f) => f.variable)
+  .join(" ");
 
 const siteUrl = "https://jordangarcia.me";
 
@@ -94,10 +128,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={fontVars} suppressHydrationWarning>
       <head>
-        {/* Static build-time string: applies the saved theme before paint. */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+        {/* Static build-time strings: apply saved theme/font before paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: THEME_BOOT_SCRIPT + FONT_BOOT_SCRIPT,
+          }}
+        />
       </head>
       <body>
         <script

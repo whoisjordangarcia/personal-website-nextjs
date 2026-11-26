@@ -4,7 +4,7 @@ import React from "react";
 import AgentConsole from "./agent/AgentConsole";
 import type { AgentArticle } from "./agent/AgentTerminal";
 import OpencodeConsole from "./opencode/OpencodeConsole";
-import ThemePicker from "./theme/ThemePicker";
+import ConfigMenu, { type ConfigTab } from "./theme/ConfigMenu";
 
 export type Variant = "agent" | "opencode";
 /** Shift+Tab order. */
@@ -66,15 +66,18 @@ export default function HomeVariant({
     setVariant(VARIANTS[(VARIANTS.indexOf(current) + 1) % VARIANTS.length]!);
   }, []);
 
-  const [configOpen, setConfigOpen] = React.useState(false);
-  const openConfig = React.useCallback(() => setConfigOpen(true), []);
+  const [configTab, setConfigTab] = React.useState<ConfigTab | null>(null);
+  const openConfig = React.useCallback(
+    (tab: ConfigTab = "theme") => setConfigTab(tab),
+    [],
+  );
 
   // Cmd+, / Ctrl+, opens the theme menu, like an editor's settings shortcut.
   React.useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "," && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setConfigOpen(true);
+        setConfigTab("theme");
       }
     }
     window.addEventListener("keydown", onKeyDown);
@@ -114,7 +117,9 @@ export default function HomeVariant({
           />
         </>
       )}
-      {configOpen && <ThemePicker onClose={() => setConfigOpen(false)} />}
+      {configTab && (
+        <ConfigMenu initialTab={configTab} onClose={() => setConfigTab(null)} />
+      )}
     </div>
   );
 }

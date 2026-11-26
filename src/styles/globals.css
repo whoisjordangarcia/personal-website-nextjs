@@ -282,10 +282,31 @@
   width: 2px;
 }
 
+/* Site font, switchable from /config -> Font (<html data-font>). */
+:root {
+  --site-font: IoskeleyMono, ui-monospace, monospace;
+}
+[data-font="geist"] {
+  --site-font: var(--font-geist-mono), ui-monospace, monospace;
+}
+[data-font="jetbrains"] {
+  --site-font: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+[data-font="fira"] {
+  --site-font: var(--font-fira-code), ui-monospace, monospace;
+}
+[data-font="plex"] {
+  --site-font: var(--font-plex-mono), ui-monospace, monospace;
+}
+[data-font="system"] {
+  --site-font:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
 html,
 body {
   background-color: var(--bg-color);
-  font-family: IoskeleyMono;
+  font-family: var(--site-font);
 }
 
 /* Tmux status bar styles — in globals.css to avoid FOUC from styled-jsx */

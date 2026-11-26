@@ -92,7 +92,7 @@ export default function AgentStatusBar({
         </button>
         <button
           type="button"
-          onClick={onConfig}
+          onClick={() => onConfig()}
           className="inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs text-(--ctp-overlay0) hover:text-(--ctp-text) sm:min-h-0"
         >
           ⚙ /config <span className="pointer-coarse:hidden">(⌘,)</span>

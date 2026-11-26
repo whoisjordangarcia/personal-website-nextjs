@@ -19,7 +19,7 @@ export default function AgentConsole({
   articles: AgentArticle[];
   onCycle: () => void;
   /** Opens the theme menu (the "config" command). */
-  onConfig?: () => void;
+  onConfig?: (tab?: "theme" | "font") => void;
 }) {
   const { turns, value, setValue, model, submit, onKeyDown, endRef } =
     useAgentSession({ articles, onCycle, onConfig });

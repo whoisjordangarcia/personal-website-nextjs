@@ -1,18 +1,20 @@
 import { afterEach, describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ThemePicker from "./ThemePicker";
+import ConfigMenu from "./ConfigMenu";
+import { FONT_BOOT_SCRIPT, FONT_STORAGE_KEY } from "./font";
 import { THEME_BOOT_SCRIPT, THEME_STORAGE_KEY } from "./theme";
 
 afterEach(() => {
   window.localStorage.clear();
   delete document.documentElement.dataset.theme;
+  delete document.documentElement.dataset.font;
 });
 
-describe("ThemePicker", () => {
+describe("ConfigMenu", () => {
   it("marks the saved theme and focuses the dialog", () => {
-    render(<ThemePicker onClose={vi.fn()} />);
-    expect(screen.getByRole("dialog", { name: "Theme" })).toHaveFocus();
+    render(<ConfigMenu onClose={vi.fn()} />);
+    expect(screen.getByRole("dialog", { name: "Config" })).toHaveFocus();
     expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
       "Catppuccin Macchiato",
     );
@@ -21,7 +23,7 @@ describe("ThemePicker", () => {
   it("previews on arrow keys and saves on Enter", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    render(<ThemePicker onClose={onClose} />);
+    render(<ConfigMenu onClose={onClose} />);
 
     await user.keyboard("{ArrowDown}");
     expect(document.documentElement.dataset.theme).toBe("mocha");
@@ -35,7 +37,7 @@ describe("ThemePicker", () => {
   it("reverts the preview on Escape", async () => {
     const user = userEvent.setup();
     window.localStorage.setItem(THEME_STORAGE_KEY, "frappe");
-    render(<ThemePicker onClose={vi.fn()} />);
+    render(<ConfigMenu onClose={vi.fn()} />);
 
     await user.keyboard("{ArrowDown}{Escape}");
     expect(document.documentElement.dataset.theme).toBe("frappe");
@@ -44,10 +46,42 @@ describe("ThemePicker", () => {
 
   it("applies a theme on tap / number key", async () => {
     const user = userEvent.setup();
-    render(<ThemePicker onClose={vi.fn()} />);
+    render(<ConfigMenu onClose={vi.fn()} />);
 
     await user.click(screen.getByRole("button", { name: /Catppuccin Latte/ }));
     expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe("latte");
+  });
+});
+
+describe("ConfigMenu font tab", () => {
+  it("switches to Font with the arrow keys and saves Geist Mono", async () => {
+    const user = userEvent.setup();
+    render(<ConfigMenu onClose={vi.fn()} />);
+
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
+      "Font",
+    );
+    await user.keyboard("{ArrowDown}");
+    expect(document.documentElement.dataset.font).toBe("geist");
+
+    await user.keyboard("{Enter}");
+    expect(window.localStorage.getItem(FONT_STORAGE_KEY)).toBe("geist");
+  });
+
+  it("opens straight on the font tab and reverts both on Escape", async () => {
+    const user = userEvent.setup();
+    render(<ConfigMenu initialTab="font" onClose={vi.fn()} />);
+
+    await user.keyboard("{ArrowDown}{Escape}");
+    expect(document.documentElement.dataset.font).toBe("ioskeley");
+    expect(window.localStorage.getItem(FONT_STORAGE_KEY)).toBeNull();
+  });
+
+  it("boots a saved font before paint", () => {
+    window.localStorage.setItem(FONT_STORAGE_KEY, "jetbrains");
+    new Function(FONT_BOOT_SCRIPT)();
+    expect(document.documentElement.dataset.font).toBe("jetbrains");
   });
 });
 

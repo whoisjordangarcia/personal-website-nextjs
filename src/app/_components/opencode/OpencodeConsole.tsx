@@ -23,7 +23,7 @@ export default function OpencodeConsole({
   articles: AgentArticle[];
   onCycle: () => void;
   /** Opens the theme menu (the "config" command). */
-  onConfig?: () => void;
+  onConfig?: (tab?: "theme" | "font") => void;
 }) {
   const { turns, value, setValue, busy, model, submit, onKeyDown, endRef } =
     useAgentSession({ articles, onCycle, onConfig, thinkMs: OC_THINK_MS });
@@ -115,7 +115,7 @@ export default function OpencodeConsole({
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={onConfig}
+              onClick={() => onConfig()}
               className="inline-flex min-h-11 cursor-pointer items-center hover:text-(--ctp-text) sm:min-h-0"
             >
               <span className="pointer-coarse:hidden">ctrl+,</span>

@@ -28,7 +28,7 @@ export function useAgentSession({
   /** Shift+Tab inside the prompt, and the "skin" command. */
   onCycle: () => void;
   /** The "config" / "theme" commands. */
-  onConfig: () => void;
+  onConfig: (tab?: "theme" | "font") => void;
   /** How long the fake "thinking" lasts before a reply appears. */
   thinkMs?: number;
 }) {
@@ -90,7 +90,7 @@ export function useAgentSession({
         } else if (action?.type === "cycle") {
           onCycle();
         } else if (action?.type === "config") {
-          onConfig();
+          onConfig(action.tab);
         }
       }, thinkMs);
     },

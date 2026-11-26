@@ -59,6 +59,13 @@ describe("runCommand", () => {
     }
   });
 
+  it("opens the font tab on font", () => {
+    expect(runCommand("/font", articles).action).toEqual({
+      type: "config",
+      tab: "font",
+    });
+  });
+
   it("switches skins on skin, and refuses to exit", () => {
     expect(runCommand("skin", articles).action).toEqual({ type: "cycle" });
     expect(runCommand("exit", articles).action).toBeUndefined();
