@@ -45,7 +45,7 @@ export default function OpencodeConsole({
             <OcUser>{t.input}</OcUser>
             <div className="mt-3 space-y-2">
               {t.replies === null ? (
-                <OcLoader />
+                <OcLoader verb={t.verb} />
               ) : (
                 <>
                   {t.replies.map((r, i) => (

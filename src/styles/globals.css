@@ -561,3 +561,34 @@ a.term-link:hover {
     animation: none;
   }
 }
+
+/* OpenCode loader label: a highlight sweeping across the verb */
+.oc-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--ctp-peach) 0%,
+    var(--ctp-peach) 40%,
+    var(--ctp-text) 50%,
+    var(--ctp-peach) 60%,
+    var(--ctp-peach) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ocShimmer 1.4s linear infinite;
+}
+@keyframes ocShimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oc-shimmer {
+    animation: none;
+    color: var(--ctp-peach);
+  }
+}

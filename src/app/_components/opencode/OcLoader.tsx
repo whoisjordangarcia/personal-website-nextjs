@@ -47,12 +47,41 @@ export function OcScanner({ color = "var(--ctp-peach)" }: { color?: string }) {
   );
 }
 
-/** Pending-reply row: scanner + "working". */
-export default function OcLoader() {
+/** Seconds since mount, ticking every 100ms (frozen under reduced motion). */
+function useElapsed(reduced: boolean) {
+  const [elapsed, setElapsed] = React.useState(0);
+  React.useEffect(() => {
+    if (reduced) return;
+    const start = performance.now();
+    const t = window.setInterval(
+      () => setElapsed((performance.now() - start) / 1000),
+      100,
+    );
+    return () => window.clearInterval(t);
+  }, [reduced]);
+  return elapsed;
+}
+
+/**
+ * Pending-reply row: a peach-ruled panel with the scanner, a shimmering
+ * fun verb, a live timer and the interrupt hint.
+ */
+export default function OcLoader({ verb = "Working" }: { verb?: string }) {
+  const reduced = usePrefersReducedMotion();
+  const elapsed = useElapsed(reduced);
+
   return (
-    <p className="flex items-center gap-3 text-(--ctp-overlay0)" role="status">
-      <OcScanner />
-      <span>working</span>
-    </p>
+    <div
+      role="status"
+      className="flex flex-wrap items-center gap-x-3 gap-y-1 border-l-2 border-(--ctp-peach) bg-(--ctp-mantle) px-3 py-2"
+    >
+      <span className="text-base">
+        <OcScanner />
+      </span>
+      <span className="oc-shimmer font-bold">{verb}…</span>
+      <span className="text-xs text-(--ctp-overlay0) tabular-nums">
+        {elapsed.toFixed(1)}s · esc interrupt
+      </span>
+    </div>
   );
 }

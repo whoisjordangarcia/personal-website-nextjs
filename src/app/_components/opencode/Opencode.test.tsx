@@ -52,7 +52,7 @@ describe("OpencodeConsole", () => {
 
     await user.type(screen.getByLabelText("Ask the agent"), "/ls{Enter}");
 
-    expect(screen.getByRole("status")).toHaveTextContent("working");
+    expect(screen.getByRole("status")).toHaveTextContent(/….*esc interrupt/);
     expect(
       await screen.findByRole(
         "link",
